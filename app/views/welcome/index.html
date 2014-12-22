@@ -1,0 +1,516 @@
+<div class="container">
+
+  <div class="page-header">
+    <h1>Doozer Core API<br/>
+    <small>API Definition &amp; Test Interface</small></h1>
+    <p class="lead">This is a restful JSON API endpoint only. Interact with this API as below.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="page-header">Authentication</h2>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Login</h3>
+          <p><code>GET /api/login/:fb_oauth_token</code>
+          </p>
+        </div>
+        <div class="panel-body">
+
+          <p>Every doozer request requires a JSON parameter with a valid doozer
+            <code>session_id</code>. Login with Facebook here, to create that token, then click the Log in button to get a valid doozer session.</p>
+
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>Example Request/Reponse</h4>
+            </div>
+            <div class="panel-body">
+              <h5>Request</h5>
+              <strong>URL</strong>
+              <br />
+              <pre>GET http://localhost:3000/api/login/CAAU9WC52BFcBACu2UMPIphEDfSVpmlQNivt2fnGyEkUsTeMvGgjIqULfsDX2cIah52IKYKzJBg1ytvjHKrIQuM5hX65EGPPaHboEU3cnezZB03BhGVrvJhLCEfc0m0F4eo8mcm617DzEIN5qmOdBXaukCLVqmc6rVc392E9o7AGVYc4q2zRZAM1XZBPnLLoecKjnW1Kx0wVNd9GF4ZA6
+            </pre>
+              <strong>Request Body</strong>
+              <pre>[none]</pre>
+              <h5>Response</h5>
+              <pre>{
+  "session_id": "2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646"
+}</pre>
+            </div>
+          </div>
+
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h4>Test Interface</h4>
+            </div>
+            <div class="panel-body">
+              <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+              </fb:login-button>
+
+              <div id="status">
+              </div>
+
+              <textarea id='token' cols='50' rows='5'></textarea>
+              <br />
+              <input type="submit" id='login-submit' value="log in">
+              <br />
+              <br />
+              <div class='well'>
+                <div id="login_response" class='hidden'>
+                  <strong>Status:</strong>
+                  <div id="login_response_status"></div>
+                  <strong>Session ID:</strong>
+                  <div id="login_response_session_id"></div>
+                  <strong>JSON:</strong><pre><div id='login_response_json'></div></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Logout</h3>
+          <p><code>DELETE /api/logout</code>
+          </p>
+        </div>
+        <div class="panel-body">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>Example Request/Reponse</h4>
+            </div>
+            <div class="panel-body">
+              <h5>Request</h5>
+              <strong>URL</strong>
+              <br />
+              <pre>DELETE http://localhost:3000/api/logout
+            </pre>
+              <strong>Request Body</strong>
+              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <h5>Response</h5>
+              <pre>[none]</pre>
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h4>Test Interface</h4>
+            </div>
+            <div class="panel-body">
+              <textarea id='logout_session_id' cols='100' rows='1'></textarea>
+              <br />
+              <input type="submit" id='logout_submit' value="log out">
+              <br />
+              <br />
+              <div class='well'>Click the log out to log that session ID out
+                <br />
+                <div id="logout_response" class='hidden'>
+                  <strong>Status:</strong>
+                  <div id="logout_response_status"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="page-header">Item Manipulation</h2>
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3>!! Session ID !!</h3>
+        </div>
+        <div class="panel-body">
+          <strong>You must set your session ID here for all requests below. </strong>
+          <br />
+          <br />Clicking login above will automatically populate this with your current session ID.
+          <br />
+          <textarea id='current_session_id' cols='100' rows='1'></textarea>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Get Lists</h3>
+          <p><code>POST /api/item</code>
+          </p>
+        </div>
+        <div class="panel-body">
+          <p>Lists are defined as items without a parent for a specific user. Supply a valid authentication token to retrieve a user's list.
+          </p>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>Example Request/Reponse</h4>
+            </div>
+            <div class="panel-body">
+              <h5>Request</h5>
+              <strong>URL</strong>
+              <br />
+              <pre>POST http://localhost:3000/api/item</pre>
+              <strong>Request Body</strong>
+              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <h5>Response</h5>
+              <pre>{
+  "items": [
+    {
+      "id": "5496479123233a453400000d",
+      "archive": false,
+      "title": "My first list",
+      "user_id": "46098107584098"
+    }
+    {
+      "title": "test list",
+      "archive": true,
+      "id": "54964f7e950a6123b000000a",
+      "notes": "notes",
+      "user_id": "46098107584098"
+    }
+  ]
+}</pre>
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h4>Test Interface</h4>
+            </div>
+            <div class="panel-body">
+              <input type="submit" id='get_lists' value="get lists">
+              <br />
+              <br />
+              <div class='well'>
+                <div id="get_lists_response" class='hidden'>
+                  <strong>Status:</strong>
+                  <div id="get_lists_response_status"></div>
+                  <strong>JSON:</strong><pre><div id='get_lists_response_json'></div></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Get Children</h3>
+          <p><code>POST /api/item/:id/children</code>
+          </p>
+        </div>
+        <div class="panel-body">
+          <p>Request all of the items that have the specified item as the parent. Request the list items.
+          </p>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>Example Request/Reponse</h4>
+            </div>
+            <div class="panel-body">
+              <h5>Request</h5>
+              <strong>URL</strong>
+              <br />
+              <pre>POST http://localhost:3000/api/items/54964f7e950a664ab000000a/children</pre>
+              <strong>Request Body</strong>
+              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <h5>Response</h5>
+              <pre>{
+  "items": [
+    {
+      "archive": false,
+      "done": true,
+      "id": "54964fa2950a664ab000000b",
+      "notes": "notes",
+      "order": 1,
+      "parent": "54964f7e950a664ab000000a",
+      "title": "asdf",
+      "user_id": "4614807584795"
+    },
+    {
+      "archive": false,
+      "done": true,
+      "id": "54964fa8950a664ab000000c",
+      "notes": "notes",
+      "order": 1,
+      "parent": "54964f7e950a664ab000000a",
+      "title": "one",
+      "user_id": "4614807584795"
+    }
+  ]
+}</pre>
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h4>Test Interface</h4>
+            </div>
+            <div class="panel-body">
+              <textarea id='get_children_parent_id' cols='100' rows='1'></textarea>
+              <br />
+              <input type="submit" id='get_children' value="get children">
+              <br />
+              <div class='well'>
+                <div id="get_children_response" class='hidden'>
+                  <strong>Status:</strong>
+                  <div id="get_children_response_status"></div>
+                  <strong>JSON:</strong><pre><div id='get_children_response_json'></div></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a name="CreateItem"></a>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Create Item</h3>
+          <p><code>POST /api/item/create</code>
+          </p>
+        </div>
+        <div class="panel-body">
+          <p>Create a new item by supplying the following values. If parent is empty, a new list will be created.
+          </p>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>Example Request/Reponse</h4>
+            </div>
+            <div class="panel-body">
+              <h5>Request</h5>
+              <strong>URL</strong>
+              <br />
+              <pre>POST http://localhost:3000/api/items/create</pre>
+              <strong>Request Body</strong>
+              <pre>session_id=c7733e6fc3141663b839a4a877ec02c593dd4b722089e4c7cfb46aaf58fb048d&amp;parent=54964f7e950a664ab000000a&amp;title=MyTitle&amp;notes=MyNotes&amp;order=1111&amp;duedate=Sat%2C+03+Feb+2001+04%3A05%3A06+GMT&amp;done=true&amp;archive=false
+</pre>
+              <h5>Response</h5>
+              <pre>{
+  "archive": false,
+  "done": true,
+  "duedate": "2001-02-03",
+  "id": "54967baa950a664ab0000015",
+  "notes": "MyNotes",
+  "order": 1111,
+  "parent": "54964f7e950a664ab000000a",
+  "title": "MyTitle",
+  "user_id": "4614807584795"
+}</pre>
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h4>Test Interface</h4>
+            </div>
+            <div class="panel-body">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="parent_id" id='create_item_parent_id'>
+                <input type="text" class="form-control" placeholder="title" id='create_item_title'>
+                <input type="text" class="form-control" placeholder="notes" id='create_item_notes'>
+                <input type="number" class="form-control" placeholder="order" id='create_item_order'>
+                <input type="datetime" class="form-control" placeholder="due date" id='create_item_due_date'>
+                <span class="input-group-addon">done
+                  <input type="checkbox" id='create_item_done'>
+                </span>
+                <span class="input-group-addon">archive
+                  <input type="checkbox" id='create_item_archive'>
+                </span>
+              </div>
+              <br />
+              <input type="submit" id='create_item' value="create item">
+              <br />
+              <br />
+              <div class='well'>
+                <div id="create_item_response" class='hidden'>
+                  <strong>Status:</strong>
+                  <div id="create_item_response_status"></div>
+                  <strong>JSON:</strong><pre><div id='create_item_response_json'></div></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a name="GetItem"></a>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Get Item</h3>
+          <p><code>POST /api/item/:id/show</code>
+          </p>
+        </div>
+        <div class="panel-body">
+
+          <p>Return all values for a particular item. Does not return the chidren of that item use Get Children for that.
+          </p>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>Example Request/Reponse</h4>
+            </div>
+            <div class="panel-body">
+              <h5>Request</h5>
+              <strong>URL</strong>
+              <br />
+              <pre>POST http://localhost:3000/api/items/54967baa950a664ab0000015/show</pre>
+              <strong>Request Body</strong>
+              <pre>session_id=c7733e6fc3141663b839a4a877ec02c593dd4b722089e4c7cfb46aaf58fb048d</pre>
+              <h5>Response</h5>
+              <pre>{
+  "archive": false,
+  "done": true,
+  "duedate": "2001-02-03",
+  "id": "54967baa950a664ab0000015",
+  "notes": "MyNotes",
+  "order": 1111,
+  "parent": "54964f7e950a664ab000000a",
+  "title": "MyTitle",
+  "user_id": "4614807584795"
+}</pre>
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h4>Test Interface</h4>
+            </div>
+            <div class="panel-body">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="item_id" id='get_item_item_id'>
+              </div>
+              <br />
+              <input type="submit" id='get_item' value="get item">
+              <br />
+              <br />
+              <div class='well'>
+                <div id="get_item_response" class='hidden'>
+                  <strong>Status:</strong>
+                  <div id="get_item_response_status"></div>
+                  <strong>JSON:</strong><pre><div id='get_item_response_json'></div></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Update Item</h3>
+          <p><code>PUT /api/item/:id</code>
+          </p>
+        </div>
+        <div class="panel-body">
+          <p>Update any value, except the item ID. Use this to set items as done, archived, etc.
+          </p>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>Example Request/Reponse</h4>
+            </div>
+            <div class="panel-body">
+              <h5>Request</h5>
+              <strong>URL</strong>
+              <br />
+              <pre>POST http://localhost:3000/api/items/54967baa950a664ab0000015</pre>
+              <strong>Request Body</strong>
+              <pre>session_id=c7733e6fc3141663b839a4a877ec02c593dd4b722089e4c7cfb46aaf58fb048d&amp;parent=54964f7e950a664ab000000a&amp;title=ANewTitle&amp;notes=New+Notes&amp;order=2222&amp;duedate=Sat%2C+03+Feb+2015+04%3A05%3A06+GMT&amp;done=false&amp;archive=false</pre>
+              <h5>Response</h5>
+              <pre>{
+  "archive": false,
+  "done": false,
+  "duedate": "2015-02-03",
+  "id": "54967baa950a664ab0000015",
+  "notes": "New Notes",
+  "order": 2222,
+  "parent": "54964f7e950a664ab000000a",
+  "title": "ANewTitle",
+  "user_id": "4614807584795"
+}</pre>
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h4>Test Interface</h4>
+            </div>
+            <div class="panel-body">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="item_id" id='update_item_item_id'>
+                <input type="text" class="form-control" placeholder="parent_id" id='update_item_parent_id'>
+                <input type="text" class="form-control" placeholder="title" id='update_item_title'>
+                <input type="text" class="form-control" placeholder="notes" id='update_item_notes'>
+                <input type="number" class="form-control" placeholder="order" id='update_item_order'>
+                <input type="datetime" class="form-control" placeholder="due date" id='update_item_due_date'>
+                <span class="input-group-addon">done
+                  <input type="checkbox" id='update_item_done'>
+                </span>
+                <span class="input-group-addon">archive
+                  <input type="checkbox" id='update_item_archive'>
+                </span>
+              </div>
+              <br />
+              <input type="submit" id='update_item' value="update item">
+              <br />
+              <br />
+              <div class='well'>Click the update item button to update the item
+                <br />
+                <div id="update_item_response" class='hidden'>
+                  <strong>Status:</strong>
+                  <div id="update_item_response_status"></div>
+                  <strong>JSON:</strong><pre><div id='update_item_response_json'></div></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Delete Item</h3>
+          <p><code>DELETE /api/item/:id</code>
+          </p>
+        </div>
+        <div class="panel-body">
+          <p>Permenently delete an item. Generally do not use this, set the 'archive' bit instead. Left in in case something goes wrong.
+          </p>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>Example Request/Reponse</h4>
+            </div>
+            <div class="panel-body">
+              <h5>Request</h5>
+              <strong>URL</strong>
+              <br />
+              <pre>DELETE http://localhost:3000/api/items/5496450983233a4534000006</pre>
+              <strong>Request Body</strong>
+              <pre>session_id=c7733e6fc3141663b839a4a877ec02c593dd4b722089e4c7cfb46aaf58fb048d</pre>
+              <h5>Response</h5>
+              <pre>[none]</pre>
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h4>Test Interface</h4>
+            </div>
+            <div class="panel-body">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="item_id" id='delete_item_item_id'>
+              </div>
+              <br />
+              <input type="submit" id='delete_item' value="delete item">
+              <br />
+              <br />
+              <div class='well'>
+                <div id="delete_item_response" class='hidden'>
+                  <strong>Status:</strong>
+                  <div id="delete_item_response_status"></div>
+                  <strong>JSON:</strong><pre><div id='delete_item_response_json'></div></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /container -->

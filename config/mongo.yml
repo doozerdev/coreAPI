@@ -1,0 +1,27 @@
+defaults: &defaults
+  host: 127.0.0.1
+  port: 27017
+  options:
+    w: 1
+    pool_size: 1
+    slave_ok: false
+    ssl: false
+
+development:
+  # uri: <%= ENV['MONGO_URL'] %>
+  # use_env_var: true
+  <<: *defaults
+  database: doozer_development
+
+test:
+  #if set to true make sure to set the environment variable 'MONGO_URL' to the connection string
+  #this keeps usernames and passwords out of source (git)
+  use_env_var: true
+  #keep the following line in if you're using the env_var, I'm not sure why it's needed, 
+  #but it breaks if I take it out, TODO: investigate this
+  uri: <%= ENV['MONGOHQ_URL'] %>
+
+# set these environment variables on your prod server
+production:
+  use_env_var: true
+  uri: <%= ENV['MONGOHQ_URL'] %>

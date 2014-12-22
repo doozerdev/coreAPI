@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: 
+  done: 
+  parent: 
+  order: 
+  duedate: 
+  user_id: 
+  notes: MyString
+
+two:
+  title: 
+  done: 
+  parent: 
+  order: 
+  duedate: 
+  user_id: 
+  notes: MyString
