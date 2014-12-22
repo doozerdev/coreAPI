@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     $("#logout_submit").click(function() {
     $.ajax({
-        url: '/api/logout/',
+        url: '/api/logout',
         type: 'DELETE',
         data: {
           session_id: $('textarea#logout_session_id').val()
