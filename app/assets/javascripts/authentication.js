@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   $("#login-submit").click(function() {
 
-    $.get("http://localhost:3000/api/login/" + $('textarea#token').val(), function(data, textStatus) {
+    $.get("/api/login/" + $('textarea#token').val(), function(data, textStatus) {
       $("#login_response_status").html(textStatus)
       $("#login_response_session_id").html(data.session_id)
       $('textarea#current_session_id').val(data.session_id)
@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     $("#logout_submit").click(function() {
     $.ajax({
-        url: 'http://localhost:3000/api/logout/',
+        url: '/api/logout/',
         type: 'DELETE',
         data: {
           session_id: $('textarea#logout_session_id').val()
