@@ -8,12 +8,6 @@ gem 'bson_ext'
 # facebook authentication
 gem "koala", "~> 1.10.0rc"
 
-#makes heroku static assets easier
-group :production, :staging do
-  gem "rails_12factor"
-  gem "rails_stdout_logging"
-  gem "rails_serve_static_assets"
-end
 
 ####### End Custom Stuff
 
