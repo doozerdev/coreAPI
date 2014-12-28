@@ -69,8 +69,19 @@ class ItemsController < BaseApiController
   #DELETE /item/:id
   #DeleteItem
   def destroy
+    count = 0
+
+    children = Item.where(:user_id=>@user.uid,
+                          :parent=>params['id'])
+    children.each do |child|
+      Item.destroy(child.id)
+      count = count + 1 
+    end
+
     Item.destroy(params[:id])
-    render nothing: true, status: 204
+    count = count + 1
+
+    render json: {delete_item_count: count}, status: 200
   end
 
   private
