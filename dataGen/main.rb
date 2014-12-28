@@ -172,6 +172,13 @@ def main
     code, num_deleted = doozer.deleteItem(session_id, item_id)
   end
 
+  puts 'deleting all other test lists created by running this script.'
+  newly_created_list_ids.each do |to_delete|
+  newly_created_list_ids.delete(to_delete)
+  code, num_deleted =  doozer.deleteItem(session_id, to_delete)
+  puts "deleted #{num_deleted} items (including list)"
+  end
+
   ###################################
   #log out
   ###################################
