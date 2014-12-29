@@ -3,8 +3,8 @@ $(document).ready(function() {
   $("#get_lists").click(function() {
     $.ajax({
       url: '/api/items/index',
-      type: 'POST',
-      data: {session_id: $('textarea#current_session_id').val()},
+      type: 'GET',
+      headers: {session_id: $('textarea#current_session_id').val()},
       dataType: "json"
     })
     .done(function(data, textStatus) {
@@ -25,8 +25,8 @@ $(document).ready(function() {
     $.ajax({
       url: '/api/items/' + 
       $('textarea#get_children_parent_id').val() + '/children',
-      type: 'POST',
-      data: {session_id: $('textarea#current_session_id').val()},
+      type: 'GET',
+      headers: {session_id: $('textarea#current_session_id').val()},
       dataType: "json"
     })
     .done(function(data, textStatus) {
@@ -51,8 +51,8 @@ $(document).ready(function() {
     $.ajax({
       url: '/api/items/create',
       type: 'POST',
+      headers: {session_id: $('textarea#current_session_id').val()},
       data: {
-        session_id: $('#current_session_id').val(),
         parent:     $('#create_item_parent_id').val(),
         title:      $('#create_item_title').val(),
         notes:      $('#create_item_notes').val(),
@@ -80,8 +80,8 @@ $(document).ready(function() {
     $.ajax({
       url: '/api/items/' + 
       $('#get_item_item_id').val() + '/show',
-      type: 'POST',
-      data: {session_id: $('textarea#current_session_id').val()},
+      type: 'GET',
+      headers: {session_id: $('textarea#current_session_id').val()},
       dataType: "json"
     })
     .done(function(data, textStatus) {
@@ -100,8 +100,8 @@ $(document).ready(function() {
       url: '/api/items/' + 
       $('#update_item_item_id').val(),
       type: 'PUT',
+      headers: {session_id: $('textarea#current_session_id').val()},
       data: {
-        session_id: $('#current_session_id').val(),
         parent:     $('#update_item_parent_id').val(),
         title:      $('#update_item_title').val(),
         notes:      $('#update_item_notes').val(),
@@ -130,7 +130,7 @@ $(document).ready(function() {
       url: '/api/items/' + 
       $('#delete_item_item_id').val(),
       type: 'DELETE',
-      data: {session_id: $('#current_session_id').val()},
+      headers: {session_id: $('textarea#current_session_id').val()},
       dataType: "json"
     })
     .done(function(data, textStatus) {

@@ -26,7 +26,7 @@ def main
 
   doozer = Doozer.new()
 
-  fb_oauth_token = 'CAAU9WC52BFcBAPP7WeIkSZCGAOqlCgYziwGvjZB1iZA4uIjQZAiZATMEirzqL3K2ZCe6b0Gzo0MhKgbcZAFUgKpaU6Fgw4LZCbmmUY6lZCyTxVI8o3A6FWYXzHueVljyz7WVu4e6rihDRnbNqAFxMRXBuuoMEmKpdl9L6FY5cu7kfPIUbjTtZAPUXxIAGThZCD1fLxYDQ4zMFMUR2sf9zegt2Cy'
+  fb_oauth_token = 'CAAU9WC52BFcBADZBm9F1usPm2MzH5zx0P1maYfA6bG4EdULPLTDUH1W7LGP9zP21DXw2fkp2tN8R9hqXgbC0I4vHfk0uhP2LZCt1JZCDGDW7TGu4EZCiPtqYCPtIDzTUnTizeAPfumMdflw7AKwN7yY5VYz6I4peAZBiUVpalHDsbNkOPfxo2FeoDUQZCrY0DtUltlQlAmtLoYZAAqm8cEw'
 
   ###################################
   #log in

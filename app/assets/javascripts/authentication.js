@@ -16,7 +16,7 @@ $(document).ready(function() {
     $.ajax({
         url: '/api/logout',
         type: 'DELETE',
-        data: {
+        headers: {
           session_id: $('textarea#logout_session_id').val()
         }
       })

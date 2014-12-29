@@ -8,11 +8,11 @@ Rails.application.routes.draw do
     end
     delete '/logout' => 'sessions#destroy'
     scope '/items' do
-      post '/index' => 'items#index'
+      get '/index' => 'items#index'
       post '/create' => 'items#create'
       scope '/:id' do
-        post '/show' => 'items#show'
-        post '/children' => 'items#children'
+        get '/show' => 'items#show'
+        get '/children' => 'items#children'
         put '/' => 'items#update'
         delete '/' => 'items#destroy'
       end

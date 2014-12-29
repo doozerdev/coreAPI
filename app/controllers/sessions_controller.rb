@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    user = User.where(:session_id => params[:session_id]).first
+    user = User.where(:session_id => request.headers["HTTP_SESSION_ID"]).first
     if user
       user.session_id = nil
       user.expires_at = DateTime.now
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       user = nil
       render nothing: true, status: 200
     else
-      render nothing: true, status: 500
+      render nothing: true, status: 401
     end
   end
 end
