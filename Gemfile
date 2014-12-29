@@ -13,6 +13,10 @@ gem "rails_12factor"
 gem "rails_stdout_logging"
 gem "rails_serve_static_assets"
 
+
+gem 'rspec-rails'
+gem "rspec"
+# gem "rails_helper"
 ####### End Custom Stuff
 
 
