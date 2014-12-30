@@ -2,7 +2,7 @@ class ItemsController < BaseApiController
 
   before_action :check_authZ, only: [:show, :children, :update, :destroy]
 
-  #POST /item/index
+  #GET /item/index
   #AllLists
   def index
     render json: {items: Item.where(:user_id=>@user.uid, :parent => nil)}, status: 200
@@ -37,14 +37,14 @@ class ItemsController < BaseApiController
     end
   end
 
-  #POST /item/:id
+  #GET /item/:id
   #GetItem
   def show
     puts params[:id]
     render json: Item.where(:id => params[:id]).first, status: 200
   end
 
-  #POST /item/:id/children
+  #GET /item/:id/children
   #GetChildren
   def children
     render json: {items: Item.where(:user_id=>@user.uid,
