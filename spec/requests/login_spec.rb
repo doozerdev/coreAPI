@@ -11,9 +11,10 @@ RSpec.describe "SessionsController" do
   describe "GET /api/login/:oauth_token" do
     it "logs in a user with a FB token" do
 
-      @test_users = Koala::Facebook::TestUsers.new(
-      :app_id => '1474823829455959', :secret => 'baa64757ee9417802e9f0605b42067f4')
-      user = @test_users.create(true)
+      user = Koala::Facebook::TestUsers.new(
+      :app_id => '1474823829455959', 
+      :secret => 'baa64757ee9417802e9f0605b42067f4').list.first
+      
       fb_oauth_token = user["access_token"]
 
       get "/api/login/#{fb_oauth_token}", {}, { "Accept" => "application/json" }
@@ -23,8 +24,6 @@ RSpec.describe "SessionsController" do
       session_id = JSON.parse(response.body)['session_id']
 
       expect(session_id).to match(/[0-9a-f]{32}/)
-
-      expect(@test_users.delete(user['id'])['success']).to eq true
     end
   end
 
