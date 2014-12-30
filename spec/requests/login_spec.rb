@@ -12,9 +12,10 @@ RSpec.describe "SessionsController" do
     it "logs in a user with a FB token" do
 
       user = Koala::Facebook::TestUsers.new(
-      :app_id => '1474823829455959', 
-      :secret => 'baa64757ee9417802e9f0605b42067f4').list.first
-      
+        :app_id => '1474823829455959',
+      :secret => 'baa64757ee9417802e9f0605b42067f4').list.select{
+      |user| user['id'] == '321638971355001'}.first
+
       fb_oauth_token = user["access_token"]
 
       get "/api/login/#{fb_oauth_token}", {}, { "Accept" => "application/json" }
