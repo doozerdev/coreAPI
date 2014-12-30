@@ -20,24 +20,20 @@ class User
     graph = Koala::Facebook::API.new(token)
     begin
       profile = graph.get_object("me")
-      if(profile['verified'])
-        user = User.first_or_create(:uid=>profile['id'])
-        user.uid = profile['id']
-        user.email = profile['email']
-        user.first_name = profile['first_name']
-        user.last_name = profile['last_name']
-        user.gender = profile['gender']
-        user.link = profile['link']
-        user.locale = profile['locale']
-        user.timezone = profile['timezone']
-        user.oauth_token = token
-        user.expires_at = DateTime.now + 1.hour
-        user.session_id = SecureRandom.hex(32)
-        user.save!
-        user
-      else
-        nil
-      end
+      user = User.first_or_create(:uid=>profile['id'])
+      user.uid = profile['id']
+      user.email = profile['email']
+      user.first_name = profile['first_name']
+      user.last_name = profile['last_name']
+      user.gender = profile['gender']
+      user.link = profile['link']
+      user.locale = profile['locale']
+      user.timezone = profile['timezone']
+      user.oauth_token = token
+      user.expires_at = DateTime.now + 1.hour
+      user.session_id = SecureRandom.hex(32)
+      user.save!
+      user
     rescue
       nil
     end
