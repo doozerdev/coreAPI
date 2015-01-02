@@ -13,8 +13,11 @@ class User
   key :locale, String
   key :timezone, Integer
   key :oauth_token, String
-  key :expires_at, DateTime
+  key :expires_at, Time
   key :session_id, String
+  key :role, String
+
+  User.ensure_index ([[:email, 1], [:uid,1]]), :unique => true
 
   def self.from_token(token)
     graph = Koala::Facebook::API.new(token)

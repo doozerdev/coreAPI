@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     scope '/login' do
       get '/:oauth_token' => 'sessions#create'
     end
+    scope '/users' do
+      put '/:uid' => 'users#update'
+    end
     delete '/logout' => 'sessions#destroy'
     scope '/items' do
       get '/index' => 'items#index'

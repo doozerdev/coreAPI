@@ -516,6 +516,68 @@
           </div>
         </div>
       </div>
+      <h2>Users</h2>
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Update User</h3>
+          <p><code>PUT /api/users/:id</code>
+          </p>
+        </div>
+        <div class="panel-body">
+          <p>Update the role of the user.
+          </p>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>Example Request/Reponse</h4>
+            </div>
+            <div class="panel-body">
+              <h5>Request</h5>
+              <strong>URL</strong>
+              <br />
+              <pre>POST http://localhost:3000/api/users/321638971355001</pre>
+              <strong>Request Header</strong>
+              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <strong>Request Body</strong>
+              <pre>role=[admin|user]</pre>
+              <h5>Response</h5>
+              <pre>{
+  "expires_at": "2015-01-03T00:11:03.000Z",
+  "first_name": "Rspectestuser",
+  "gender": "male",
+  "last_name": "Donotdelete",
+  "link": "https://www.facebook.com/app_scoped_user_id/321638971355001/",
+  "locale": "en_US",
+  "role": "admin",
+  "timezone": 0,
+  "uid": "321638971355001"
+}</pre>
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h4>Test Interface</h4>
+            </div>
+            <div class="panel-body">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="user_id" id='update_user_user_id'>
+                <input type="text" class="form-control" placeholder="role" id='update_user_role'>
+              </div>
+              <br />
+              <input type="submit" id='update_user' value="update item">
+              <br />
+              <br />
+              <div class='well'>
+                <div id="update_user_response" class='hidden'>
+                  <strong>Status:</strong>
+                  <div id="update_user_response_status"></div>
+                  <strong>JSON:</strong><pre><div id='update_user_response_json'></div></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
