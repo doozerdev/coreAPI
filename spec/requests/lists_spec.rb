@@ -402,6 +402,15 @@ describe 'PUT /api/lists/:id' do
     end
   end
 
+  describe 'DELETE /api/lists/:id' do
+    it "delete the test item" do
+      delete "/api/items/#{test_item_id}", {}, {"HTTP_SESSION_ID" => session_id}
+      expect(response.status).to eq 200
+      delete_count = JSON.parse(response.body)['delete_item_count']
+      expect(delete_count).to eq 1
+    end
+  end
+
   #######################################################
   # Helper functions
   #######################################################
