@@ -11,27 +11,17 @@ class ItemsController < BaseApiController
   #POST /item/create
   #AddItem
   def create
-    item = Item.new
     if params[:title]
-      item.title = params[:title]
-      item.user_id = @user.uid
-      if params[:parent] and !params[:parent].empty?
-        item.parent = params[:parent]
-      end
-      if params[:duedate] and !params[:duedate].empty?
-        item.duedate = DateTime.parse(params[:duedate])
-      end
-      if params[:order] and !params[:order].empty?
-        item.order = params[:order].to_i
-      end
+      item = Item.new(params.permit(:title, :parent, :duedate, :order,
+                                    :done, :archive, :notes))
 
-      item.done = params[:done].to_bool if params[:done]
-      item.archive = params[:archive].to_bool if params[:archive]
-
-      item.notes = params[:notes]
-
-      item.save
-      render json: item, status: 201
+      if params[:parent] and !check_authZ_item(params[:parent])
+        render json: {error: 'parent not found'}, status: 404
+      else
+        item.user_id = @user.uid
+        item.save
+        render json: item, status: 201
+      end
     else
       render json: {error: 'title is required'}, status: 400
     end
@@ -40,7 +30,6 @@ class ItemsController < BaseApiController
   #GET /item/:id
   #GetItem
   def show
-    puts params[:id]
     render json: Item.where(:id => params[:id]).first, status: 200
   end
 
@@ -54,16 +43,14 @@ class ItemsController < BaseApiController
   #PUT /item/:id
   #UpdateItem
   def update
-    item = Item.update(params[:id], params.permit(:title, :duedate, :order,
+    item = Item.update(params[:id], params.permit(:title, :parent, :duedate, :order,
                                                   :done, :archive, :notes))
-    if params[:parent] and !params[:parent].empty?
-      item.parent = params[:parent]
-      item.save
+    if params[:parent] and !check_authZ_item(params[:parent])
+      render json: {error: 'parent not found'}, status: 404
     else
-      item.parent = nil
       item.save
+      render json: item, status: 202
     end
-    render json: item, status: 202
   end
 
   #DELETE /item/:id
@@ -75,7 +62,7 @@ class ItemsController < BaseApiController
                           :parent=>params['id'])
     children.each do |child|
       Item.destroy(child.id)
-      count = count + 1 
+      count = count + 1
     end
 
     Item.destroy(params[:id])
@@ -87,12 +74,20 @@ class ItemsController < BaseApiController
   private
   def check_authZ
     if params[:id] and !params[:id].empty?
-      item = Item.where(:id => params[:id]).first
-      unless item and item.user_id == @user.uid
-        render nothing: true, status: :unauthorized     
+      unless check_authZ_item(params[:id])
+        render json: {error: 'item not found'}, status: 404
       end
     else
-      render nothing: true, status: :unauthorized 
+      render json: {error: 'item not found'}, status: 404
+    end
+  end
+
+  def check_authZ_item(item_id)
+    item = Item.where(:id => item_id).first
+    unless item and item.user_id == @user.uid
+      return false
+    else
+      return true
     end
   end
 end

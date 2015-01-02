@@ -264,6 +264,148 @@ RSpec.describe "Lists API" do
     end
   end
 
+
+  ################################################
+  #Error Cases
+  ################################################
+
+  #does not exist item
+  dne_item_id = '123'
+  #does not own item
+  dno_item_id = '123'
+  # a test item we do own, so we can attempt to take over another list
+  test_item_id = nil
+
+  describe "POST /api/lists/create" do
+    it "create a test item for ownership tests" do
+      post "/api/items/create", {
+        :title => 'test item'
+        },{"HTTP_SESSION_ID" => session_id}
+      expect(response.status).to eq 201
+      item = JSON.parse(response.body)
+      expect(item['id']).to match(/[a-f0-9]{24}/)
+      test_item_id = item['id']
+    end
+  end  
+
+  describe "POST /api/lists/create" do
+    it "attempts to create an item without a title" do
+      post "/api/items/create", {},{"HTTP_SESSION_ID" => session_id}
+      expect(response.status).to eq 400
+      expect(JSON.parse(response.body)['error']).to eq 'title is required'
+    end
+  end
+
+  describe "POST /api/lists/create" do
+    it "attempts to create an item with a parent we don't own" do
+      post "/api/items/create", {
+        :title => 'A Parent I do not own',
+        :parent => dno_item_id
+      },
+        {"HTTP_SESSION_ID" => session_id}
+      expect(response.status).to eq 404
+      expect(JSON.parse(response.body)['error']).to eq 'parent not found'
+    end
+  end
+
+  describe 'PUT /api/lists/:id' do
+    it "attempt to update an item we don't own" do
+      put "/api/items/#{dno_item_id}", {
+        :title => 'title',
+        :notes => 'notes',
+        :duedate => DateTime.now,
+        :order => 123,
+        :done => true,
+        :archive => true
+      }, {"HTTP_SESSION_ID" => session_id}
+      expect(response.status).to eq 404
+      expect(JSON.parse(response.body)['error']).to eq 'item not found'
+    end
+  end
+
+  describe 'PUT /api/lists/:id' do
+    it 'attempt to update an item that does not exist' do
+      put "/api/items/#{dne_item_id}", {
+        :title => 'title',
+        :notes => 'notes',
+        :duedate => DateTime.now,
+        :order => 123,
+        :done => true,
+        :archive => true
+      }, {"HTTP_SESSION_ID" => session_id}
+      expect(response.status).to eq 404
+      expect(JSON.parse(response.body)['error']).to eq 'item not found'
+    end
+  end
+
+describe 'PUT /api/lists/:id' do
+    it "attempt to update an item with a parent we don't own" do
+      put "/api/items/#{test_item_id}", {
+        :title => 'title',
+        :parent => dno_item_id,
+        :notes => 'notes',
+        :duedate => DateTime.now,
+        :order => 123,
+        :done => true,
+        :archive => true
+      }, {"HTTP_SESSION_ID" => session_id}
+      expect(response.status).to eq 404
+      expect(JSON.parse(response.body)['error']).to eq 'parent not found'
+    end
+  end
+
+  describe 'PUT /api/lists/:id' do
+    it "attempt to update an item with a parent that does not exist" do
+      put "/api/items/#{test_item_id}", {
+        :title => 'title',
+        :parent => dne_item_id,
+        :notes => 'notes',
+        :duedate => DateTime.now,
+        :order => 123,
+        :done => true,
+        :archive => true
+      }, {"HTTP_SESSION_ID" => session_id}
+      expect(response.status).to eq 404
+      expect(JSON.parse(response.body)['error']).to eq 'parent not found'
+    end
+  end
+
+  describe "GET /api/items/#{first_item.id}/show" do
+    it "attempts to view an item we don't own" do
+      get "/api/items/#{dno_item_id}/show", {}, {"HTTP_SESSION_ID" => session_id}
+      expect(response.status).to eq 404
+      expect(JSON.parse(response.body)['error']).to eq 'item not found'
+    end
+  end
+
+  describe "GET /api/items/#{first_item.id}/show" do
+    it "attempts to view an item that does not exist" do
+      get "/api/items/#{dne_item_id}/show", {}, {"HTTP_SESSION_ID" => session_id}
+      expect(response.status).to eq 404
+      expect(JSON.parse(response.body)['error']).to eq 'item not found'
+    end
+  end
+
+  describe 'DELETE /api/lists/:id' do
+    it "attempts to deletes an item that doesn't exist" do
+      delete "/api/items/#{dne_item_id}", {}, {"HTTP_SESSION_ID" => session_id}
+      expect(response.status).to eq 404
+      expect(JSON.parse(response.body)['error']).to eq 'item not found'
+    end
+  end
+
+  describe 'DELETE /api/lists/:id' do
+    it "attempts to deletes an item that we don't own" do
+      delete "/api/items/#{dno_item_id}", {}, {"HTTP_SESSION_ID" => session_id}
+      expect(response.status).to eq 404
+      expect(JSON.parse(response.body)['error']).to eq 'item not found'
+    end
+  end
+
+  #######################################################
+  # Helper functions
+  #######################################################
+
   def compare(json_item, item)
     expect(json_item['parent']).to eq item.parent if(item.parent)
     expect(json_item['title']).to eq item.title if(item.title)
