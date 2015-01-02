@@ -8,6 +8,7 @@ MongoMapper.database.collections.each { |c| c.drop_indexes }
 RSpec.describe "Lists API" do
 
   session_id = nil
+  admin_session_id = nil
   new_list = Item.new(
     :title => 'A New List',
     :notes => 'Some Notes',
@@ -34,17 +35,24 @@ RSpec.describe "Lists API" do
   )
 
   before(:all) do
-    user = Koala::Facebook::TestUsers.new(:app_id => '1474823829455959', :secret => 'baa64757ee9417802e9f0605b42067f4').list.select{|user| user['id'] == '321638971355001'}.first
+    test_users = Koala::Facebook::TestUsers.new(:app_id => '1474823829455959', :secret => 'baa64757ee9417802e9f0605b42067f4').list
 
+    user = test_users.select{|user| user['id'] == '321638971355001'}.first
     fb_oauth_token = user["access_token"]
-
     get "/api/login/#{fb_oauth_token}", {}, { "Accept" => "application/json" }
-
     expect(response.status).to eq 201
-
     session_id = JSON.parse(response.body)['session_id']
-
     expect(session_id).to match(/[0-9a-f]{32}/)
+
+    admin = test_users.select{|admin| admin['id'] == '1546391385590451'}.first
+    fb_oauth_token = admin["access_token"]
+    get "/api/login/#{fb_oauth_token}", {}, { "Accept" => "application/json" }
+    expect(response.status).to eq 201
+    json_response = JSON.parse(response.body)
+    expect(User.where(:uid => admin['id']).first.role).to eq 'admin'
+    admin_session_id = json_response['session_id']
+    expect(admin_session_id).to match(/[0-9a-f]{32}/)
+
   end
 
   describe "POST /api/lists/create" do
@@ -243,6 +251,14 @@ RSpec.describe "Lists API" do
       expect(response.status).to eq 200
       list = JSON.parse(response.body)
       compare(list, second_item)
+    end
+  end
+
+  describe 'GET /api/lists/:term/search' do
+    it "searchs through items" do
+      get "/api/items/title/search", {}, {"HTTP_SESSION_ID" => admin_session_id}
+      expect(response.status).to eq 200
+      expect(JSON.parse(response.body)['count']).to be > 1
     end
   end
 

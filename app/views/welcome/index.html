@@ -466,6 +466,61 @@
         </div>
       </div>
 
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Search Titles</h3>
+          <p><code>PUT /api/items/:query</code>
+          </p>
+        </div>
+        <div class="panel-body">
+          <p>Searches the titles of all items (user must be admin)
+          </p>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>Example Request/Reponse</h4>
+            </div>
+            <div class="panel-body">
+              <h5>Request</h5>
+              <strong>URL</strong>
+              <br />
+              <pre>GET http://localhost:3000/api/items/title</pre>
+              <strong>Request Header</strong>
+              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <h5>Response</h5>
+              <pre>
+                
+
+
+
+
+
+              </pre>
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h4>Test Interface</h4>
+            </div>
+            <div class="panel-body">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="search_term" id='search_term'>
+              </div>
+              <br />
+              <input type="submit" id='search_button' value="search">
+              <br />
+              <br />
+              <div class='well'>
+                <div id="search_response" class='hidden'>
+                  <strong>Status:</strong>
+                  <div id="search_response_status"></div>
+                  <strong>JSON:</strong><pre><div id='search_response_json'></div></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -517,7 +572,7 @@
         </div>
       </div>
       <h2>Users</h2>
-<div class="panel panel-default">
+      <div class="panel panel-default">
         <div class="panel-heading">
           <h3>Update User</h3>
           <p><code>PUT /api/users/:id</code>

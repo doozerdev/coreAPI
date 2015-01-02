@@ -125,6 +125,25 @@ $(document).ready(function() {
     });
   });
 
+  $("#search_button").click(function() {
+    $.ajax({
+      url: '/api/items/' + 
+      $('#search_term').val() + '/search',
+      type: 'GET',
+      headers: {session_id: $('textarea#current_session_id').val()},
+      dataType: "json"
+    })
+    .done(function(data, textStatus) {
+      $("#search_response_status").html(textStatus)
+      $('#search_response_json').text(JSON.stringify(data, null, '\t'))
+    }).fail(function( jqXHR, textStatus ) {
+      $("#search_response_status").html("<strong class='text-danger'>" + 
+        jqXHR.status + ": " + textStatus + "</strong>")
+    }).always(function(){
+      $("#search_response").removeClass("hidden")
+    });
+  });
+
   $("#delete_item").click(function() {
     $.ajax({
       url: '/api/items/' + 

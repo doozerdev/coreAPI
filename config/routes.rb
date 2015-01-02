@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     scope '/items' do
       get '/index' => 'items#index'
       post '/create' => 'items#create'
+      get '/:term/search' => 'items#search'
       scope '/:id' do
         get '/show' => 'items#show'
         get '/children' => 'items#children'

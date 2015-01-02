@@ -71,6 +71,15 @@ class ItemsController < BaseApiController
     render json: {delete_item_count: count}, status: 200
   end
 
+  def search
+    if @user.role == 'admin'
+      items = Item.all(:title => /#{Regexp.escape(params['term'])}/)
+      render json: {count: items.count, items: items}, status: 200
+    else
+      render nothing: true, status: 401
+    end
+  end
+
   private
   def check_authZ
     if params[:id] and !params[:id].empty?
