@@ -10,15 +10,27 @@ RSpec.describe "Lists API" do
   session_id = nil
   new_list = Item.new(
     :title => 'A New List',
-    :notes => 'Some Notes'
+    :notes => 'Some Notes',
+    :duedate => DateTime.now,
+    :order => 1,
+    :done => false,
+    :archive => false
   )
   first_item = Item.new(
     :title=>'The First Item for the List',
-    :notes=>'Some notes for the first item'
+    :notes=>'Some notes for the first item',
+    :duedate => DateTime.now,
+    :order => 1,
+    :done => false,
+    :archive => false
   )
   second_item = Item.new(
     :title=>'The Second Item for the List',
-    :notes=>'Some notes for the second item'
+    :notes=>'Some notes for the second item',
+    :duedate => DateTime.now,
+    :order => 1,
+    :done => false,
+    :archive => false
   )
 
   before(:all) do
@@ -41,6 +53,10 @@ RSpec.describe "Lists API" do
       post "/api/items/create", {
         :title => new_list.title,
         :notes => new_list.notes,
+        :duedate => new_list.duedate,
+        :order => new_list.order,
+        :done => new_list.done,
+        :archive => new_list.archive
       },
         {"HTTP_SESSION_ID" => session_id}
 
@@ -70,7 +86,11 @@ RSpec.describe "Lists API" do
       post "/api/items/create", {
         :parent => first_item.parent,
         :title => first_item.title,
-        :notes => first_item.notes
+        :notes => first_item.notes,
+        :duedate => first_item.duedate,
+        :order => first_item.order,
+        :done => first_item.done,
+        :archive => first_item.archive
       },
         {"HTTP_SESSION_ID" => session_id}
 
@@ -83,7 +103,11 @@ RSpec.describe "Lists API" do
       post "/api/items/create", {
         :parent => second_item.parent,
         :title => second_item.title,
-        :notes => second_item.notes
+        :notes => second_item.notes,
+        :duedate => second_item.duedate,
+        :order => second_item.order,
+        :done => second_item.done,
+        :archive => second_item.archive
       },
         {"HTTP_SESSION_ID" => session_id}
 
@@ -136,10 +160,18 @@ RSpec.describe "Lists API" do
     it 'updates the list' do
       new_list.title = "#{new_list.title} - updated"
       new_list.notes = "#{new_list.notes} - updated"
+      new_list.duedate = DateTime.now
+      new_list.order = 2
+      new_list.done = true
+      new_list.archive = true
 
       put "/api/items/#{new_list.id}", {
         :title => new_list.title,
-        :notes => new_list.notes
+        :notes => new_list.notes,
+        :duedate => new_list.duedate,
+        :order => new_list.order,
+        :done => new_list.done,
+        :archive => new_list.archive
       }, {"HTTP_SESSION_ID" => session_id}
       expect(response.status).to eq 202
       item = JSON.parse(response.body)
@@ -160,10 +192,19 @@ RSpec.describe "Lists API" do
     it 'updates the items in the list' do
       first_item.title = "#{first_item.title} - updated"
       first_item.notes = "#{first_item.notes} - updated"
+      first_item.duedate = DateTime.now
+      first_item.order = 2
+      first_item.done = true
+      first_item.archive = true
+
       put "/api/items/#{first_item.id}", {
         :parent => first_item.parent,
         :title => first_item.title,
-        :notes => first_item.notes
+        :notes => first_item.notes,
+        :duedate => first_item.duedate,
+        :order => first_item.order,
+        :done => first_item.done,
+        :archive => first_item.archive
       }, {"HTTP_SESSION_ID" => session_id}
       expect(response.status).to eq 202
       item = JSON.parse(response.body)
@@ -171,10 +212,19 @@ RSpec.describe "Lists API" do
 
       second_item.title = "#{second_item.title} - updated"
       second_item.notes = "#{second_item.notes} - updated"
+      second_item.duedate = DateTime.now
+      second_item.order = 2
+      second_item.done = true
+      second_item.archive = true
+
       put "/api/items/#{second_item.id}", {
         :parent => second_item.parent,
         :title => second_item.title,
-        :notes => second_item.notes
+        :notes => second_item.notes,
+        :duedate => second_item.duedate,
+        :order => second_item.order,
+        :done => second_item.done,
+        :archive => second_item.archive
       }, {"HTTP_SESSION_ID" => session_id}
       expect(response.status).to eq 202
       item = JSON.parse(response.body)
@@ -218,7 +268,7 @@ RSpec.describe "Lists API" do
     expect(json_item['parent']).to eq item.parent if(item.parent)
     expect(json_item['title']).to eq item.title if(item.title)
     expect(json_item['notes']).to eq item.notes if(item.notes)
-    expect(json_item['duedate']).to eq item.duedate if(item.duedate)
+    expect(DateTime.parse(json_item['duedate'])).to eq item.duedate if(item.duedate)
     expect(json_item['archive']).to eq item.archive if(item.archive)
     expect(json_item['done']).to eq item.done if(item.done)
   end

@@ -6,7 +6,7 @@ class Item
   key :archive, Boolean
   key :parent, String
   key :order, Integer
-  key :duedate, DateTime
+  key :duedate, Time
   key :user_id, String
   key :notes, String
 

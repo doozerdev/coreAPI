@@ -19,7 +19,7 @@ class ItemsController < BaseApiController
         item.parent = params[:parent]
       end
       if params[:duedate] and !params[:duedate].empty?
-        item.duedate = DateTime.httpdate(params[:duedate])
+        item.duedate = DateTime.parse(params[:duedate])
       end
       if params[:order] and !params[:order].empty?
         item.order = params[:order].to_i
