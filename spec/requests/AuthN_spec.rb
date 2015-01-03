@@ -1,10 +1,13 @@
 require "rails_helper"
 require "spec_helper"
 
-MongoMapper.connection = Mongo::Connection.new('127.0.0.1', 27017)
-MongoMapper.database = "doozer_development"
-MongoMapper.database.collections.each { |c| c.drop_indexes }
-
+if Rails.env.production?
+  MongoMapper.uri = ENV['MONGOHQ_URL']
+else Rails.env.development?
+  MongoMapper.connection = Mongo::Connection.new('127.0.0.1', 27017)
+  MongoMapper.database = "doozer_development"
+  MongoMapper.database.collections.each { |c| c.drop_indexes }
+end
 session_id = nil
 
 RSpec.describe "SessionsController" do
