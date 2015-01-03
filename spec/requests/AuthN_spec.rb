@@ -2,7 +2,7 @@ require "rails_helper"
 require "spec_helper"
 
 if Rails.env.production?
-  MongoMapper.uri = ENV['MONGOHQ_URL']
+  MongoMapper.connection = Mongo::Connection.new(ENV['MONGOHQ_URL'])
 else Rails.env.development?
   MongoMapper.connection = Mongo::Connection.new('127.0.0.1', 27017)
   MongoMapper.database = "doozer_development"
