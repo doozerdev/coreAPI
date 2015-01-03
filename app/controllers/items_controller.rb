@@ -15,7 +15,7 @@ class ItemsController < BaseApiController
       item = Item.new(params.permit(:title, :parent, :duedate, :order,
                                     :done, :archive, :notes))
 
-      if params[:parent] and !check_authZ_item(params[:parent])
+      if params[:parent] and !params[:parent].empty? and !check_authZ_item(params[:parent])
         render json: {error: 'parent not found'}, status: 404
       else
         item.user_id = @user.uid
@@ -76,7 +76,9 @@ class ItemsController < BaseApiController
       items = Item.all(:title => /#{Regexp.escape(params['term'])}/)
       render json: {count: items.count, items: items}, status: 200
     else
-      render nothing: true, status: 401
+      items = Item.where(:user_id=>@user.uid, 
+        :title => /#{Regexp.escape(params['term'])}/)
+      render json: {count: items.count, items: items}, status: 200
     end
   end
 
