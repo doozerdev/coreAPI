@@ -473,7 +473,7 @@
           </p>
         </div>
         <div class="panel-body">
-          <p>Searches the titles of all items (user must be admin)
+          <p>Searches the titles of all items. If user is admin, all titles will be searched, if not only the user's titles will be searched.
           </p>
           <div class="panel panel-info">
             <div class="panel-heading">
@@ -487,13 +487,29 @@
               <strong>Request Header</strong>
               <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
               <h5>Response</h5>
-              <pre>
-                
-
-
-
-
-
+              <pre>{
+  "count": 2,
+  "items": [
+    {
+      "archive": false,
+      "done": false,
+      "id": "54a78fd3950a66ff9f000abf",
+      "notes": "",
+      "parent": "54a78fd2950a66ff9f000a70",
+      "title": "fill health",
+      "user_id": "4614807584795"
+    },
+    {
+      "archive": false,
+      "done": false,
+      "id": "54a78f9f950a66ff9f0009ae",
+      "notes": "",
+      "parent": "54a78f9f950a66ff9f0009a8",
+      "title": "clean health",
+      "user_id": "4614807584795"
+    }
+  ]
+}
               </pre>
             </div>
           </div>
@@ -514,6 +530,62 @@
                   <strong>Status:</strong>
                   <div id="search_response_status"></div>
                   <strong>JSON:</strong><pre><div id='search_response_json'></div></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>List Most Common Words</h3>
+          <p><code>PUT /api/items/common/words</code>
+          </p>
+        </div>
+        <div class="panel-body">
+          <p>returns a list of the most 50 most common words used in titles (must be admin)
+          </p>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>Example Request/Reponse</h4>
+            </div>
+            <div class="panel-body">
+              <h5>Request</h5>
+              <strong>URL</strong>
+              <br />
+              <pre>GET http://localhost:3000/api/items/common/words</pre>
+              <strong>Request Header</strong>
+              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <h5>Response</h5>
+              <pre>{
+  "words": [
+    [
+      "word",
+      51
+    ],
+    [
+      "title",
+      50
+    ]
+  ]
+}</pre>
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h4>Test Interface</h4>
+            </div>
+            <div class="panel-body">
+              <input type="submit" id='common_words' value="common_words">
+              <br />
+              <br />
+              <div class='well'>
+                <div id="common_words_response" class='hidden'>
+                  <strong>Status:</strong>
+                  <div id="common_words_response_status"></div>
+                  <strong>JSON:</strong><pre><div id='common_words_response_json'></div></pre>
                 </div>
               </div>
             </div>

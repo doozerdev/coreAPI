@@ -258,7 +258,7 @@ RSpec.describe "Lists API" do
     it "searchs through items" do
       get "/api/items/title/search", {}, {"HTTP_SESSION_ID" => admin_session_id}
       expect(response.status).to eq 200
-      expect(JSON.parse(response.body)['count']).to be > 1
+      expect(JSON.parse(response.body)['count']).to be >= 1
     end
   end
 

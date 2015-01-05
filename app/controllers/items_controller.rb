@@ -82,6 +82,24 @@ class ItemsController < BaseApiController
     end
   end
 
+  def most_common_words
+    if @user.role == 'admin'
+      words = Hash.new
+      Item.each do |i|
+        i.title.split.each do |w|
+          if words.has_key?(w)
+            words[w] = words[w]+1
+          else
+            words[w] = 1
+          end
+        end
+      end
+      render json: {words: words.sort_by{|word, count| count}.reverse.first(50)}, status: 200
+    else
+      render nothing: true, status: :unauthorized 
+    end
+  end
+
   private
   def check_authZ
     if params[:id] and !params[:id].empty?

@@ -144,6 +144,28 @@ $(document).ready(function() {
     });
   });
 
+  $("#common_words").click(function() {
+    $.ajax({
+      url: '/api/items/common/words',
+      type: 'GET',
+      headers: {session_id: $('textarea#current_session_id').val()},
+      dataType: "json"
+    })
+    .done(function(data, textStatus) {
+      $("#common_words_response_status").html(textStatus)
+
+      $('#common_words_response_json').text(JSON.stringify(data, null, '\t'))
+    }).fail(function( jqXHR, textStatus ) {
+      $("#common_words_response_status").html("<strong class='text-danger'>" + 
+        jqXHR.status + ": " + textStatus + "</strong>")
+    })
+    .always(function(){
+      $("#common_words_response").removeClass("hidden")
+    });
+  });
+
+
+
   $("#delete_item").click(function() {
     $.ajax({
       url: '/api/items/' + 
