@@ -1,10 +1,12 @@
-# this is a basic test harness to demonstrate the functionality of the 
-# doozer API. Not the same as a proper test harness, but can be useful for 
+# this is a basic test harness to demonstrate the functionality of the
+# doozer API. Not the same as a proper test harness, but can be useful for
 # testing and debugging.
 # call it from the command line using 'ruby main.rb'
 
 
 require './api.rb'
+
+fb_oauth_token = 'CAAU9WC52BFcBAOkmLpZAbdxulZAiAc8MBcod3IxgJ6xqnk7B1hCSmS6nDxBpIZBhfn5ccQkbUXowHfGzFpYskN9EJLq2GS3kQVqpDyctRAmGzldxg5zZC8kcIc05vW2zlJCMyUsQ9VeoCx15vJnYwr8iU3vQMSMyAyMqPmpxPHm0XHjT1wzBkWPp2dBMhg5UplR3GasW1xzaZBF8DnXOQ'
 
 def checkResponse(code)
   if code == 401
@@ -13,7 +15,7 @@ def checkResponse(code)
   end
 end
 
-def main
+def main (verbose)
 
   verbs = ['accept', 'allow', 'ask', 'believe', 'borrow', 'break', 'bring', 'buy', 'cancel', 'change', 'clean', 'comb', 'complain', 'cough', 'count', 'cut', 'dance', 'draw', 'drink', 'drive', 'eat', 'explain', 'fall', 'fill', 'find', 'finish', 'fit', 'fix', 'fly', 'forget', 'give', 'go', 'have', 'hear', 'hurt', 'know', 'learn', 'leave', 'listen', 'live', 'look', 'lose', 'make', 'need', 'open']
 
@@ -26,29 +28,34 @@ def main
 
   doozer = Doozer.new()
 
-  fb_oauth_token = 'CAAU9WC52BFcBADZBm9F1usPm2MzH5zx0P1maYfA6bG4EdULPLTDUH1W7LGP9zP21DXw2fkp2tN8R9hqXgbC0I4vHfk0uhP2LZCt1JZCDGDW7TGu4EZCiPtqYCPtIDzTUnTizeAPfumMdflw7AKwN7yY5VYz6I4peAZBiUVpalHDsbNkOPfxo2FeoDUQZCrY0DtUltlQlAmtLoYZAAqm8cEw'
-
   ###################################
   #log in
   ###################################
-  puts '####################################'
-  puts 'Login'
-  puts '------------------------------------'
+  if verbose
+    puts '####################################'
+    puts 'Login'
+    puts '------------------------------------'
+  end
   session_id = doozer.login(fb_oauth_token)
 
   if session_id == 401
     puts 'unauthorized from FaceBook, be sure to replace the oauth token. Exiting'
     exit
   end
+  if verbose
+    puts "session_id: #{session_id}"
+  end
 
-  puts "session_id: #{session_id}"
 
+  start_time = Time.now
   ###################################
   #Get Lists
   ###################################
-  puts '####################################'
-  puts 'getLists'
-  puts '------------------------------------'
+  if verbose
+    puts '####################################'
+    puts 'getLists'
+    puts '------------------------------------'
+  end
   code, lists = doozer.getLists(session_id)
   checkResponse(code)
 
@@ -60,30 +67,38 @@ def main
 
 
   lists["items"].each do |list|
-    puts "#{list['title']} - #{list['id']}"
+    if verbose
+      puts "#{list['title']} - #{list['id']}"
+    end
     list_ids.push(list['id'])
   end
 
   ###################################
   #Get Children
   ###################################
-  puts '####################################'
-  puts 'getChildren'
-  puts '------------------------------------'
+  if verbose
+    puts '####################################'
+    puts 'getChildren'
+    puts '------------------------------------'
+  end
   list_ids.each do |list_id|
     code, item = doozer.getItem(session_id, list_id)
-
-    puts item['title']
-
+    if verbose
+      puts item['title']
+    end
     code, children = doozer.getChildren(session_id, list_id)
 
     if children['items'].any?
       children['items'].each do |item|
-        puts "  #{item['title']} - #{item['id']}"
+        if verbose
+          puts "  #{item['title']} - #{item['id']}"
+        end
         item_ids.push(item['id'])
       end
     else
-      puts '  no children'
+      if verbose
+        puts '  no children'
+      end
     end
   end
 
@@ -106,44 +121,47 @@ def main
 
     newly_created_item_ids.push(item['id'])
   end
+  if verbose
+    puts 'created new list'
 
-  puts 'created new list'
+    code, item = doozer.getItem(session_id, new_list['id'])
+    puts item['title']
 
-  code, item = doozer.getItem(session_id, new_list['id'])
-  puts item['title']
-
-  code, children = doozer.getChildren(session_id, new_list['id'])
-
-  children['items'].each do |item|
-    puts "  #{item['title']} - #{item['id']}"
+    code, children = doozer.getChildren(session_id, new_list['id'])
+    children['items'].each do |item|
+      puts "  #{item['title']} - #{item['id']}"
+    end
   end
-
   ###################################
   #Update Item
   ###################################
-
-  puts 'update 2 random list titles'
+  if verbose
+    puts 'update 2 random list titles'
+  end
   for i in 1..2
     code, list = doozer.getItem(session_id, newly_created_list_ids.sample)
 
     code, updated_list = doozer.updateItem(session_id, list['id'], list['parent'], "updated title - #{list['title']}", list['notes'], list['order'], list['duedate'], list['done'], list['archive'] )
-
-    puts 'list was: '
-    puts list['title']
-    puts 'list updated to: '
-    puts updated_list['title']
+    if verbose
+      puts 'list was: '
+      puts list['title']
+      puts 'list updated to: '
+      puts updated_list['title']
+    end
   end
-
-  puts 'update 10 random item titles'
+  if verbose
+    puts 'update 10 random item titles'
+  end
   for i in 1..10
     code, item = doozer.getItem(session_id, newly_created_item_ids.sample)
 
     code, updated_item = doozer.updateItem(session_id, item['id'], item['parent'], "updated title - #{item['title']}", item['notes'], item['order'], item['duedate'], item['done'], item['archive'] )
-
-    puts 'item was: '
-    puts item['title']
-    puts 'item updated to: '
-    puts updated_item['title']
+    if verbose
+      puts 'item was: '
+      puts item['title']
+      puts 'item updated to: '
+      puts updated_item['title']
+    end
   end
 
 
@@ -151,8 +169,9 @@ def main
   ###################################
   #Delete Item
   ###################################
-
-  puts 'delete one random list (and all children)'
+  if verbose
+    puts 'delete one random list (and all children)'
+  end
   to_delete = newly_created_list_ids.sample
   code, response = doozer.getChildren(session_id, to_delete)
   children = response['items']
@@ -161,33 +180,52 @@ def main
   newly_created_item_ids.delete(items_to_delete)
   newly_created_list_ids.delete(to_delete)
   code, num_deleted =  doozer.deleteItem(session_id, to_delete)
-  puts "deleted #{num_deleted} items (including list)"
-
+  if verbose
+    puts "deleted #{num_deleted} items (including list)"
+  end
   num_to_delete = rand(5)
-  puts "delete #{num_to_delete} random items"
+  if verbose
+    puts "delete #{num_to_delete} random items"
+  end
   for i in 1..num_to_delete
     item_id = newly_created_item_ids.sample
-    puts "======Deleteing #{item_id}"
+    if verbose
+      puts "======Deleteing #{item_id}"
+    end
     newly_created_item_ids.delete(item_id)
     code, num_deleted = doozer.deleteItem(session_id, item_id)
   end
-
-  puts 'deleting all other test lists created by running this script.'
-  newly_created_list_ids.each do |to_delete|
-  newly_created_list_ids.delete(to_delete)
-  code, num_deleted =  doozer.deleteItem(session_id, to_delete)
-  puts "deleted #{num_deleted} items (including list)"
+  if verbose
+    puts 'deleting all other test lists created by running this script.'
   end
+  newly_created_list_ids.each do |to_delete|
+    newly_created_list_ids.delete(to_delete)
+    code, num_deleted =  doozer.deleteItem(session_id, to_delete)
+    if verbose
+      puts "deleted #{num_deleted} items (including list)"
+    end
+  end
+
+  end_time = Time.now
 
   ###################################
   #log out
   ###################################
-  puts '####################################'
-  puts 'log out'
-  puts '------------------------------------'
+  if verbose
+    puts '####################################'
+    puts 'log out'
+    puts '------------------------------------'
+  end
   logout_code = doozer.logout(session_id).code
+  if verbose
+    puts "  log out: #{logout_code}"
+  end
 
-  puts "log out: #{logout_code}"
+  return (end_time-start_time)*1000
 end
 
-main()
+timings = Array.new
+for i in 1..4
+  puts main(false)
+end
+
