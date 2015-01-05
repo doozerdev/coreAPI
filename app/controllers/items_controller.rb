@@ -72,18 +72,21 @@ class ItemsController < BaseApiController
   end
 
   def search
+    items = nil
+    start_time = Time.now
     if @user.role == 'admin'
       items = Item.all(:title => /#{Regexp.escape(params['term'])}/)
-      render json: {count: items.count, items: items}, status: 200
     else
       items = Item.where(:user_id=>@user.uid, 
         :title => /#{Regexp.escape(params['term'])}/)
-      render json: {count: items.count, items: items}, status: 200
     end
+    end_time = Time.now
+    render json: {request_time: "#{((end_time-start_time)*1000).round(2)} ms", count: items.count, items: items}, status: 200
   end
 
   def most_common_words
     if @user.role == 'admin'
+      start_time = Time.now
       words = Hash.new
       Item.each do |i|
         i.title.split.each do |w|
@@ -94,7 +97,8 @@ class ItemsController < BaseApiController
           end
         end
       end
-      render json: {words: words.sort_by{|word, count| count}.reverse.first(50)}, status: 200
+      end_time = Time.now
+      render json: {request_time: "#{((end_time-start_time)*1000).round(2)} ms", words: words.sort_by{|word, count| count}.reverse.first(50)}, status: 200
     else
       render nothing: true, status: :unauthorized 
     end

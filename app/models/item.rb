@@ -10,6 +10,8 @@ class Item
   key :user_id, String
   key :notes, String
 
+  Item.ensure_index ([[:title, 1]])
+
   def children
     #TODO: cache this
     child_items = Item.where(:parent => id.to_s).order(:order).all
