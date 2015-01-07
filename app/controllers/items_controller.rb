@@ -5,13 +5,13 @@ class ItemsController < BaseApiController
   #GET /item/index
   #AllLists
   def index
-    render json: {items: Item.where(:user_id=>@user.uid, :parent => nil)}, status: 200
+    render json: {items: Item.where(:user_id=>@user.uid, :parent => nil || '')}, status: 200
   end
 
   #POST /item/create
   #AddItem
   def create
-    if params[:title]
+    if params[:title] and !params[:title].empty?
       item = Item.new(params.permit(:title, :parent, :duedate, :order,
                                     :done, :archive, :notes))
 
