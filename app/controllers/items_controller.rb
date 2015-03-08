@@ -6,7 +6,14 @@ class ItemsController < BaseApiController
   #AllLists
   def index
     render json: {items: Item.where(:user_id=>@user.uid, :parent => nil || '')}, status: 200
+
   end
+
+  def display
+    render json: {items: Item.where(:user_id=>@user.uid, :parent => nil || '')}, status: 200
+
+  end
+  
 
   #POST /item/create
   #AddItem

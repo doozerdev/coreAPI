@@ -17,6 +17,11 @@ gem "rails_serve_static_assets"
 gem 'rspec-rails'
 gem "rspec"
 # gem "rails_helper"
+
+gem 'sass', '3.2.19'
+gem 'bower-rails'
+gem 'angular-rails-templates'
+
 ####### End Custom Stuff
 
 

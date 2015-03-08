@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  get 'display' => 'welcome#display'
+
+  resources :items
+
   scope '/api' do
     scope '/login' do
       get '/:oauth_token' => 'sessions#create'
