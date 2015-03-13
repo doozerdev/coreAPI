@@ -5,13 +5,14 @@ class ItemsController < BaseApiController
   #GET /item/index
   #AllLists
   def index
-    render json: {items: Item.where(:user_id=>@user.uid, :parent => nil || '')}, status: 200
+      render json: {items: Item.where(:user_id=>@user.uid, :parent => nil || '')}, status: 200         
 
   end
 
-  def display
-    render json: {items: Item.where(:user_id=>@user.uid, :parent => nil || '')}, status: 200
 
+  def display
+    render json: {items: Item.where(:user_id=>@user.uid, :parent => nil || '')}, status: 200 
+   
   end
   
 

@@ -12,14 +12,62 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require angular/angular
 //= require angular-route/angular-route
 //= require angular-rails-templates
 //= require angular-resource/angular-resource
 //= require_tree .
 
+
+var doozerdisplay;
+var controllers;
+var session_cookie = $.cookie('session_id');
+
 $(document).ready(function() {
   if($.cookie('session_id'))
     $('textarea#current_session_id').val($.cookie('session_id'))
 });
+
+
+doozerdisplay = angular.module('doozerdisplay', ['templates', 'ngRoute', 'ngResource', 'controllers']);
+
+doozerdisplay.config([
+  '$routeProvider', function($routeProvider) {
+    return $routeProvider.when('/', {
+      templateUrl: "display.html",
+      controller: 'ItemsController'
+    });
+  }
+]);
+
+
+
+controllers = angular.module('controllers', []);
+
+controllers.controller("ItemsController", [
+  '$scope', '$routeParams', '$location', '$resource', function($scope, $routeParams, $location, $resource) {}, 
+
+
+  $.ajax({
+    url: '/api/items/index',
+    type: 'GET',
+    dataType: 'json',
+    headers: {session_id: session_cookie},
+    success: function(data) {
+      var text;
+      text = JSON.stringify(data);
+      return $('body').append("Successful AJAX call: " + text);
+    }
+   })
+
+
+
+
+]);
+
+
+
+
+
+
+
