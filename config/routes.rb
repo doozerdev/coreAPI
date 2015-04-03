@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  root 'welcome#index'
+  match "*all" => "application#cors_preflight_check", via:[ :options ]
+
+  root 'welcome#apireference'
 
   scope '/api' do
     scope '/login' do
@@ -11,12 +13,12 @@ Rails.application.routes.draw do
     end
     delete '/logout' => 'sessions#destroy'
     scope '/items' do
-      get '/index' => 'items#index'
-      post '/create' => 'items#create'
+      get '/' => 'items#index'
+      post '/' => 'items#create'
       get '/common/words' => 'items#most_common_words'
       get '/:term/search' => 'items#search'
       scope '/:id' do
-        get '/show' => 'items#show'
+        get '/' => 'items#show'
         get '/children' => 'items#children'
         put '/' => 'items#update'
         delete '/' => 'items#destroy'

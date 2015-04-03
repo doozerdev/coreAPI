@@ -17,5 +17,5 @@
 
 $(document).ready(function() {
   if($.cookie('session_id'))
-    $('textarea#current_session_id').val($.cookie('session_id'))
+    $('textarea#current_sessionId').val($.cookie('sessionId'))
 });

@@ -3,10 +3,10 @@ class BaseApiController < ApplicationController
 
   private
   def authenticate_user_from_token!
-    if !request.headers["HTTP_SESSION_ID"]
+    if !request.headers["HTTP_SESSIONID"]
       render nothing: true, status: :unauthorized
     else
-      @user = User.where(:session_id => request.headers.fetch("HTTP_SESSION_ID")).first
+      @user = User.where(:session_id => request.headers["HTTP_SESSIONID"]).first
       unless @user
         render nothing: true, status: :unauthorized 
       end

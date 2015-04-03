@@ -3,14 +3,14 @@ class SessionsController < ApplicationController
   def create
     user = User.from_token(params[:oauth_token])
     if user
-      render json: {'session_id'=> user.session_id}, status: 201
+      render json: {'sessionId'=> user.session_id}, status: 201
     else
       render nothing: true, status: 401
     end
   end
 
   def destroy
-    user = User.where(:session_id => request.headers["HTTP_SESSION_ID"]).first
+    user = User.where(:session_id => request.headers["HTTP_SESSIONID"]).first
     if user
       user.session_id = nil
       user.expires_at = DateTime.now

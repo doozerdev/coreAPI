@@ -4,11 +4,11 @@ $(document).ready(function() {
 
     $.get("/api/login/" + $('textarea#token').val(), function(data, textStatus) {
       $("#login_response_status").html(textStatus)
-      $("#login_response_session_id").html(data.session_id)
-      $('textarea#current_session_id').val(data.session_id)
+      $("#login_response_sessionId").html(data.sessionId)
+      $('textarea#current_sessionId').val(data.sessionId)
       $('#login_response_json').text(JSON.stringify(data, null, '\t'))
       $("#login_response").removeClass("hidden");
-      $.cookie('session_id', data.session_id);
+      $.cookie('sessionId', data.sessionId);
     }, "json");
   });
 
@@ -17,7 +17,7 @@ $(document).ready(function() {
         url: '/api/logout',
         type: 'DELETE',
         headers: {
-          session_id: $('textarea#logout_session_id').val()
+          sessionId: $('textarea#logout_sessionId').val()
         }
       })
       .done(function(data, textStatus) {

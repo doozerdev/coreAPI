@@ -2,10 +2,10 @@ class ItemsController < BaseApiController
 
   before_action :check_authZ, only: [:show, :children, :update, :destroy]
 
-  #GET /item/index
+  #GET /item/
   #AllLists
   def index
-    render json: {items: Item.where(:user_id=>@user.uid, :parent => nil || '')}, status: 200
+    render json: {items: Item.where(:user_id=>@user.uid, :parent => [nil, ''])}, status: 200
   end
 
   #POST /item/create
@@ -20,7 +20,7 @@ class ItemsController < BaseApiController
       else
         item.user_id = @user.uid
         item.save
-        render json: item, status: 201
+        render json: item, status: :created
       end
     else
       render json: {error: 'title is required'}, status: 400
@@ -37,7 +37,7 @@ class ItemsController < BaseApiController
   #GetChildren
   def children
     render json: {items: Item.where(:user_id=>@user.uid,
-                                    :parent=>params['id'])}, status: 200
+                                    :parent=>params['id']).order(:order)}, status: 200
   end
 
   #PUT /item/:id

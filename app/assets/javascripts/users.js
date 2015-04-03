@@ -5,7 +5,7 @@ $("#update_user").click(function() {
       url: '/api/users/' + 
       $('#update_user_user_id').val(),
       type: 'PUT',
-      headers: {session_id: $('textarea#current_session_id').val()},
+      headers: {sessionId: $('textarea#current_sessionId').val()},
       data: {
         role: $('#update_user_role').val()
         },

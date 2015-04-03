@@ -4,7 +4,7 @@ $(document).ready(function() {
     $.ajax({
       url: '/api/items/index',
       type: 'GET',
-      headers: {session_id: $('textarea#current_session_id').val()},
+      headers: {sessionId: $('textarea#current_sessionId').val()},
       dataType: "json"
     })
     .done(function(data, textStatus) {
@@ -26,7 +26,7 @@ $(document).ready(function() {
       url: '/api/items/' + 
       $('textarea#get_children_parent_id').val() + '/children',
       type: 'GET',
-      headers: {session_id: $('textarea#current_session_id').val()},
+      headers: {sessionId: $('textarea#current_sessionId').val()},
       dataType: "json"
     })
     .done(function(data, textStatus) {
@@ -51,7 +51,7 @@ $(document).ready(function() {
     $.ajax({
       url: '/api/items/create',
       type: 'POST',
-      headers: {session_id: $('textarea#current_session_id').val()},
+      headers: {sessionId: $('textarea#current_sessionId').val()},
       data: {
         parent:     $('#create_item_parent_id').val(),
         title:      $('#create_item_title').val(),
@@ -81,7 +81,7 @@ $(document).ready(function() {
       url: '/api/items/' + 
       $('#get_item_item_id').val() + '/show',
       type: 'GET',
-      headers: {session_id: $('textarea#current_session_id').val()},
+      headers: {sessionId: $('textarea#current_sessionId').val()},
       dataType: "json"
     })
     .done(function(data, textStatus) {
@@ -100,7 +100,7 @@ $(document).ready(function() {
       url: '/api/items/' + 
       $('#update_item_item_id').val(),
       type: 'PUT',
-      headers: {session_id: $('textarea#current_session_id').val()},
+      headers: {sessionId: $('textarea#current_sessionId').val()},
       data: {
         parent:     $('#update_item_parent_id').val(),
         title:      $('#update_item_title').val(),
@@ -130,7 +130,7 @@ $(document).ready(function() {
       url: '/api/items/' + 
       $('#search_term').val() + '/search',
       type: 'GET',
-      headers: {session_id: $('textarea#current_session_id').val()},
+      headers: {sessionId: $('textarea#current_sessionId').val()},
       dataType: "json"
     })
     .done(function(data, textStatus) {
@@ -148,7 +148,7 @@ $(document).ready(function() {
     $.ajax({
       url: '/api/items/common/words',
       type: 'GET',
-      headers: {session_id: $('textarea#current_session_id').val()},
+      headers: {sessionId: $('textarea#current_sessionId').val()},
       dataType: "json"
     })
     .done(function(data, textStatus) {
@@ -171,7 +171,7 @@ $(document).ready(function() {
       url: '/api/items/' + 
       $('#delete_item_item_id').val(),
       type: 'DELETE',
-      headers: {session_id: $('textarea#current_session_id').val()},
+      headers: {sessionId: $('textarea#current_sessionId').val()},
       dataType: "json"
     })
     .done(function(data, textStatus) {

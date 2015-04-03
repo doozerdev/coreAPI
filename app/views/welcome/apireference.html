@@ -2,7 +2,7 @@
 
   <div class="page-header">
     <h1>Doozer Core API<br/>
-    <small>API Definition &amp; Test Interface</small></h1>
+    <small>API Reference &amp; Test Interface</small></h1>
     <p class="lead">This is a restful JSON API endpoint only. Interact with this API as below.</p>
   </div>
 
@@ -19,7 +19,7 @@
         <div class="panel-body">
 
           <p>Every doozer request requires a JSON parameter with a valid doozer
-            <code>session_id</code>. Login with Facebook here, to create that token, then click the Log in button to get a valid doozer session.</p>
+            <code>sessionId</code>. Login with Facebook here, to create that token, then click the Log in button to get a valid doozer session.</p>
 
           <div class="panel panel-info">
             <div class="panel-heading">
@@ -35,7 +35,7 @@
               <pre>[none]</pre>
               <h5>Response</h5>
               <pre>{
-  "session_id": "2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646"
+  "sessionId": "2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646"
 }</pre>
             </div>
           </div>
@@ -61,7 +61,7 @@
                   <strong>Status:</strong>
                   <div id="login_response_status"></div>
                   <strong>Session ID:</strong>
-                  <div id="login_response_session_id"></div>
+                  <div id="login_response_sessionId"></div>
                   <strong>JSON:</strong><pre><div id='login_response_json'></div></pre>
                 </div>
               </div>
@@ -88,7 +88,7 @@
               <pre>DELETE http://localhost:3000/api/logout
             </pre>
               <strong>Request Header</strong>
-              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <pre>sessionId=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
               <h5>Response</h5>
               <pre>[none]</pre>
             </div>
@@ -98,7 +98,7 @@
               <h4>Test Interface</h4>
             </div>
             <div class="panel-body">
-              <textarea id='logout_session_id' cols='100' rows='1'></textarea>
+              <textarea id='logout_sessionId' cols='100' rows='1'></textarea>
               <br />
               <input type="submit" id='logout_submit' value="log out">
               <br />
@@ -126,7 +126,7 @@
           <br />
           <br />Clicking login above will automatically populate this with your current session ID.
           <br />
-          <textarea id='current_session_id' cols='100' rows='1'></textarea>
+          <textarea id='current_sessionId' cols='100' rows='1'></textarea>
         </div>
       </div>
 
@@ -153,7 +153,7 @@
               <br />
               <pre>GET http://localhost:3000/api/item</pre>
               <strong>Request Header</strong>
-              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <pre>sessionId=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
               <h5>Response</h5>
               <pre>{
   "items": [
@@ -213,7 +213,7 @@
               <br />
               <pre>GET http://localhost:3000/api/items/54964f7e950a664ab000000a/children</pre>
               <strong>Request Header</strong>
-              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <pre>sessionId=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
               <h5>Response</h5>
               <pre>{
   "items": [
@@ -282,7 +282,7 @@
               <br />
               <pre>POST http://localhost:3000/api/items/create</pre>
               <strong>Request Header</strong>
-              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <pre>sessionId=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
               <strong>Request Body</strong>
               <pre>parent=54964f7e950a664ab000000a&amp;title=MyTitle&amp;notes=MyNotes&amp;order=1111&amp;duedate=Sat%2C+03+Feb+2001+04%3A05%3A06+GMT&amp;done=true&amp;archive=false
 </pre>
@@ -355,7 +355,7 @@
               <br />
               <pre>GET http://localhost:3000/api/items/54967baa950a664ab0000015/show</pre>
               <strong>Request Header</strong>
-              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <pre>sessionId=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
               <h5>Response</h5>
               <pre>{
   "archive": false,
@@ -413,7 +413,7 @@
               <br />
               <pre>POST http://localhost:3000/api/items/54967baa950a664ab0000015</pre>
               <strong>Request Header</strong>
-              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <pre>sessionId=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
               <strong>Request Body</strong>
               <pre>parent=54964f7e950a664ab000000a&amp;title=ANewTitle&amp;notes=New+Notes&amp;order=2222&amp;duedate=Sat%2C+03+Feb+2015+04%3A05%3A06+GMT&amp;done=false&amp;archive=false</pre>
               <h5>Response</h5>
@@ -485,7 +485,7 @@
               <br />
               <pre>GET http://localhost:3000/api/items/title</pre>
               <strong>Request Header</strong>
-              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <pre>sessionId=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
               <h5>Response</h5>
               <pre>{
   "count": 2,
@@ -557,7 +557,7 @@
               <br />
               <pre>GET http://localhost:3000/api/items/common/words</pre>
               <strong>Request Header</strong>
-              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <pre>sessionId=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
               <h5>Response</h5>
               <pre>{
   "words": [
@@ -613,7 +613,7 @@
               <br />
               <pre>DELETE http://localhost:3000/api/items/5496450983233a4534000006</pre>
               <strong>Request Header</strong>
-              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <pre>sessionId=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
               <h5>Response</h5> The number of items (including the parent that were deleted)
               <pre>{
   "delete_item_count": 3
@@ -663,7 +663,7 @@
               <br />
               <pre>POST http://localhost:3000/api/users/321638971355001</pre>
               <strong>Request Header</strong>
-              <pre>session_id=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
+              <pre>sessionId=2c1d01391be2e3f104e4313b4a04d5adf5ce375678abbaddb0af37a21178c646</pre>
               <strong>Request Body</strong>
               <pre>role=[admin|user]</pre>
               <h5>Response</h5>

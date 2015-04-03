@@ -4,6 +4,58 @@
 		"selected_items":
 		[
 			[
+				"new",
+				"new_item"
+			],
+			[
+				"end",
+				"end_time"
+			],
+			[
+				"json",
+				"json_response"
+			],
+			[
+				"test",
+				"test_item_id"
+			],
+			[
+				"parent",
+				"parent_id"
+			],
+			[
+				"second",
+				"second_item"
+			],
+			[
+				"sed",
+				"second_item"
+			],
+			[
+				"secon",
+				"second_item"
+			],
+			[
+				"first",
+				"first_item"
+			],
+			[
+				"par",
+				"parent"
+			],
+			[
+				"due",
+				"due_date"
+			],
+			[
+				"se",
+				"session_id"
+			],
+			[
+				"newly_create",
+				"newly_created_list_ids"
+			],
+			[
 				"employ",
 				"employee"
 			],
@@ -92,10 +144,6 @@
 				"form-control"
 			],
 			[
-				"new",
-				"new_engagement_path"
-			],
-			[
 				"show",
 				"show_closed"
 			],
@@ -142,10 +190,6 @@
 			[
 				"curre",
 				"current_user"
-			],
-			[
-				"end",
-				"end_period"
 			],
 			[
 				"Employ",
@@ -288,10 +332,6 @@
 				"image_id"
 			],
 			[
-				"first",
-				"firstVuln"
-			],
-			[
 				"has_",
 				"has_many  (function)"
 			],
@@ -344,10 +384,37 @@
 	"buffers":
 	[
 		{
-			"file": "app/assets/javascripts/lists.js",
+			"file": "app/controllers/items_controller.rb",
 			"settings":
 			{
-				"buffer_size": 1871,
+				"buffer_size": 3354,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "require \"rails_helper\"\nrequire \"spec_helper\"\n\nMongoMapper.connection = Mongo::Connection.new('127.0.0.1', 27017)\nMongoMapper.database = \"doozer_development\"\nMongoMapper.database.collections.each { |c| c.drop_indexes }\n\nRSpec.describe \"Lists API\" do\n\n  session_id = nil\n  admin_session_id = nil\n  new_list = Item.new(\n    :title => 'A New List',\n    :notes => 'Some Notes',\n    :duedate => DateTime.now,\n    :order => 1,\n    :done => false,\n    :archive => false\n  )\n  first_item = Item.new(\n    :title=>'The First Item for the List',\n    :notes=>'Some notes for the first item',\n    :duedate => DateTime.now,\n    :order => 1,\n    :done => false,\n    :archive => false\n  )\n  second_item = Item.new(\n    :title=>'The Second Item for the List',\n    :notes=>'Some notes for the second item',\n    :duedate => DateTime.now,\n    :order => 1,\n    :done => false,\n    :archive => false\n  )\n\n  before(:all) do\n    test_users = Koala::Facebook::TestUsers.new(:app_id => '1474823829455959', :secret => 'baa64757ee9417802e9f0605b42067f4').list\n\n    user = test_users.select{|user| user['id'] == '321638971355001'}.first\n    fb_oauth_token = user[\"access_token\"]\n    get \"/api/login/#{fb_oauth_token}\", {}, { \"Accept\" => \"application/json\" }\n    expect(response.status).to eq 201\n    session_id = JSON.parse(response.body)['session_id']\n    expect(session_id).to match(/[0-9a-f]{32}/)\n\n    admin = test_users.select{|admin| admin['id'] == '1546391385590451'}.first\n    fb_oauth_token = admin[\"access_token\"]\n    get \"/api/login/#{fb_oauth_token}\", {}, { \"Accept\" => \"application/json\" }\n    expect(response.status).to eq 201\n    json_response = JSON.parse(response.body)\n    expect(User.where(:uid => admin['id']).first.role).to eq 'admin'\n    admin_session_id = json_response['session_id']\n    expect(admin_session_id).to match(/[0-9a-f]{32}/)\n\n  end\n\n  describe \"POST /api/lists/create\" do\n    it \"create a new list\" do\n\n      post \"/api/items/create\", {\n        :title => new_list.title,\n        :notes => new_list.notes,\n        :duedate => new_list.duedate,\n        :order => new_list.order,\n        :done => new_list.done,\n        :archive => new_list.archive\n      },\n        {\"HTTP_SESSION_ID\" => session_id}\n\n      expect(response.status).to eq 201\n\n      item = JSON.parse(response.body)\n\n      compare(item, new_list)\n      new_list.id = item['id']\n      first_item.parent = new_list.id\n      second_item.parent = new_list.id\n    end\n  end\n\n  describe 'GET /api/lists/:id/show' do\n    it \"verifies the new list was created\" do\n      get \"/api/items/#{new_list.id}/show\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 200\n      list = JSON.parse(response.body)\n      compare(list, new_list)\n    end\n  end\n\n  describe 'POST /api/lists/create' do\n    it \"adds two items to the newly created list\" do\n\n      post \"/api/items/create\", {\n        :parent => first_item.parent,\n        :title => first_item.title,\n        :notes => first_item.notes,\n        :duedate => first_item.duedate,\n        :order => first_item.order,\n        :done => first_item.done,\n        :archive => first_item.archive\n      },\n        {\"HTTP_SESSION_ID\" => session_id}\n\n      expect(response.status).to eq 201\n\n      child = JSON.parse(response.body)\n      compare(child, first_item)\n      first_item.id = child['id']\n\n      post \"/api/items/create\", {\n        :parent => second_item.parent,\n        :title => second_item.title,\n        :notes => second_item.notes,\n        :duedate => second_item.duedate,\n        :order => second_item.order,\n        :done => second_item.done,\n        :archive => second_item.archive\n      },\n        {\"HTTP_SESSION_ID\" => session_id}\n\n      expect(response.status).to eq 201\n      child = JSON.parse(response.body)\n      compare(child, second_item)\n      second_item.id = child['id']\n    end\n  end\n\n  describe 'GET /api/lists/:id/show' do\n    it \"verifies the two items were created\" do\n      get \"/api/items/#{first_item.id}/show\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 200\n      list = JSON.parse(response.body)\n      compare(list, first_item)\n\n      get \"/api/items/#{second_item.id}/show\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 200\n      list = JSON.parse(response.body)\n      compare(list, second_item)\n    end\n  end\n\n  describe 'GET /api/lists/index' do\n    it \"retrieves all lists for test user\" do\n      get \"/api/items/index\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 200\n      items = JSON.parse(response.body)['items']\n\n      expect(items.select{|l| l['id'] == new_list.id.to_s}.count).to eq 1\n      list = items.select{|l| l['id'] == new_list.id.to_s}.first\n      compare(list, new_list)\n    end\n  end\n\n  describe 'GET /api/lists/:id/children' do\n    it \"retrieves all chilren nodes for the newly created list\" do\n      get \"/api/items/#{new_list.id}/children\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 200\n      children = JSON.parse(response.body)['items']\n      expect(children.count).to eq 2\n\n      compare(children[0], first_item)\n      compare(children[1], second_item)\n    end\n  end\n\n  describe 'PUT /api/lists/:id' do\n    it 'updates the list' do\n      new_list.title = \"#{new_list.title} - updated\"\n      new_list.notes = \"#{new_list.notes} - updated\"\n      new_list.duedate = DateTime.now\n      new_list.order = 2\n      new_list.done = true\n      new_list.archive = true\n\n      put \"/api/items/#{new_list.id}\", {\n        :title => new_list.title,\n        :notes => new_list.notes,\n        :duedate => new_list.duedate,\n        :order => new_list.order,\n        :done => new_list.done,\n        :archive => new_list.archive\n      }, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 202\n      item = JSON.parse(response.body)\n      compare(item, new_list)\n    end\n  end\n\n  describe 'GET /api/lists/:id/show' do\n    it \"verifies the list was properly updated\" do\n      get \"/api/items/#{new_list.id}/show\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 200\n      list = JSON.parse(response.body)\n      compare(list, new_list)\n    end\n  end\n\n  describe 'PUT /api/lists/:id' do\n    it 'updates the items in the list' do\n      first_item.title = \"#{first_item.title} - updated\"\n      first_item.notes = \"#{first_item.notes} - updated\"\n      first_item.duedate = DateTime.now\n      first_item.order = 2\n      first_item.done = true\n      first_item.archive = true\n\n      put \"/api/items/#{first_item.id}\", {\n        :parent => first_item.parent,\n        :title => first_item.title,\n        :notes => first_item.notes,\n        :duedate => first_item.duedate,\n        :order => first_item.order,\n        :done => first_item.done,\n        :archive => first_item.archive\n      }, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 202\n      item = JSON.parse(response.body)\n      compare(item, first_item)\n\n      second_item.title = \"#{second_item.title} - updated\"\n      second_item.notes = \"#{second_item.notes} - updated\"\n      second_item.duedate = DateTime.now\n      second_item.order = 2\n      second_item.done = true\n      second_item.archive = true\n\n      put \"/api/items/#{second_item.id}\", {\n        :parent => second_item.parent,\n        :title => second_item.title,\n        :notes => second_item.notes,\n        :duedate => second_item.duedate,\n        :order => second_item.order,\n        :done => second_item.done,\n        :archive => second_item.archive\n      }, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 202\n      item = JSON.parse(response.body)\n      compare(item, second_item)\n    end\n  end\n\n  describe 'GET /api/lists/:id/show' do\n    it \"verifies the two items were properly updated\" do\n      get \"/api/items/#{first_item.id}/show\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 200\n      list = JSON.parse(response.body)\n      compare(list, first_item)\n\n      get \"/api/items/#{second_item.id}/show\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 200\n      list = JSON.parse(response.body)\n      compare(list, second_item)\n    end\n  end\n\n  describe 'GET /api/lists/:term/search' do\n    it \"searchs through items\" do\n      get \"/api/items/title/search\", {}, {\"HTTP_SESSION_ID\" => admin_session_id}\n      expect(response.status).to eq 200\n      expect(JSON.parse(response.body)['count']).to be >= 1\n    end\n  end\n\n  describe 'DELETE /api/lists/:id' do\n    it \"deletes one item from the list\" do\n      delete \"/api/items/#{first_item.id}\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 200\n      delete_count = JSON.parse(response.body)['delete_item_count']\n      expect(delete_count).to eq 1\n    end\n  end\n\n  describe 'DELETE /api/lists/:id' do\n    it \"deletes the entire newly created list\" do\n      delete \"/api/items/#{new_list.id}\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 200\n      delete_count = JSON.parse(response.body)['delete_item_count']\n      expect(delete_count).to eq 2\n    end\n  end\n\n\n  ################################################\n  #Error Cases\n  ################################################\n\n  #does not exist item\n  dne_item_id = '123'\n  #does not own item\n  dno_item_id = '123'\n  # a test item we do own, so we can attempt to take over another list\n  test_item_id = nil\n\n  describe \"POST /api/lists/create\" do\n    it \"create a test item for ownership tests\" do\n      post \"/api/items/create\", {\n        :title => 'test item'\n        },{\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 201\n      item = JSON.parse(response.body)\n      expect(item['id']).to match(/[a-f0-9]{24}/)\n      test_item_id = item['id']\n    end\n  end  \n\n  describe \"POST /api/lists/create\" do\n    it \"attempts to create an item without a title\" do\n      post \"/api/items/create\", {},{\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 400\n      expect(JSON.parse(response.body)['error']).to eq 'title is required'\n    end\n  end\n\n  describe \"POST /api/lists/create\" do\n    it \"attempts to create an item with a parent we don't own\" do\n      post \"/api/items/create\", {\n        :title => 'A Parent I do not own',\n        :parent => dno_item_id\n      },\n        {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 404\n      expect(JSON.parse(response.body)['error']).to eq 'parent not found'\n    end\n  end\n\n  describe 'PUT /api/lists/:id' do\n    it \"attempt to update an item we don't own\" do\n      put \"/api/items/#{dno_item_id}\", {\n        :title => 'title',\n        :notes => 'notes',\n        :duedate => DateTime.now,\n        :order => 123,\n        :done => true,\n        :archive => true\n      }, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 404\n      expect(JSON.parse(response.body)['error']).to eq 'item not found'\n    end\n  end\n\n  describe 'PUT /api/lists/:id' do\n    it 'attempt to update an item that does not exist' do\n      put \"/api/items/#{dne_item_id}\", {\n        :title => 'title',\n        :notes => 'notes',\n        :duedate => DateTime.now,\n        :order => 123,\n        :done => true,\n        :archive => true\n      }, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 404\n      expect(JSON.parse(response.body)['error']).to eq 'item not found'\n    end\n  end\n\ndescribe 'PUT /api/lists/:id' do\n    it \"attempt to update an item with a parent we don't own\" do\n      put \"/api/items/#{test_item_id}\", {\n        :title => 'title',\n        :parent => dno_item_id,\n        :notes => 'notes',\n        :duedate => DateTime.now,\n        :order => 123,\n        :done => true,\n        :archive => true\n      }, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 404\n      expect(JSON.parse(response.body)['error']).to eq 'parent not found'\n    end\n  end\n\n  describe 'PUT /api/lists/:id' do\n    it \"attempt to update an item with a parent that does not exist\" do\n      put \"/api/items/#{test_item_id}\", {\n        :title => 'title',\n        :parent => dne_item_id,\n        :notes => 'notes',\n        :duedate => DateTime.now,\n        :order => 123,\n        :done => true,\n        :archive => true\n      }, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 404\n      expect(JSON.parse(response.body)['error']).to eq 'parent not found'\n    end\n  end\n\n  describe \"GET /api/items/#{first_item.id}/show\" do\n    it \"attempts to view an item we don't own\" do\n      get \"/api/items/#{dno_item_id}/show\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 404\n      expect(JSON.parse(response.body)['error']).to eq 'item not found'\n    end\n  end\n\n  describe \"GET /api/items/#{first_item.id}/show\" do\n    it \"attempts to view an item that does not exist\" do\n      get \"/api/items/#{dne_item_id}/show\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 404\n      expect(JSON.parse(response.body)['error']).to eq 'item not found'\n    end\n  end\n\n  describe 'DELETE /api/lists/:id' do\n    it \"attempts to deletes an item that doesn't exist\" do\n      delete \"/api/items/#{dne_item_id}\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 404\n      expect(JSON.parse(response.body)['error']).to eq 'item not found'\n    end\n  end\n\n  describe 'DELETE /api/lists/:id' do\n    it \"attempts to deletes an item that we don't own\" do\n      delete \"/api/items/#{dno_item_id}\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 404\n      expect(JSON.parse(response.body)['error']).to eq 'item not found'\n    end\n  end\n\n  describe 'DELETE /api/lists/:id' do\n    it \"delete the test item\" do\n      delete \"/api/items/#{test_item_id}\", {}, {\"HTTP_SESSION_ID\" => session_id}\n      expect(response.status).to eq 200\n      delete_count = JSON.parse(response.body)['delete_item_count']\n      expect(delete_count).to eq 1\n    end\n  end\n\n  #######################################################\n  # Helper functions\n  #######################################################\n\n  def compare(json_item, item)\n    expect(json_item['parent']).to eq item.parent if(item.parent)\n    expect(json_item['title']).to eq item.title if(item.title)\n    expect(json_item['notes']).to eq item.notes if(item.notes)\n    expect(DateTime.parse(json_item['duedate'])).to eq item.duedate if(item.duedate)\n    expect(json_item['archive']).to eq item.archive if(item.archive)\n    expect(json_item['done']).to eq item.done if(item.done)\n  end\n\nend\n",
+			"file": "spec/requests/lists_spec.rb",
+			"file_size": 14544,
+			"file_write_time": 130647393000000000,
+			"settings":
+			{
+				"buffer_size": 14544,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "spec/rails_helper.rb",
+			"settings":
+			{
+				"buffer_size": 1806,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/user.rb",
+			"settings":
+			{
+				"buffer_size": 1253,
 				"line_ending": "Unix"
 			}
 		},
@@ -355,31 +422,7 @@
 			"file": "app/models/item.rb",
 			"settings":
 			{
-				"buffer_size": 314,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/views/welcome/index.html",
-			"settings":
-			{
-				"buffer_size": 8073,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/controllers/items_controller.rb",
-			"settings":
-			{
-				"buffer_size": 755,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/controllers/base_api_controller.rb",
-			"settings":
-			{
-				"buffer_size": 396,
+				"buffer_size": 371,
 				"line_ending": "Unix"
 			}
 		},
@@ -387,7 +430,39 @@
 			"file": "config/routes.rb",
 			"settings":
 			{
-				"buffer_size": 2064,
+				"buffer_size": 2226,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/welcome/index.html",
+			"settings":
+			{
+				"buffer_size": 25478,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "dataGen/main.rb",
+			"settings":
+			{
+				"buffer_size": 7582,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "dataGen/perf_test.rb",
+			"settings":
+			{
+				"buffer_size": 4040,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/application_controller.rb",
+			"settings":
+			{
+				"buffer_size": 209,
 				"line_ending": "Unix"
 			}
 		}
@@ -485,26 +560,57 @@
 		"/Users/joe/github/Doozer/coreAPI/app/assets",
 		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers",
-		"/Users/joe/github/Doozer/coreAPI/app/models",
 		"/Users/joe/github/Doozer/coreAPI/app/views",
-		"/Users/joe/github/Doozer/coreAPI/app/views/layouts",
 		"/Users/joe/github/Doozer/coreAPI/app/views/welcome",
-		"/Users/joe/github/Doozer/coreAPI/config"
+		"/Users/joe/github/Doozer/coreAPI/config",
+		"/Users/joe/github/Doozer/coreAPI/dataGen",
+		"/Users/joe/github/Doozer/coreAPI/spec",
+		"/Users/joe/github/Doozer/coreAPI/spec/requests",
+		"/Users/joe/github/Doozer/coreAPI/vendor"
 	],
 	"file_history":
 	[
-		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/authentication.js",
+		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/lists.js",
+		"/Users/joe/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/joe/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/joe/github/Doozer/coreAPI/app/controllers/base_api_controller.rb",
+		"/Users/joe/github/Doozer/coreAPI/config/application.rb",
+		"/Users/joe/github/Doozer/coreAPI/spec/requests/lists_spec.rb",
+		"/Users/joe/github/Doozer/coreAPI/spec/requests/AuthN_spec.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/controllers/users_controller.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/views/welcome/index.html",
+		"/Users/joe/github/Doozer/coreAPI/config/routes.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/controllers/items_controller.rb",
+		"/Users/joe/Library/Application Support/Sublime Text 3/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
+		"/Users/joe/github/Doozer/coreAPI/app/models/user.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/users.js",
+		"/Users/joe/github/Doozer/coreAPI/spec/rails_helper.rb",
+		"/Users/joe/github/Doozer/coreAPI/spec/spec_helper.rb",
+		"/Users/joe/github/Doozer/coreAPI/dataGen/main.rb",
+		"/Users/joe/github/Doozer/coreAPI/Gemfile",
+		"/Users/joe/github/Doozer/coreAPI/.rspec",
+		"/Users/joe/github/Doozer/coreAPI/app/models/item.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/sessions_controller.rb",
+		"/Users/joe/github/Doozer/coreAPI/dataGen/api.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/authentication.js",
+		"/Users/joe/github/Doozer/coreAPI/app/views/layouts/application.html.erb",
+		"/Users/joe/github/Doozer/coreAPI/spec/requests/login_spec.rb",
+		"/Users/joe/github/Doozer/coreAPI/spec/controllers/login_spec.rb",
+		"/Users/joe/github/Doozer/coreAPI/bin/spring",
+		"/Users/joe/github/Doozer/coreAPI/.gitignore",
+		"/Users/joe/github/Doozer/coreAPI/config/initializers/session_store.rb",
+		"/Users/joe/github/Doozer/coreAPI/config/initializers/to_bool_monkey_patch.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/assets/stylesheets/bootstrap.css",
+		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/application.js",
+		"/Users/joe/github/Doozer/coreAPI/app/assets/stylesheets/bootstrap-theme.css",
+		"/Users/joe/github/Doozer/coreAPI/log/development.log",
+		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/jquery.js",
+		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/jquery.cookie.js",
 		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/get_lists.js",
 		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/login.js",
 		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/logout.js",
-		"/Users/joe/github/Doozer/coreAPI/app/models/user.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/views/layouts/application.html.erb",
-		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/application.js",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/application_controller.rb",
-		"/Users/joe/github/Doozer/coreAPI/config/routes.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/item_controller.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/models/item.rb",
 		"/Users/jbasirico/github/whetstone/app/views/employee_reviews/index.html.erb",
 		"/Users/jbasirico/github/whetstone/app/views/employee_reviews/_employee_review_template_short.html.erb",
 		"/Users/jbasirico/github/whetstone/Gemfile",
@@ -591,46 +697,18 @@
 		"/Users/jbasirico/github/whetstone/app/assets/javascripts/goals.js.coffee",
 		"/Users/jbasirico/github/whetstone/app/views/project_reviews/index.html.erb",
 		"/Users/jbasirico/github/whetstone/app/models/engagement.rb",
-		"/Users/jbasirico/github/whetstone/app/models/project_review.rb",
-		"/Users/jbasirico/Desktop/leezjqcbdkqpohsi",
-		"/Users/jbasirico/github/whetstone/config/initializers/session_store.rb",
-		"/Users/jbasirico/Desktop/foo.txt",
-		"/Users/jbasirico/Google Drive/ILT Training/Courses - Version 1/Course Content/Archive/Software Testing (3 day HTBSS+WAST)/Source Material/HTBSS LABS/File Corruption LAB/FCLAB/filetest.ini",
-		"/Users/jbasirico/Desktop/web.config",
-		"/Users/jbasirico/uninstall_homebrew.sh",
-		"/Users/jbasirico/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/C8EF6569-5102-4A17-A808-51B506856AC2/bsheader.cgi.htm",
-		"/Users/jbasirico/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/DC889FE4-89FC-4EA1-A16D-A2AEE854F6CB/badstore.htm",
-		"/Users/jbasirico/github/whetstone/app/helpers/application_helper.rb",
-		"/Volumes/share/tools/crossplatform/burp/Burp Suite Professional - licensed_to_Security_Innovation_[15_user_license]-exp-march4-2015.txt",
-		"/Users/jbasirico/github/whetstone/bin/unicorn",
-		"/Users/jbasirico/github/whetstone/whetstone.sublime-project",
-		"/Users/jbasirico/github/whetstone/app/controllers/application_controller.rb",
-		"/Users/jbasirico/github/whetstone/app/assets/stylesheets/bootstrap.min.css",
-		"/Users/jbasirico/github/whetstone/app/models/goal.rb",
-		"/Users/jbasirico/irc-parser.sh",
-		"/Users/jbasirico/github/whetstone/config/environments/production.rb",
-		"/Users/jbasirico/github/whetstone/config/initializers/devise.rb",
-		"/Users/jbasirico/github/whetstone/config/initializers/secret_token.rb",
-		"/Users/jbasirico/github/whetstone/config/environments/development.rb",
-		"/Users/jbasirico/github/whetstone/config/environment.rb",
-		"/Users/jbasirico/github/whetstone/app/assets/stylesheets/chosen.css",
-		"/Users/jbasirico/github/whetstone/app/views/engagements/_form.html.erb",
-		"/Users/jbasirico/github/whetstone/app/assets/stylesheets/goals.css.scss",
-		"/Users/jbasirico/github/whetstone/app/controllers/users_controller.rb",
-		"/Users/jbasirico/Downloads/Default.aspx",
-		"/Users/jbasirico/github/whetstone/app/views/users/edit.html.erb",
-		"/Users/jbasirico/github/whetstone/app/controllers/users/users_controller.rb",
-		"/Users/jbasirico/github/whetstone/config/database.yml"
+		"/Users/jbasirico/github/whetstone/app/models/project_review.rb"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
 		"height": 93.0,
 		"where_history":
 		[
+			"",
 			"<div",
 			""
 		]
@@ -640,6 +718,22 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"update_item",
+			"puts",
+			"@session_id",
+			"@second_item",
+			"@first_item",
+			"@new_list",
+			"HTTP_session_id",
+			"HTTP_@session_id",
+			"session_id",
+			"second_item",
+			"first_item",
+			"new_list",
+			"facebook.net",
+			"http://localhost:3000",
+			"&",
+			"css.map",
 			"pluralize",
 			"most_recent_employee_review",
 			"full_name",
@@ -751,23 +845,7 @@
 			"jbasirico@",
 			"jbasirico",
 			"Write-up",
-			"pdf",
-			"instance",
-			"pluralize",
-			"has_writeup",
-			"score",
-			">\n",
-			"passedExam",
-			"@exam",
-			"!",
-			"update",
-			"table",
-			"@exam",
-			"exam",
-			"timezone",
-			"in_time_zone",
-			"@users",
-			"Tyson Nieuwenhuis"
+			"pdf"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -775,6 +853,18 @@
 		"regex": false,
 		"replace_history":
 		[
+			"update_user",
+			"session_id",
+			"second_item",
+			"first_item",
+			"new_list",
+			"HTTP_SESSION_ID",
+			"@session_id",
+			"@second_item",
+			"@first_item",
+			"@new_list",
+			"",
+			"&amp;",
 			"current_review",
 			"div>",
 			"employee_review_template_short",
@@ -871,29 +961,59 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/assets/javascripts/lists.js",
+					"file": "app/controllers/items_controller.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1871,
+						"buffer_size": 3354,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1268,
-								1268
+								743,
+								743
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 303.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "spec/requests/lists_spec.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14544,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								393,
+								393
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -905,12 +1025,12 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "app/models/item.rb",
+					"buffer": 2,
+					"file": "spec/rails_helper.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 314,
+						"buffer_size": 1806,
 						"regions":
 						{
 						},
@@ -931,60 +1051,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 2,
-					"file": "app/views/welcome/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8073,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6555,
-								6576
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2269.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "app/controllers/items_controller.rb",
+					"file": "app/models/user.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 755,
+						"buffer_size": 1253,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								542,
-								542
+								1233,
+								1233
 							]
 						],
 						"settings":
@@ -994,27 +1078,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 140.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "app/controllers/base_api_controller.rb",
+					"file": "app/models/item.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 396,
+						"buffer_size": 371,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								395,
-								395
+								255,
+								255
 							]
 						],
 						"settings":
@@ -1036,15 +1120,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2064,
+						"buffer_size": 2226,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1084,
-								1084
+								413,
+								413
 							]
 						],
 						"settings":
@@ -1057,7 +1141,125 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/views/welcome/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 25478,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								945,
+								945
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "dataGen/main.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7582,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2093,
+								2093
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 207.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "dataGen/perf_test.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4040,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2952,
+								2952
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1300.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/controllers/application_controller.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 209,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								164,
+								164
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1065,7 +1267,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 22.0
 	},
 	"input":
 	{
@@ -1080,18 +1282,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.5,
 			1.0
 		],
 		"rows":
@@ -1112,7 +1307,7 @@
 	"project": "coreAPI.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1147,7 +1342,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 248.0,
+	"side_bar_width": 194.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
