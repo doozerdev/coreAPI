@@ -9,6 +9,8 @@ class Item
   key :duedate, Time
   key :user_id, String
   key :notes, String
+  key :solutions, String
+  timestamps!
 
   Item.ensure_index ([[:title, 1]])
 

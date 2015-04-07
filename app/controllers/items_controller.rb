@@ -117,7 +117,7 @@ class ItemsController < BaseApiController
 
   def check_authZ_item(item_id)
     item = Item.where(:id => item_id).first
-    unless item and item.user_id == @user.uid
+    unless item and (item.user_id == @user.uid or @user.role == 'admin')
       return false
     else
       return true
