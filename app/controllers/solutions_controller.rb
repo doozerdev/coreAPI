@@ -1,4 +1,4 @@
-class SolutionsController < ApplicationController
+class SolutionsController < BaseApiController
   before_action :check_authZ
 
   def index

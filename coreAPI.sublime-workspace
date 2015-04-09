@@ -395,7 +395,15 @@
 			"file": "app/controllers/items_controller.rb",
 			"settings":
 			{
-				"buffer_size": 3368,
+				"buffer_size": 3395,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/routes.rb",
+			"settings":
+			{
+				"buffer_size": 2544,
 				"line_ending": "Unix"
 			}
 		}
@@ -917,18 +925,18 @@
 						"selection":
 						[
 							[
-								1061,
-								1061
+								349,
+								349
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": null,
-							"translate_tabs_to_spaces": null
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 111.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -940,15 +948,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3368,
+						"buffer_size": 3395,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1190,
-								1928
+								2224,
+								2224
 							]
 						],
 						"settings":
@@ -958,7 +966,37 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 656.0,
+						"translation.y": 1328.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "config/routes.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2544,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								967,
+								967
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,

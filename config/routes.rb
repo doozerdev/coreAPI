@@ -24,6 +24,15 @@ Rails.application.routes.draw do
         delete '/' => 'items#destroy'
       end
     end
+    scope '/solutions' do
+      get '/' => 'solutions#index'
+      post '/' => 'solutions#create'
+      scope '/:id' do
+        get '/' => 'solutions#show'
+        put '/' => 'solutions#update'
+        delete '/' => 'solutions#destroy'
+      end
+    end
   end
 
 
