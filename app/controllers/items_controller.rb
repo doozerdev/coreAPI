@@ -5,7 +5,9 @@ class ItemsController < BaseApiController
   #GET /item/
   #AllLists
   def index
-    render json: {items: Item.where(:user_id=>@user.uid, :parent => [nil, ''])}, status: 200
+    items = Item.where(:user_id=>@user.uid, :parent => [nil, ''], :archive => [false, nil] )
+
+    render json: {items: items}, status: 200
   end
 
   #POST /item/create
@@ -36,8 +38,8 @@ class ItemsController < BaseApiController
   #GET /item/:id/children
   #GetChildren
   def children
-    render json: {items: Item.where(:user_id=>@user.uid,
-                                    :parent=>params['id']).order(:order)}, status: 200
+    children = Item.where(:user_id=>@user.uid, :parent=>params['id'], :archive => [false, nil]).order(:order)
+    render json: {items: children}, status: 200
   end
 
   #PUT /item/:id
@@ -45,7 +47,7 @@ class ItemsController < BaseApiController
   def update
     item = Item.update(params[:id], params.permit(:title, :parent, :duedate, :order,
                                                   :done, :archive, :notes))
-    if params[:parent] and !check_authZ_item(params[:parent])
+    if (params[:parent] and !params[:parent].empty?) and !check_authZ_item(params[:parent])
       render json: {error: 'parent not found'}, status: 404
     else
       item.save
