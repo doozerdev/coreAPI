@@ -6,7 +6,7 @@ class ItemsController < BaseApiController
   #AllLists
   def index
     items = Item.where(:user_id=>@user.uid, :parent => [nil, ''], :archive => [false, nil] )
-
+    
     render json: {items: items}, status: 200
   end
 

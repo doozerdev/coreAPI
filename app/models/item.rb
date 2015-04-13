@@ -18,4 +18,11 @@ class Item
     #TODO: cache this
     child_items = Item.where(:parent => id.to_s).order(:order).all
   end
+
+  def as_json(options = { })
+    h = super(options)
+    h[:children_count] = children.count
+    h
+  end
+
 end
