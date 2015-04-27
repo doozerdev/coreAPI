@@ -106,6 +106,30 @@ class ItemsController < BaseApiController
     end
   end
 
+  def solutions
+    if @user.role == 'admin' or Item.find(params[:id]).user_id == @user.id
+      render json: {solutions: ItemSolutionMap.where(:item_id => params[:id])}, :status => :ok
+    else
+      render nothing: true, status: :unauthorized
+    end
+  end
+
+  def addLink
+    ism = new ItemSolutionMap(params.permit(:solutionId))
+
+    ism.date_associated = DateTime.now
+    if ism.save
+      render json: ism, status: :created
+    else
+      render nothing: true, status: :bad_request
+    end
+  end
+
+  def removeLink
+    ItemSolutionMap.where(:item_id=>params[:itemId],
+                          :solution_id=>params[:solutionId]).destroy_all
+  end
+
   private
   def check_authZ
     if params[:id] and !params[:id].empty?

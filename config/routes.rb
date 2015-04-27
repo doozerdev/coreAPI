@@ -22,6 +22,8 @@ Rails.application.routes.draw do
         get '/children' => 'items#children'
         put '/' => 'items#update'
         delete '/' => 'items#destroy'
+        get '/solutions' => 'items#solutions'
+        post '/mapSolution' => 'items#addLink'
       end
     end
     scope '/solutions' do
@@ -31,6 +33,8 @@ Rails.application.routes.draw do
         get '/' => 'solutions#show'
         put '/' => 'solutions#update'
         delete '/' => 'solutions#destroy'
+        get '/items' => 'solutions#items'
+        post '/mapItem' => 'solutions#addLink'
       end
     end
   end
