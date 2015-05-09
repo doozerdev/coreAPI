@@ -16,12 +16,13 @@ class Item
 
   def children
     #TODO: cache this
-    child_items = Item.where(:parent => id.to_s).order(:order).all
+    child_items = Item.where(:parent => id.to_s, :archive => [false, nil]).order(:order).all
   end
 
   def as_json(options = { })
     h = super(options)
     h[:children_count] = children.count
+    h[:children_undone] = children.count {|item| !item.done}
     h
   end
 
