@@ -20,6 +20,8 @@ class ItemsController < BaseApiController
       if params[:parent] and !params[:parent].empty? and !check_authZ_item(params[:parent])
         render json: {error: 'parent not found'}, status: 404
       else
+        item.parent = '' unless params[:parent]
+
         item.user_id = @user.uid
         item.save
         render json: item, status: :created
