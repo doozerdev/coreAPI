@@ -396,10 +396,10 @@
 	"buffers":
 	[
 		{
-			"file": "app/controllers/solutions_controller.rb",
+			"file": "app/views/welcome/apireference.html",
 			"settings":
 			{
-				"buffer_size": 2204,
+				"buffer_size": 39739,
 				"line_ending": "Unix"
 			}
 		},
@@ -415,23 +415,7 @@
 			"file": "app/models/item.rb",
 			"settings":
 			{
-				"buffer_size": 516,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/models/item_solution_map.rb",
-			"settings":
-			{
-				"buffer_size": 153,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "config/routes.rb",
-			"settings":
-			{
-				"buffer_size": 2726,
+				"buffer_size": 603,
 				"line_ending": "Unix"
 			}
 		}
@@ -534,26 +518,31 @@
 		"/Users/joe/github/Doozer/coreAPI/app/assets",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers",
 		"/Users/joe/github/Doozer/coreAPI/app/models",
+		"/Users/joe/github/Doozer/coreAPI/app/views",
+		"/Users/joe/github/Doozer/coreAPI/app/views/layouts",
+		"/Users/joe/github/Doozer/coreAPI/app/views/welcome",
 		"/Users/joe/github/Doozer/coreAPI/config",
+		"/Users/joe/github/Doozer/coreAPI/config/initializers",
 		"/Users/joe/github/Doozer/coreAPI/vendor"
 	],
 	"file_history":
 	[
+		"/Users/joe/github/Doozer/coreAPI/app/controllers/solutions_controller.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/controllers/items_controller.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/models/item_solution_map.rb",
+		"/Users/joe/github/Doozer/coreAPI/Gemfile",
+		"/Users/joe/github/Doozer/coreAPI/config/routes.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/models/item.rb",
 		"/Users/joe/Downloads/HacmeBank - Android v1.0/README.txt",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/item_solution_map_controller.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/controllers/solutions_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/models/ item_solution_map.rb",
-		"/Users/joe/github/Doozer/coreAPI/Gemfile",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/sessions_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/models/solution.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/models/item.rb",
 		"/Users/joe/Library/Application Support/Sublime Text 3/Packages/BeautifyRuby/Default (OSX).sublime-keymap",
 		"/Users/joe/Library/Application Support/Sublime Text 3/Packages/BeautifyRuby/BeautifyRuby.sublime-settings",
-		"/Users/joe/github/Doozer/coreAPI/config/routes.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/application_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/lists.js",
 		"/Users/joe/github/Doozer/coreAPI/app/models/user.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/controllers/items_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/cors_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/base_api_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/authentication.js",
@@ -665,8 +654,7 @@
 		"/Users/jbasirico/github/whetstone/app/views/devise/mailer/confirmation_instructions.html.erb",
 		"/Users/jbasirico/github/whetstone/bin/sass-convert",
 		"/Users/jbasirico/github/whetstone/config/initializers/filter_parameter_logging.rb",
-		"/Users/jbasirico/github/whetstone/log/production.log",
-		"/Users/jbasirico/github/whetstone/db/migrate/20140101231759_add_se_sse_pse_act_to_engagements.rb"
+		"/Users/jbasirico/github/whetstone/log/production.log"
 	],
 	"find":
 	{
@@ -934,39 +922,45 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/controllers/solutions_controller.rb",
+					"file": "app/views/welcome/apireference.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2204,
+						"buffer_size": 39739,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1788,
-								1788
+								7276,
+								7276
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 350.0,
+						"translation.y": 3655.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
 				{
 					"buffer": 1,
 					"file": "app/controllers/items_controller.rb",
@@ -980,22 +974,21 @@
 						"selection":
 						[
 							[
-								3660,
-								3660
+								1254,
+								1267
 							]
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/Theme - Afterglow/Afterglow.tmTheme",
 							"syntax": "Packages/Ruby/Ruby.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1670.0,
+						"translation.y": 1069.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1004,79 +997,19 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 516,
+						"buffer_size": 603,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								182,
-								189
+								425,
+								425
 							]
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/Theme - Afterglow/Afterglow.tmTheme",
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 34.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/models/item_solution_map.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 153,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								153,
-								153
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "config/routes.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2726,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								632,
-								635
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/Theme - Afterglow/Afterglow.tmTheme",
 							"syntax": "Packages/Ruby/Ruby.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
@@ -1085,7 +1018,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1108,11 +1041,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
