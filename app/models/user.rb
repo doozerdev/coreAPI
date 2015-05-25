@@ -33,7 +33,7 @@ class User
       user.locale = profile['locale']
       user.timezone = profile['timezone']
       user.oauth_token = token
-      user.expires_at = DateTime.now + 1.hour
+      user.expires_at = DateTime.now + 24.hours
       user.session_id = SecureRandom.hex(32)
       user.save!
       user
