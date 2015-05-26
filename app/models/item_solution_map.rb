@@ -1,9 +1,9 @@
 class ItemSolutionMap
   include MongoMapper::Document
 
-  key :item_id, String
-  key :solution_id, String
-  key :date_associated, Time
+  key :itemId, String
+  key :solutionId, String
+  key :dateAssociated, Time
   timestamps!
 
 end

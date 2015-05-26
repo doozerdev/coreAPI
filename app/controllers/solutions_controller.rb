@@ -35,18 +35,16 @@ class SolutionsController < BaseApiController
   end
 
   def items
-    if @user.role == 'admin'
-      itemsList = ItemSolutionMap.where(:solution_id => params[:id])
-    else
-      itemsList = ItemSolutionMap.where(:solution_id => params[:id], :user_id => @user.id)
-    end
+    solutionsList = ItemSolutionMap.where(:solutionId => params[:id])
+    itemsList = solutionsList.collect{|s| Item.where(:id=>s.itemId).first}
     render json: {items: itemsList}, :status => :ok
   end
 
   def addLink
-    ism = new ItemSolutionMap(params.permit(:itemId))
+    ism = ItemSolutionMap.new(params.permit(:itemId))
+    ism.solutionId = params[:id]
+    ism.dateAssociated = DateTime.now
 
-    ism.date_associated = DateTime.now
     if ism.save
       render json: ism, status: :created
     else
@@ -55,8 +53,10 @@ class SolutionsController < BaseApiController
   end
 
   def removeLink
-    ItemSolutionMap.where(:item_id=>params[:itemId],
-                          :solution_id=>params[:solutionId]).destroy_all
+    ItemSolutionMap.where(:itemId=>params[:itemId],
+                          :solutionId=>params[:id]).destroy_all
+
+    render nothing: true, status: 200
   end
 
   #DELETE /item/:id
