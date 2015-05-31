@@ -10,6 +10,7 @@ class Item
   key :user_id, String
   key :notes, String
   key :solutions, String
+  key :color, String
   timestamps!
 
   Item.ensure_index ([[:title, 1]])
