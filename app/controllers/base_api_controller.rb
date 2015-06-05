@@ -7,16 +7,18 @@ class BaseApiController < ApplicationController
       render nothing: true, status: :unauthorized
     else
       @user = User.where(:session_id => request.headers["HTTP_SESSIONID"]).first
-      if @user.expires_at < DateTime.now
-        @user.session_id = nil
-        @user.save
-        @user = nil
+
+      if @user
+        if @user.expires_at < DateTime.now
+          @user.session_id = nil
+          @user.save
+          @user = nil
+        else
+          @user.expires_at = DateTime.now + 24.hours
+          @user.save
+        end
       else
-        @user.expires_at = DateTime.now + 24.hours
-        @user.save
-      end
-      unless @user
-        render nothing: true, status: :unauthorized 
+        render nothing: true, status: :unauthorized
       end
     end
   end

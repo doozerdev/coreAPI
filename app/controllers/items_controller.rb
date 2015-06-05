@@ -2,10 +2,21 @@ class ItemsController < BaseApiController
 
   before_action :check_authZ, only: [:show, :children, :update, :destroy]
 
-  #GET /item/
+  def lists
+    puts 'lists'
+    items = Item.where(:user_id=>@user.uid, :archive => [false, nil], :parent=>['', nil] )
+
+    render json: {items: items}, status: 200
+  end
+
+  #GET /items/
   #AllLists
   def index
-    items = Item.where(:user_id=>@user.uid, :parent => [nil, ''], :archive => [false, nil] )
+    if(params[:last_sync])
+      items = Item.where(:user_id=>@user.uid, :archive => [false, nil], :updated_at => params[:last_sync] )
+    else
+      items = Item.where(:user_id=>@user.uid, :archive => [false, nil] )
+    end
     
     render json: {items: items}, status: 200
   end

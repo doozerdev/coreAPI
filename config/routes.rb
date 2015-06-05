@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       put '/:uid' => 'users#update'
     end
     delete '/logout' => 'sessions#destroy'
+    get '/lists' => 'items#lists'
     scope '/items' do
       get '/' => 'items#index'
       post '/' => 'items#create'
