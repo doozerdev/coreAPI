@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         get '/children' => 'items#children'
         put '/' => 'items#update'
         delete '/' => 'items#destroy'
+        delete '/archive' => 'items#archive'
         get '/solutions' => 'items#solutions'
         post '/mapSolution' => 'items#addLink'
       end

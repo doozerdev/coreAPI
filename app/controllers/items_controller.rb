@@ -3,7 +3,6 @@ class ItemsController < BaseApiController
   before_action :check_authZ, only: [:show, :children, :update, :destroy]
 
   def lists
-    puts 'lists'
     items = Item.where(:user_id=>@user.uid, :archive => [false, nil], :parent=>['', nil] )
 
     render json: {items: items}, status: 200
@@ -66,6 +65,22 @@ class ItemsController < BaseApiController
       item.save
       render json: item, status: 202
     end
+  end
+
+  def archive
+    count = 0
+
+    children = Item.where(:user_id=>@user.uid,
+                          :parent=>params['id'])
+    children.each do |child|
+      Item.update(child.id, :archive=>true)
+      count = count + 1
+    end
+
+    Item.update(params['id'], :archive=>true)
+    count = count + 1
+
+    render json: {archive_item_count: count}, status: 200
   end
 
   #DELETE /item/:id
