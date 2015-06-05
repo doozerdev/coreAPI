@@ -1,6 +1,6 @@
 class ItemsController < BaseApiController
 
-  before_action :check_authZ, only: [:show, :children, :update, :destroy]
+  before_action :check_authZ, only: [:show, :children, :update, :destroy, :archive]
 
   def lists
     items = Item.where(:user_id=>@user.uid, :archive => [false, nil], :parent=>['', nil] )
