@@ -11,12 +11,11 @@ class ItemsController < BaseApiController
   #GET /items/
   #AllLists
   def index
+    items = Item.where(:user_id=>@user.uid, :archive => [false, nil] )
     if(params[:last_sync])
-      items = Item.where(:user_id=>@user.uid, :archive => [false, nil], :updated_at => params[:last_sync] )
-    else
-      items = Item.where(:user_id=>@user.uid, :archive => [false, nil] )
+      items = items.select{|a| DateTime.parse(a.updated_at.to_s) > DateTime.parse(params[:last_sync]) }
     end
-    
+
     render json: {items: items}, status: 200
   end
 
@@ -107,8 +106,7 @@ class ItemsController < BaseApiController
     if @user.role == 'admin'
       items = Item.all(:title => /#{Regexp.escape(params['term'])}/)
     else
-      items = Item.where(:user_id=>@user.uid, 
-        :title => /#{Regexp.escape(params['term'])}/)
+      items = Item.where(:user_id=>@user.uid, :title => /#{Regexp.escape(params['term'])}/)
     end
     end_time = Time.now
     render json: {request_time: "#{((end_time-start_time)*1000).round(2)} ms", count: items.count, items: items}, status: 200
@@ -130,7 +128,7 @@ class ItemsController < BaseApiController
       end_time = Time.now
       render json: {request_time: "#{((end_time-start_time)*1000).round(2)} ms", words: words.sort_by{|word, count| count}.reverse.first(50)}, status: 200
     else
-      render nothing: true, status: :unauthorized 
+      render nothing: true, status: :unauthorized
     end
   end
 
