@@ -18,7 +18,6 @@ class ItemsController < BaseApiController
       rescue
         last_sync = DateTime.strptime(params[:last_sync],'%s')
       end
-      puts last_sync
 
       items = items.select{|a| DateTime.parse(a.updated_at.to_s) > last_sync }
     end
