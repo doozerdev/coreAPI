@@ -17,13 +17,21 @@ class Item
 
   def children
     #TODO: cache this
-    child_items = Item.where(:parent => id.to_s, :archive => [false, nil]).order(:order).all
+    Item.where(:parent => id.to_s, :archive => [false, nil]).order(:order).all
+  end
+
+  def solutions
+    #TODO: cache this
+    itemsList = ItemSolutionMap.where(:itemId => id.to_s)
+    itemsList.collect{|i| Solution.where(:id=>i.solutionId).first}
+    
   end
 
   def as_json(options = { })
     h = super(options)
     h[:children_count] = children.count
     h[:children_undone] = children.count {|item| !item.done}
+    h[:solutions_count] = solutions.count
     h
   end
 
