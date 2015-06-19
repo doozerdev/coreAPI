@@ -42,4 +42,12 @@ class User
     end
   end
 
+  def as_json(options = { })
+    h = super(options)
+    h.delete('oauth_token')
+    h.delete('id')
+    h.delete('session_id')
+    h
+  end
+
 end

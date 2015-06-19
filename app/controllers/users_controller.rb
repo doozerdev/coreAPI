@@ -1,17 +1,46 @@
 class UsersController < BaseApiController
-  def update
-    if @user.role == 'admin'
-      user = User.where(:uid=>params[:uid]).first
-      user.role = params[:role]
-      user.save
-      json = user.as_json
-      json.delete('oauth_token')
-      json.delete('id')
-      json.delete('session_id')
+  before_action :check_admin, only: [:updateAdmin, :index, :destroy]
+  before_action :check_user, only: [:show, :update]
 
-      render json: json, status: 202
-    else
-      render nothing: true, status: 401
+  def index
+    render json: User.all, status: :ok
+  end
+
+  def show
+    render json: User.where(:uid => params[:id]).first, status :ok
+  end
+
+  def destroy
+    if User.destroy(:params[:id])
+      render json: {deleted: true}, status: 200
+  end
+
+  def update
+    user = User.update(params[:id],
+                        params.permit(:email, :first_name, :last_name
+                          :gender, :timezone))
+    user.save
+    render json: user, status: 202
+  end
+
+  def updateAdmin
+    user = User.where(:id=>params[:id]).first
+    user.role = params[:role]
+    user.save
+
+    render json: json, status: :accepted
+  end
+
+  private
+  def check_admin
+    unless @user.role == 'admin'
+      render nothing: true, status: :unauthorized
+    end
+  end
+
+  def check_user
+    unless @user.id == params[:id] or @user.role == 'admin'
+      render nothing: true, status: :unauthorized
     end
   end
 end

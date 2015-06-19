@@ -9,7 +9,13 @@ Rails.application.routes.draw do
       get '/:oauth_token' => 'sessions#create'
     end
     scope '/users' do
-      put '/:uid' => 'users#update'
+      get '/' => 'users#index'
+      scope '/:id' do
+        get '/' => 'users#show'
+        delete '/' => 'users#destroy'
+        put '/' => 'users#update'
+        put '/updateAdmin' => 'users#updateAdmin'
+      end
     end
     delete '/logout' => 'sessions#destroy'
     get '/lists' => 'items#lists'
