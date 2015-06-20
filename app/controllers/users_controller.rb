@@ -7,18 +7,19 @@ class UsersController < BaseApiController
   end
 
   def show
-    render json: User.where(:uid => params[:id]).first, status :ok
+    render json: User.where(:uid => params[:id]).first, status: :ok
   end
 
   def destroy
     if User.destroy(:params[:id])
       render json: {deleted: true}, status: 200
+    end
   end
 
   def update
     user = User.update(params[:id],
-                        params.permit(:email, :first_name, :last_name
-                          :gender, :timezone))
+                       params.permit(:email, :first_name, :last_name,
+                                     :gender, :timezone))
     user.save
     render json: user, status: 202
   end
