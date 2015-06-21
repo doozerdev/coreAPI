@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     end
     delete '/logout' => 'sessions#destroy'
     get '/lists' => 'items#lists'
+    get '/listsForUser/:uid' => 'items#lists_for_user'
     scope '/items' do
       get '/' => 'items#index'
       post '/' => 'items#create'
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
       scope '/:id' do
         get '/' => 'items#show'
         get '/children' => 'items#children'
+        get '/childrenForUser/:uid' => 'items#children_for_user'
         put '/' => 'items#update'
         delete '/' => 'items#destroy'
         delete '/archive' => 'items#archive'

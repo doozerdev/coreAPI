@@ -2,8 +2,16 @@ class ItemsController < BaseApiController
 
   before_action :check_authZ, only: [:show, :children, :update, :destroy, :archive, :solutions]
 
+  before_action :check_admin, only: [:lists_for_user, :children_for_user, :most_common_words]
+
   def lists
     items = Item.where(:user_id=>@user.uid, :archive => [false, nil], :parent=>['', nil] )
+
+    render json: {items: items}, status: 200
+  end
+
+  def lists_for_user
+  	items = Item.where(:user_id=>params[:uid], :archive => [false, nil], :parent=>['', nil] )
 
     render json: {items: items}, status: 200
   end
@@ -25,8 +33,6 @@ class ItemsController < BaseApiController
     render json: {items: items}, status: 200
   end
 
-  #POST /item/create
-  #AddItem
   def create
     if params[:title] and !params[:title].empty?
       item = Item.new(params.permit(:title, :parent, :duedate, :order,
@@ -46,21 +52,20 @@ class ItemsController < BaseApiController
     end
   end
 
-  #GET /item/:id
-  #GetItem
   def show
     render json: Item.where(:id => params[:id]).first, status: 200
   end
 
-  #GET /item/:id/children
-  #GetChildren
   def children
     children = Item.where(:user_id=>@user.uid, :parent=>params['id'], :archive => [false, nil]).order(:order)
     render json: {items: children}, status: 200
   end
 
-  #PUT /item/:id
-  #UpdateItem
+  def children_for_user
+    children = Item.where(:user_id=>params[:uid], :parent=>params['id'], :archive => [false, nil]).order(:order)
+    render json: {items: children}, status: 200
+  end
+
   def update
     item = Item.update(params[:id], params.permit(:title, :parent, :duedate, :order,
                                                   :done, :archive, :notes))
@@ -107,7 +112,6 @@ class ItemsController < BaseApiController
   end
 
   def most_common_words
-    if @user.role == 'admin'
       start_time = Time.now
       words = Hash.new
       Item.each do |i|
@@ -121,9 +125,6 @@ class ItemsController < BaseApiController
       end
       end_time = Time.now
       render json: {request_time: "#{((end_time-start_time)*1000).round(2)} ms", words: words.sort_by{|word, count| count}.reverse.first(50)}, status: 200
-    else
-      render nothing: true, status: :unauthorized
-    end
   end
 
   def solutions
@@ -131,12 +132,6 @@ class ItemsController < BaseApiController
   	itemsList = ItemSolutionMap.where(:itemId => params[:id])
   	solutionsList = itemsList.collect{|i| Solution.where(:id=>i.solutionId).first}
     render json: {items: solutionsList}, :status => :ok
-    
-    # if @user.role == 'admin' or Item.find(params[:id]).user_id == @user.id
-    #   render json: {solutions: ItemSolutionMap.where(:item_id => params[:id])}, :status => :ok
-    # else
-    #   render nothing: true, status: :unauthorized
-    # end
   end
 
   def addLink
@@ -185,5 +180,11 @@ class ItemsController < BaseApiController
     else
       return true
     end
+  end
+
+  def check_admin
+  	unless @user.role = 'admin'
+  		      render nothing: true, status: :unauthorized
+  	end
   end
 end
