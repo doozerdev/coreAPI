@@ -8,10 +8,9 @@ class SolutionsController < BaseApiController
   def create
     if params[:title] and !params[:title].empty?
       solution = Solution.new(params.permit(:title, :source, :description,
-                                            :price, :address, :phoneNumber,
-                                            :openHours, :link, :tags,
-                                            :expireDate, :imgLink, :notes,
-                                            :archived))
+                                            :price, :address, :phone_number,
+                                            :open_hours, :link, :tags, :expire_date,
+                                            :img_link, :notes, :archive))
       solution.save
       render json: solution, status: :created
     else
@@ -26,10 +25,9 @@ class SolutionsController < BaseApiController
   def update
     solution = Solution.update(params[:id],
                                params.permit(:title, :source, :description,
-                                             :price, :address, :phone_number,
-                                             :open_hours, :link, :tags,
-                                             :expire_date, :img_link, :notes,
-                                             :archived))
+                               :price, :address, :phone_number,
+                               :open_hours, :link, :tags, :expire_date,
+                               :img_link, :notes, :archive))
     solution.save
     render json: solution, status: 202
   end

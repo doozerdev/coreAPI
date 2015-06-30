@@ -34,8 +34,8 @@ class ItemsController < BaseApiController
 
   def create
     if params[:title] && !params[:title].empty?
-      item = Item.new(params.permit(:title, :parent, :duedate, :order,
-                                    :done, :archive, :notes))
+      item = Item.new(params.permit(:title, :done, :archive, :parent, :order,
+                                    :duedate, :notes, :solutions, :color, :type))
 
       if params[:parent] && !params[:parent].empty? && !check_authZ_item(params[:parent])
         render json: { error: 'parent not found' }, status: 404
@@ -66,8 +66,9 @@ class ItemsController < BaseApiController
   end
 
   def update
-    item = Item.update(params[:id], params.permit(:title, :parent, :duedate, :order,
-                                                  :done, :archive, :notes, :type))
+    item = Item.update(params[:id], params.permit(:title, :done, :archive, :parent,
+                                                  :order, :duedate, :notes, :solutions,
+                                                  :color, :type))
     if (params[:parent] && !params[:parent].empty?) && !check_authZ_item(params[:parent])
       render json: { error: 'parent not found' }, status: 404
     else
