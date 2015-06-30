@@ -153,9 +153,9 @@ class ItemsController < BaseApiController
     items = nil
     start_time = Time.now
     if @user.role == 'admin'
-      items = Item.all(title: /#{Regexp.escape(params['term'])}/)
+      items = Item.all(title: /#{Regexp.escape(params['term'])}/i)
     else
-      items = Item.where(user_id: @user.uid, title: /#{Regexp.escape(params['term'])}/)
+      items = Item.where(user_id: @user.uid, title: /#{Regexp.escape(params['term'])}/i)
     end
     end_time = Time.now
     render json: { request_time: "#{((end_time - start_time) * 1000).round(2)} ms", count: items.count, items: items }, status: 200
