@@ -11,6 +11,7 @@ class Item
   key :notes, String
   key :solutions, String
   key :color, String
+  key :type, String
   timestamps!
 
   Item.ensure_index ([[:title, 1]])
@@ -24,7 +25,7 @@ class Item
     #TODO: cache this
     itemsList = ItemSolutionMap.where(:itemId => id.to_s)
     itemsList.collect{|i| Solution.where(:id=>i.solutionId).first}
-    
+
   end
 
   def as_json(options = { })
