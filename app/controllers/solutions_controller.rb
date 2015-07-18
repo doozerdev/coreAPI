@@ -51,11 +51,32 @@ class SolutionsController < BaseApiController
   end
 
   def removeLink
-    ItemSolutionMap.where(:itemId=>params[:itemId],
-                          :solutionId=>params[:id]).destroy_all
+    ItemSolutionMap.where(:item_id=>params[:item_id],
+                          :solution_id=>params[:id]).destroy_all
 
     render nothing: true, status: 200
   end
+
+  def like
+    save_action(1)
+    render nothing: true, status: :created
+  end
+
+  def dislike
+    save_action(2)
+    render nothing: true, status: :created
+  end
+
+  def click
+    save_action(3)
+    render nothing: true, status: :created
+  end
+
+  def view
+    save_action(4)
+    render nothing: true, status: :created
+  end
+
 
   #DELETE /item/:id
   #DeleteItem
@@ -65,6 +86,14 @@ class SolutionsController < BaseApiController
   end
 
   private
+  def save_action (id)
+    solution_activity = SolutionActivity.new(:user_id=>@user.id,
+                         :solution_id=>params[:id],
+                         :item_id=>params[:item_id],
+                         :action_id =>id)
+    solution_activity.save
+  end
+
   def check_authZ
     unless @user.role == 'admin'
       render nothing: true, status: :unauthorized

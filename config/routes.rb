@@ -45,7 +45,11 @@ Rails.application.routes.draw do
         delete '/' => 'solutions#destroy'
         get '/items' => 'solutions#items'
         post '/mapItem' => 'solutions#addLink'
-        delete '/unmapItem/:itemId' => 'solutions#removeLink'
+        post '/like/:item_id' => 'solutions#like'
+        post '/dislike/:item_id' => 'solutions#dislike'
+        post '/view/:item_id' => 'solutions#view'
+        post '/click/:item_id' => 'solutions#click'
+        delete '/unmapItem/:item_id' => 'solutions#removeLink'
       end
     end
   end
