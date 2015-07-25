@@ -19,7 +19,7 @@ class Item
 
   def children
     #TODO: cache this
-    Item.where(:parent => id.to_s, :archive => [false, nil]).order(:order).all
+    Item.where(:parent => id.to_s, :archive => [false, nil]).order(:order).all.reject{|i| i.type =='header'}
   end
 
   def solutions
