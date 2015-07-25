@@ -18,4 +18,16 @@ class Solution
 
   Item.ensure_index ([[:title, 1]])
 
+  def items
+    #TODO: cache this
+    itemsList = ItemSolutionMap.where(:solutionId => id.to_s)
+    itemsList.collect{|s| Solution.where(:id=>s.itemId).first}
+  end
+
+  def as_json(options = { })
+    h = super(options)
+    h[:items_count] = items.count
+    h
+  end
+
 end
