@@ -18,7 +18,7 @@ class ItemsController < BaseApiController
   # GET /items/
   # AllLists
   def index
-    items = Item.where(user_id: @user.uid, archive: [false, nil])
+    items = Item.where(user_id: @user.uid)
     if params[:last_sync]
       begin
         last_sync = DateTime.parse(params[:last_sync])
@@ -66,9 +66,17 @@ class ItemsController < BaseApiController
   end
 
   def update
+    originalItem = Item.find(params[:id])
     item = Item.update(params[:id], params.permit(:title, :done, :archive, :parent,
                                                   :order, :duedate, :notes, :solutions,
                                                   :color, :type))
+
+    if (!originalItem.done and item.done)
+      item.date_completed = DateTime.now
+    elsif (originalItem.done and !item.done)
+      item.date_completed = nil
+    end
+
     if (params[:parent] && !params[:parent].empty?) && !check_authZ_item(params[:parent])
       render json: { error: 'parent not found' }, status: 404
     else

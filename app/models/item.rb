@@ -3,6 +3,7 @@ class Item
 
   key :title, String
   key :done, Boolean
+  key :date_completed, Time
   key :archive, Boolean
   key :parent, String
   key :order, Integer
