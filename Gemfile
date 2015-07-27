@@ -17,6 +17,10 @@ gem "rails_serve_static_assets"
 gem 'rspec-rails'
 gem "rspec"
 # gem "rails_helper"
+
+gem 'execjs'
+gem 'therubyracer'
+
 ####### End Custom Stuff
 
 
