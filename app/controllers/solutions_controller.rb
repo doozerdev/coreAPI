@@ -33,15 +33,15 @@ class SolutionsController < BaseApiController
   end
 
   def items
-    solutionsList = ItemSolutionMap.where(:solutionId => params[:id])
-    itemsList = solutionsList.collect{|s| Item.where(:id=>s.itemId).first}
+    solutionsList = ItemSolutionMap.where(:solution_id => params[:id])
+    itemsList = solutionsList.collect{|s| Item.where(:id=>s.item_id).first}
     render json: {items: itemsList}, :status => :ok
   end
 
   def addLink
-    ism = ItemSolutionMap.new(params.permit(:itemId))
-    ism.solutionId = params[:id]
-    ism.dateAssociated = DateTime.now
+    ism = ItemSolutionMap.new(params.permit(:item_id))
+    ism.solution_id = params[:id]
+    ism.date_associated = DateTime.now.utc
 
     if ism.save
       render json: ism, status: :created
@@ -87,7 +87,7 @@ class SolutionsController < BaseApiController
 
   private
   def save_action (id)
-    solution_activity = SolutionActivity.new(:user_id=>@user.id,
+    solution_activity = SolutionActivity.new(:userId=>@user.id,
                          :solution_id=>params[:id],
                          :item_id=>params[:item_id],
                          :action_id =>id)
