@@ -400,67 +400,30 @@
 	"buffers":
 	[
 		{
-			"file": "app/controllers/items_controller.rb",
+			"file": "config/mongo.yml",
 			"settings":
 			{
-				"buffer_size": 5339,
+				"buffer_size": 709,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/models/solution_activity.rb",
+			"file": "config/secrets.yml",
 			"settings":
 			{
-				"buffer_size": 173,
+				"buffer_size": 964,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/controllers/solutions_controller.rb",
+			"contents": "NOOBS INSTALLATION INSTRUCTIONS\n\n1. Insert an SD card that is 4GB or greater in size into your computer.\n2. Format the SD card using the platform-specific instructions below:\n   a. Windows\n      i. Download the SD Association's Formatting Tool from https://www.sdcard.org/downloads/formatter_4/eula_windows/\n      ii. Install and run the Formatting Tool on your machine\n      iii. Set \"FORMAT SIZE ADJUSTMENT\" option to \"ON\" in the \"Options\" menu\n      iv. Check that the SD card you inserted matches the one selected by the Tool\n      v. Click the \"Format\" button\n   b. Mac\n      i. Download the SD Association's Formatting Tool from https://www.sdcard.org/downloads/formatter_4/eula_mac/\n      ii. Install and run the Formatting Tool on your machine\n      iii. Select \"Overwrite Format\"\n      iv. Check that the SD card you inserted matches the one selected by the Tool\n      v. Click the \"Format\" button\n   c. Linux\n      i. We recommend using gparted (or the command line version parted)\n      ii. Format the entire disk as FAT\n3. Extract the files contained in this NOOBS zip file.\n4. Copy the extracted files onto the SD card that you just formatted so that this file is at the root directory of the SD card. Please note that in some cases it may extract the files into a folder, if this is the case then please copy across the files from inside the folder rather than the folder itself.\n5. Insert the SD card into your Pi and connect the power supply.\n\nYour Pi will now boot into NOOBS and should display a list of operating systems that you can choose to install.\nIf your display remains blank, you should select the correct output mode for your display by pressing one of the following number keys on your keyboard:\n1. HDMI mode - this is the default display mode.\n2. HDMI safe mode - select this mode if you are using the HDMI connector and cannot see anything on screen when the Pi has booted.\n3. Composite PAL mode - select either this mode or composite NTSC mode if you are using the composite RCA video connector.\n4. Composite NTSC mode\n\nIf you are still having difficulties after following these instructions, then please visit the Raspberry Pi Forums ( http://www.raspberrypi.org/forums/ ) for support.\n",
+			"file": "/Users/joe/Downloads/NOOBS_v1_4_1/INSTRUCTIONS-README.txt",
+			"file_size": 2250,
+			"file_write_time": 130687754000000000,
 			"settings":
 			{
-				"buffer_size": 2672,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/models/solution_action.rb",
-			"settings":
-			{
-				"buffer_size": 169,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "config/routes.rb",
-			"settings":
-			{
-				"buffer_size": 3377,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/controllers/users_controller.rb",
-			"settings":
-			{
-				"buffer_size": 1080,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/models/item.rb",
-			"settings":
-			{
-				"buffer_size": 843,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/models/user.rb",
-			"settings":
-			{
-				"buffer_size": 1394,
-				"line_ending": "Unix"
+				"buffer_size": 2219,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -570,30 +533,38 @@
 		"/Users/joe/github/Doozer/coreAPI/app/views/layouts",
 		"/Users/joe/github/Doozer/coreAPI/app/views/welcome",
 		"/Users/joe/github/Doozer/coreAPI/config",
-		"/Users/joe/github/Doozer/coreAPI/config/initializers",
-		"/Users/joe/github/Doozer/coreAPI/vendor"
+		"/Users/joe/github/Doozer/coreAPI/public"
 	],
 	"file_history":
 	[
+		"/Users/joe/Downloads/spark.txt",
+		"/Users/joe/github/Doozer/coreAPI/app/models/user.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/models/item_solution_map.rb",
+		"/Users/joe/github/Doozer/coreAPI/Gemfile",
+		"/Users/joe/github/Doozer/coreAPI/app/models/solution.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/models/item.rb",
+		"/Users/joe/Desktop/canibal_markov.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/controllers/users_controller.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/controllers/items_controller.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/models/solution_activity.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/controllers/solutions_controller.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/models/solution_action.rb",
+		"/Users/joe/github/Doozer/coreAPI/config/routes.rb",
+		"/Users/joe/github/Doozer/coreAPI/config/mongo.yml",
+		"/Users/joe/Downloads/SI Dinner scratchpad.md-2.markdown",
+		"/Users/joe/Downloads/SI Dinner scratchpad.md.markdown",
+		"/Users/joe/Downloads/Joe_Doozer.pem.txt",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/sessions_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/base_api_controller.rb",
 		"/Users/joe/Documents/Kitematic/hello-world-nginx/website_files/index.html",
-		"/Users/joe/github/Doozer/coreAPI/config/routes.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/controllers/solutions_controller.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/models/item_solution_map.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/models/item.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/controllers/items_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/views/welcome/apireference.html",
-		"/Users/joe/github/Doozer/coreAPI/Gemfile",
 		"/Users/joe/Downloads/HacmeBank - Android v1.0/README.txt",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/item_solution_map_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/models/ item_solution_map.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/models/solution.rb",
 		"/Users/joe/Library/Application Support/Sublime Text 3/Packages/BeautifyRuby/Default (OSX).sublime-keymap",
 		"/Users/joe/Library/Application Support/Sublime Text 3/Packages/BeautifyRuby/BeautifyRuby.sublime-settings",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/application_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/lists.js",
-		"/Users/joe/github/Doozer/coreAPI/app/models/user.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/cors_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/authentication.js",
 		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts/application.js",
@@ -608,7 +579,6 @@
 		"/Users/joe/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/joe/github/Doozer/coreAPI/config/application.rb",
 		"/Users/joe/github/Doozer/coreAPI/spec/requests/AuthN_spec.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/controllers/users_controller.rb",
 		"/Users/joe/Library/Application Support/Sublime Text 3/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
 		"/Users/joe/github/Doozer/coreAPI/spec/spec_helper.rb",
 		"/Users/joe/github/Doozer/coreAPI/.rspec",
@@ -694,15 +664,7 @@
 		"/Users/jbasirico/github/whetstone/app/views/goals/new.html.erb",
 		"/Users/jbasirico/github/whetstone/app/views/goals/_legacy_form.html.erb",
 		"/Users/jbasirico/github/whetstone/app/views/goals/_show_legacy_goal.html.erb",
-		"/Users/jbasirico/github/whetstone/app/views/goals/_form.html.erb",
-		"/Users/jbasirico/github/whetstone/app/views/goals/_goal_template.html.erb",
-		"/Users/jbasirico/github/whetstone/db/migrate/20140711192712_add_goal_type_to_goals.rb",
-		"/Users/jbasirico/github/whetstone/db/migrate/20140711192712_add_type_to_goals.rb",
-		"/Users/jbasirico/Library/Application Support/Sublime Text 3/Packages/BeautifyRuby/BeautifyRuby.sublime-settings",
-		"/Users/jbasirico/github/whetstone/config/initializers/inflections.rb",
-		"/Users/jbasirico/github/whetstone/app/views/devise/mailer/confirmation_instructions.html.erb",
-		"/Users/jbasirico/github/whetstone/bin/sass-convert",
-		"/Users/jbasirico/github/whetstone/config/initializers/filter_parameter_logging.rb"
+		"/Users/jbasirico/github/whetstone/app/views/goals/_form.html.erb"
 	],
 	"find":
 	{
@@ -977,112 +939,26 @@
 			[
 				{
 					"buffer": 0,
-					"file": "app/controllers/items_controller.rb",
+					"file": "config/mongo.yml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5339,
+						"buffer_size": 709,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								709,
+								709
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"syntax": "Packages/YAML/YAML.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/models/solution_activity.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 173,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								136,
-								145
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/controllers/solutions_controller.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2672,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2094,
-								2094
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1158.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/models/solution_action.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 169,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								99,
-								99
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1092,123 +968,59 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "config/routes.rb",
-					"semi_transient": false,
+					"buffer": 1,
+					"file": "config/secrets.yml",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 3377,
+						"buffer_size": 964,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1688,
-								1688
+								298,
+								298
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/YAML/YAML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 794.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "app/controllers/users_controller.rb",
+					"buffer": 2,
+					"file": "/Users/joe/Downloads/NOOBS_v1_4_1/INSTRUCTIONS-README.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1080,
+						"buffer_size": 2219,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								417,
-								417
+								1563,
+								1563
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 182.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/models/item.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 843,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 149.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "app/models/user.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1394,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								385,
-								385
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

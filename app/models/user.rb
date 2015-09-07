@@ -47,6 +47,8 @@ class User
     h.delete('oauth_token')
     h.delete('id')
     h.delete('session_id')
+    h.delete('first_name')
+    h.delete('last_name')
     h
   end
 

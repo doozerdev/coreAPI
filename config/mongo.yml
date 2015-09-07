@@ -23,5 +23,5 @@ test:
 
 # set these environment variables on your prod server
 production:
-  use_env_var: true
-  uri: <%= ENV['MONGOHQ_URL'] %>
+  <<: *defaults
+  database: doozer_prod
