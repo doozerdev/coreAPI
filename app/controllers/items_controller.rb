@@ -136,13 +136,13 @@ class ItemsController < BaseApiController
   end
 
   def solutions
-    itemsList = ItemSolutionMap.where(itemId: params[:id])
-    solutionsList = itemsList.collect { |i| Solution.where(id: i.solutionId).first }
+    itemsList = ItemSolutionMap.where(item_id: params[:id])
+    solutionsList = itemsList.collect { |i| Solution.where(id: i.solution_id).first }
     render json: { items: solutionsList }, status: :ok
   end
 
   def addLink
-    ism = new ItemSolutionMap(params.permit(:solutionId))
+    ism = new ItemSolutionMap(params.permit(:solution_id))
 
     ism.date_associated = DateTime.now
     if ism.save
@@ -153,8 +153,8 @@ class ItemsController < BaseApiController
   end
 
   def removeLink
-    ItemSolutionMap.where(item_id: params[:itemId],
-                          solution_id: params[:solutionId]).destroy_all
+    ItemSolutionMap.where(item_id: params[:item_id],
+                          solution_id: params[:solution_id]).destroy_all
   end
 
   def search
