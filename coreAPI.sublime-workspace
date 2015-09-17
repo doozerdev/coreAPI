@@ -400,30 +400,21 @@
 	"buffers":
 	[
 		{
-			"file": "config/mongo.yml",
+			"contents": "Searching 188 files for \"solutionId\"\n\n0 matches\n\nSearching 188 files for \"itemId\"\n\n/Users/joe/github/Doozer/coreAPI/.idea/workspace.xml:\n  203            <PATH>\n  204              <PATH_ELEMENT>\n  205:               <option name=\"myItemId\" value=\"coreAPI\" />\n  206                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  207              </PATH_ELEMENT>\n  ...\n  209            <PATH>\n  210              <PATH_ELEMENT>\n  211:               <option name=\"myItemId\" value=\"coreAPI\" />\n  212                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  213              </PATH_ELEMENT>\n  214              <PATH_ELEMENT>\n  215:               <option name=\"myItemId\" value=\"coreAPI\" />\n  216                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  217              </PATH_ELEMENT>\n  ...\n  219            <PATH>\n  220              <PATH_ELEMENT>\n  221:               <option name=\"myItemId\" value=\"coreAPI\" />\n  222                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  223              </PATH_ELEMENT>\n  224              <PATH_ELEMENT>\n  225:               <option name=\"myItemId\" value=\"coreAPI\" />\n  226                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  227              </PATH_ELEMENT>\n  228              <PATH_ELEMENT>\n  229:               <option name=\"myItemId\" value=\"config\" />\n  230                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  231              </PATH_ELEMENT>\n  ...\n  233            <PATH>\n  234              <PATH_ELEMENT>\n  235:               <option name=\"myItemId\" value=\"coreAPI\" />\n  236                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  237              </PATH_ELEMENT>\n  238              <PATH_ELEMENT>\n  239:               <option name=\"myItemId\" value=\"coreAPI\" />\n  240                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  241              </PATH_ELEMENT>\n  242              <PATH_ELEMENT>\n  243:               <option name=\"myItemId\" value=\"app\" />\n  244                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  245              </PATH_ELEMENT>\n  246              <PATH_ELEMENT>\n  247:               <option name=\"myItemId\" value=\"views\" />\n  248                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  249              </PATH_ELEMENT>\n  250              <PATH_ELEMENT>\n  251:               <option name=\"myItemId\" value=\"welcome\" />\n  252                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  253              </PATH_ELEMENT>\n  ...\n  255            <PATH>\n  256              <PATH_ELEMENT>\n  257:               <option name=\"myItemId\" value=\"coreAPI\" />\n  258                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  259              </PATH_ELEMENT>\n  260              <PATH_ELEMENT>\n  261:               <option name=\"myItemId\" value=\"coreAPI\" />\n  262                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  263              </PATH_ELEMENT>\n  264              <PATH_ELEMENT>\n  265:               <option name=\"myItemId\" value=\"app\" />\n  266                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  267              </PATH_ELEMENT>\n  268              <PATH_ELEMENT>\n  269:               <option name=\"myItemId\" value=\"views\" />\n  270                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  271              </PATH_ELEMENT>\n  272              <PATH_ELEMENT>\n  273:               <option name=\"myItemId\" value=\"layouts\" />\n  274                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  275              </PATH_ELEMENT>\n  ...\n  277            <PATH>\n  278              <PATH_ELEMENT>\n  279:               <option name=\"myItemId\" value=\"coreAPI\" />\n  280                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  281              </PATH_ELEMENT>\n  282              <PATH_ELEMENT>\n  283:               <option name=\"myItemId\" value=\"coreAPI\" />\n  284                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  285              </PATH_ELEMENT>\n  286              <PATH_ELEMENT>\n  287:               <option name=\"myItemId\" value=\"app\" />\n  288                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  289              </PATH_ELEMENT>\n  290              <PATH_ELEMENT>\n  291:               <option name=\"myItemId\" value=\"views\" />\n  292                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  293              </PATH_ELEMENT>\n  294              <PATH_ELEMENT>\n  295:               <option name=\"myItemId\" value=\"cors\" />\n  296                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  297              </PATH_ELEMENT>\n  ...\n  299            <PATH>\n  300              <PATH_ELEMENT>\n  301:               <option name=\"myItemId\" value=\"coreAPI\" />\n  302                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  303              </PATH_ELEMENT>\n  304              <PATH_ELEMENT>\n  305:               <option name=\"myItemId\" value=\"coreAPI\" />\n  306                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  307              </PATH_ELEMENT>\n  308              <PATH_ELEMENT>\n  309:               <option name=\"myItemId\" value=\"app\" />\n  310                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  311              </PATH_ELEMENT>\n  312              <PATH_ELEMENT>\n  313:               <option name=\"myItemId\" value=\"models\" />\n  314                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  315              </PATH_ELEMENT>\n  ...\n  317            <PATH>\n  318              <PATH_ELEMENT>\n  319:               <option name=\"myItemId\" value=\"coreAPI\" />\n  320                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  321              </PATH_ELEMENT>\n  322              <PATH_ELEMENT>\n  323:               <option name=\"myItemId\" value=\"coreAPI\" />\n  324                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  325              </PATH_ELEMENT>\n  326              <PATH_ELEMENT>\n  327:               <option name=\"myItemId\" value=\"app\" />\n  328                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  329              </PATH_ELEMENT>\n  ...\n  331            <PATH>\n  332              <PATH_ELEMENT>\n  333:               <option name=\"myItemId\" value=\"coreAPI\" />\n  334                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  335              </PATH_ELEMENT>\n  336              <PATH_ELEMENT>\n  337:               <option name=\"myItemId\" value=\"coreAPI\" />\n  338                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  339              </PATH_ELEMENT>\n  340              <PATH_ELEMENT>\n  341:               <option name=\"myItemId\" value=\"app\" />\n  342                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  343              </PATH_ELEMENT>\n  344              <PATH_ELEMENT>\n  345:               <option name=\"myItemId\" value=\"controllers\" />\n  346                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  347              </PATH_ELEMENT>\n\n/Users/joe/github/Doozer/coreAPI/app/models/item.rb:\n   25    def solutions\n   26      #TODO: cache this\n   27:     itemsList = ItemSolutionMap.where(:itemId => id.to_s)\n   28      itemsList.collect{|i| Solution.where(:id=>i.solution_id).first}\n   29    end\n\n33 matches across 2 files\n",
 			"settings":
 			{
-				"buffer_size": 709,
-				"line_ending": "Unix"
+				"buffer_size": 8646,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
 			}
 		},
 		{
-			"file": "config/secrets.yml",
+			"file": "app/models/item.rb",
 			"settings":
 			{
-				"buffer_size": 964,
+				"buffer_size": 902,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "NOOBS INSTALLATION INSTRUCTIONS\n\n1. Insert an SD card that is 4GB or greater in size into your computer.\n2. Format the SD card using the platform-specific instructions below:\n   a. Windows\n      i. Download the SD Association's Formatting Tool from https://www.sdcard.org/downloads/formatter_4/eula_windows/\n      ii. Install and run the Formatting Tool on your machine\n      iii. Set \"FORMAT SIZE ADJUSTMENT\" option to \"ON\" in the \"Options\" menu\n      iv. Check that the SD card you inserted matches the one selected by the Tool\n      v. Click the \"Format\" button\n   b. Mac\n      i. Download the SD Association's Formatting Tool from https://www.sdcard.org/downloads/formatter_4/eula_mac/\n      ii. Install and run the Formatting Tool on your machine\n      iii. Select \"Overwrite Format\"\n      iv. Check that the SD card you inserted matches the one selected by the Tool\n      v. Click the \"Format\" button\n   c. Linux\n      i. We recommend using gparted (or the command line version parted)\n      ii. Format the entire disk as FAT\n3. Extract the files contained in this NOOBS zip file.\n4. Copy the extracted files onto the SD card that you just formatted so that this file is at the root directory of the SD card. Please note that in some cases it may extract the files into a folder, if this is the case then please copy across the files from inside the folder rather than the folder itself.\n5. Insert the SD card into your Pi and connect the power supply.\n\nYour Pi will now boot into NOOBS and should display a list of operating systems that you can choose to install.\nIf your display remains blank, you should select the correct output mode for your display by pressing one of the following number keys on your keyboard:\n1. HDMI mode - this is the default display mode.\n2. HDMI safe mode - select this mode if you are using the HDMI connector and cannot see anything on screen when the Pi has booted.\n3. Composite PAL mode - select either this mode or composite NTSC mode if you are using the composite RCA video connector.\n4. Composite NTSC mode\n\nIf you are still having difficulties after following these instructions, then please visit the Raspberry Pi Forums ( http://www.raspberrypi.org/forums/ ) for support.\n",
-			"file": "/Users/joe/Downloads/NOOBS_v1_4_1/INSTRUCTIONS-README.txt",
-			"file_size": 2250,
-			"file_write_time": 130687754000000000,
-			"settings":
-			{
-				"buffer_size": 2219,
-				"line_ending": "Windows"
 			}
 		}
 	],
@@ -537,6 +528,8 @@
 	],
 	"file_history":
 	[
+		"/Users/joe/github/Doozer/coreAPI/config/mongo.yml",
+		"/Users/joe/Downloads/NOOBS_v1_4_1/INSTRUCTIONS-README.txt",
 		"/Users/joe/Downloads/spark.txt",
 		"/Users/joe/github/Doozer/coreAPI/app/models/user.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/models/item_solution_map.rb",
@@ -550,7 +543,6 @@
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/solutions_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/models/solution_action.rb",
 		"/Users/joe/github/Doozer/coreAPI/config/routes.rb",
-		"/Users/joe/github/Doozer/coreAPI/config/mongo.yml",
 		"/Users/joe/Downloads/SI Dinner scratchpad.md-2.markdown",
 		"/Users/joe/Downloads/SI Dinner scratchpad.md.markdown",
 		"/Users/joe/Downloads/Joe_Doozer.pem.txt",
@@ -663,8 +655,7 @@
 		"/Users/jbasirico/github/whetstone/app/views/goals/_show_reviewer_comments.html.erb",
 		"/Users/jbasirico/github/whetstone/app/views/goals/new.html.erb",
 		"/Users/jbasirico/github/whetstone/app/views/goals/_legacy_form.html.erb",
-		"/Users/jbasirico/github/whetstone/app/views/goals/_show_legacy_goal.html.erb",
-		"/Users/jbasirico/github/whetstone/app/views/goals/_form.html.erb"
+		"/Users/jbasirico/github/whetstone/app/views/goals/_show_legacy_goal.html.erb"
 	],
 	"find":
 	{
@@ -685,6 +676,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"itemId",
+			"solutionId",
 			"solution_id",
 			"item_id",
 			"datetime",
@@ -810,9 +803,7 @@
 			"url",
 			"font-size",
 			"body",
-			"line-height",
-			"pull",
-			"large"
+			"line-height"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -934,90 +925,209 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "config/mongo.yml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 709,
+						"buffer_size": 8646,
 						"regions":
 						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										232,
+										238
+									],
+									[
+										516,
+										522
+									],
+									[
+										770,
+										776
+									],
+									[
+										1048,
+										1054
+									],
+									[
+										1302,
+										1308
+									],
+									[
+										1550,
+										1556
+									],
+									[
+										1827,
+										1833
+									],
+									[
+										2081,
+										2087
+									],
+									[
+										2329,
+										2335
+									],
+									[
+										2573,
+										2579
+									],
+									[
+										2819,
+										2825
+									],
+									[
+										3097,
+										3103
+									],
+									[
+										3351,
+										3357
+									],
+									[
+										3599,
+										3605
+									],
+									[
+										3843,
+										3849
+									],
+									[
+										4089,
+										4095
+									],
+									[
+										4367,
+										4373
+									],
+									[
+										4621,
+										4627
+									],
+									[
+										4869,
+										4875
+									],
+									[
+										5113,
+										5119
+									],
+									[
+										5359,
+										5365
+									],
+									[
+										5634,
+										5640
+									],
+									[
+										5888,
+										5894
+									],
+									[
+										6136,
+										6142
+									],
+									[
+										6380,
+										6386
+									],
+									[
+										6657,
+										6663
+									],
+									[
+										6911,
+										6917
+									],
+									[
+										7159,
+										7165
+									],
+									[
+										7433,
+										7439
+									],
+									[
+										7687,
+										7693
+									],
+									[
+										7935,
+										7941
+									],
+									[
+										8179,
+										8185
+									],
+									[
+										8512,
+										8518
+									]
+								],
+								"scope": ""
+							}
 						},
 						"selection":
 						[
 							[
-								709,
-								709
+								8498,
+								8498
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/YAML/YAML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 2,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "config/secrets.yml",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 964,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								298,
-								298
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/YAML/YAML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2830.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "/Users/joe/Downloads/NOOBS_v1_4_1/INSTRUCTIONS-README.txt",
+					"buffer": 1,
+					"file": "app/models/item.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2219,
+						"buffer_size": 902,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1563,
-								1563
+								516,
+								516
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 182.0,
+						"translation.y": 174.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

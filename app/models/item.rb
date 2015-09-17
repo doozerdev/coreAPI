@@ -24,8 +24,8 @@ class Item
 
   def solutions
     #TODO: cache this
-    itemsList = ItemSolutionMap.where(:itemId => id.to_s)
-    itemsList.collect{|i| Solution.where(:id=>i.solutionId).first}
+    itemsList = ItemSolutionMap.where(:item_id => id.to_s)
+    itemsList.collect{|i| Solution.where(:id=>i.solution_id).first}
   end
 
   def as_json(options = { })
