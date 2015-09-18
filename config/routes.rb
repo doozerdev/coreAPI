@@ -34,6 +34,7 @@ Rails.application.routes.draw do
         delete '/archive' => 'items#archive'
         get '/solutions' => 'items#solutions'
         post '/mapSolution' => 'items#addLink'
+        post '/unmapSolution' => 'items#removeLink'
       end
     end
     scope '/solutions' do
