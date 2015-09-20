@@ -142,9 +142,13 @@ class ItemsController < BaseApiController
   end
 
   def addLink
-    ism = new ItemSolutionMap(params.permit(:solution_id))
 
-    ism.date_associated = DateTime.now
+    ism = ItemSolutionMap.new
+
+    ism.solution_id = params[:solution_id]
+    ism.item_id = params[:item_id]
+    ism.date_associated = DateTime.now.utc
+
     if ism.save
       render json: ism, status: :created
     else
@@ -155,6 +159,8 @@ class ItemsController < BaseApiController
   def removeLink
     ItemSolutionMap.where(item_id: params[:item_id],
                           solution_id: params[:solution_id]).destroy_all
+
+    render nothing: true, status: 200
   end
 
   def search
