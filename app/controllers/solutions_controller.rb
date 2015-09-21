@@ -82,10 +82,8 @@ class SolutionsController < BaseApiController
       "#{i[:user_id]}-#{i[:solution_id]}-#{i[:item_id]}" }.count
     dislikes = SolutionActivity.where(:solution_id => params[:id], :action_id => '2').all.uniq{|i|
       "#{i[:user_id]}-#{i[:solution_id]}-#{i[:item_id]}" }.count
-    clicks   = SolutionActivity.where(:solution_id => params[:id], :action_id => '3').all.uniq{|i|
-      "#{i[:user_id]}-#{i[:solution_id]}-#{i[:item_id]}" }.count
-    views    = SolutionActivity.where(:solution_id => params[:id], :action_id => '4').all.uniq{|i|
-      "#{i[:user_id]}-#{i[:solution_id]}-#{i[:item_id]}" }.count
+    clicks   = SolutionActivity.where(:solution_id => params[:id], :action_id => '3').count
+    views    = SolutionActivity.where(:solution_id => params[:id], :action_id => '4').count
 
     render json: { likes: likes, dislikes: dislikes, clicks: clicks, views: views, score: 0 }, status: 200
   end
