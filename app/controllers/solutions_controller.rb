@@ -1,5 +1,5 @@
 class SolutionsController < BaseApiController
-  before_action :check_authZ
+  before_action :check_authZ, except: [:like, :dislike, :click, :view]
 
   def index
     render json: Solution.all, status: 200
@@ -14,7 +14,7 @@ class SolutionsController < BaseApiController
       solution.save
       render json: solution, status: :created
     else
-      render json: {error: 'title is required'}, status: 400
+      render json: { error: 'title is required' }, status: 400
     end
   end
 
@@ -25,22 +25,22 @@ class SolutionsController < BaseApiController
   def update
     solution = Solution.update(params[:id],
                                params.permit(:title, :source, :description,
-                               :price, :address, :phone_number,
-                               :open_hours, :link, :tags, :expire_date,
-                               :img_link, :notes, :archive))
+                                             :price, :address, :phone_number,
+                                             :open_hours, :link, :tags, :expire_date,
+                                             :img_link, :notes, :archive))
     solution.save
     render json: solution, status: 202
   end
 
   def items
     solutionsList = ItemSolutionMap.where(:solution_id => params[:id])
-    itemsList = solutionsList.collect{|s| Item.where(:id=>s.item_id).first}
-    render json: {items: itemsList}, :status => :ok
+    itemsList     = solutionsList.collect { |s| Item.where(:id => s.item_id).first }
+    render json: { items: itemsList }, :status => :ok
   end
 
   def addLink
-    ism = ItemSolutionMap.new(params.permit(:item_id))
-    ism.solution_id = params[:id]
+    ism                 = ItemSolutionMap.new(params.permit(:item_id))
+    ism.solution_id     = params[:id]
     ism.date_associated = DateTime.now.utc
 
     if ism.save
@@ -51,8 +51,8 @@ class SolutionsController < BaseApiController
   end
 
   def removeLink
-    ItemSolutionMap.where(:item_id=>params[:item_id],
-                          :solution_id=>params[:id]).destroy_all
+    ItemSolutionMap.where(:item_id     => params[:item_id],
+                          :solution_id => params[:id]).destroy_all
 
     render nothing: true, status: 200
   end
@@ -77,20 +77,33 @@ class SolutionsController < BaseApiController
     render nothing: true, status: :created
   end
 
+  def stats
+    likes    = SolutionActivity.where(:solution_id => params[:id], :action_id => '1').all.uniq{|i|
+      "#{i[:user_id]}-#{i[:solution_id]}-#{i[:item_id]}" }.count
+    dislikes = SolutionActivity.where(:solution_id => params[:id], :action_id => '2').all.uniq{|i|
+      "#{i[:user_id]}-#{i[:solution_id]}-#{i[:item_id]}" }.count
+    clicks   = SolutionActivity.where(:solution_id => params[:id], :action_id => '3').all.uniq{|i|
+      "#{i[:user_id]}-#{i[:solution_id]}-#{i[:item_id]}" }.count
+    views    = SolutionActivity.where(:solution_id => params[:id], :action_id => '4').all.uniq{|i|
+      "#{i[:user_id]}-#{i[:solution_id]}-#{i[:item_id]}" }.count
+
+    render json: { likes: likes, dislikes: dislikes, clicks: clicks, views: views, score: 0 }, status: 200
+  end
+
 
   #DELETE /item/:id
   #DeleteItem
   def destroy
     Solution.destroy(params[:id])
-    render json: {deleted: true}, status: 200
+    render json: { deleted: true }, status: 200
   end
 
   private
   def save_action (id)
-    solution_activity = SolutionActivity.new(:userId=>@user.id,
-                         :solution_id=>params[:id],
-                         :item_id=>params[:item_id],
-                         :action_id =>id)
+    solution_activity = SolutionActivity.first_or_create(:user_id     => @user.id,
+                                                         :solution_id => params[:id],
+                                                         :item_id     => params[:item_id],
+                                                         :action_id   => id)
     solution_activity.save
   end
 

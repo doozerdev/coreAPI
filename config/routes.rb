@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  match "*all" => "application#cors_preflight_check", via:[ :options ]
+  match "*all" => "application#cors_preflight_check", via: [:options]
 
   root 'welcome#apireference'
 
@@ -45,6 +45,7 @@ Rails.application.routes.draw do
         put '/' => 'solutions#update'
         delete '/' => 'solutions#destroy'
         get '/items' => 'solutions#items'
+        get '/stats' => 'solutions#stats'
         post '/mapItem' => 'solutions#addLink'
         post '/like/:item_id' => 'solutions#like'
         post '/dislike/:item_id' => 'solutions#dislike'
