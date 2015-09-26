@@ -137,7 +137,11 @@ class ItemsController < BaseApiController
 
   def solutions
     itemsList = ItemSolutionMap.where(item_id: params[:id])
-    solutionsList = itemsList.collect { |i| Solution.where(id: i.solution_id).first }
+    solutionsList = itemsList.collect { |i|
+      sol = Solution.where(id: i.solution_id).first
+      sol["date_associated"] = i.date_associated
+      sol
+    }
     render json: { items: solutionsList }, status: :ok
   end
 
