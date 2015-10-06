@@ -3,7 +3,7 @@ class ItemSolutionMap
 
   key :item_id, String
   key :solution_id, String
-  key :date_associated, Time
+  key :linked, Boolean
   timestamps!
 
 end
