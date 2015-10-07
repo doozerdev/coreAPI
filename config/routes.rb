@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     end
     scope '/solutions' do
       get '/' => 'solutions#index'
+      get '/for_user/:last_sync' => 'solutions#for_user'
       post '/' => 'solutions#create'
       scope '/:id' do
         get '/' => 'solutions#show'

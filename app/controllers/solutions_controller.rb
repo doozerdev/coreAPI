@@ -1,9 +1,51 @@
 class SolutionsController < BaseApiController
-  before_action :check_authZ, except: [:like, :dislike, :click, :view]
+  before_action :check_authZ, except: [:like, :dislike, :click, :view, :for_user]
   before_action :get_solution_state, only: [:like, :dislike, :click, :view]
 
   def index
     render json: Solution.all, status: 200
+  end
+
+  def for_user
+
+    # get user's items (items)
+    # get all the isms for those items (ism)
+    # select only the isms since last_sync
+    # Collect all solutions for those isms
+    # add item_id to each solution based on ism
+    # return solutions
+
+    items = Item.where(:user_id => @user.uid)
+
+    isms = Array.new
+
+    items.each do |i|
+      ism = ItemSolutionMap.where(:item_id => i.id.to_s).first
+      isms.push(ism) if ism
+    end
+
+
+    if params[:last_sync]
+      begin
+        last_sync = DateTime.parse(params[:last_sync])
+      rescue
+        last_sync = DateTime.strptime(params[:last_sync], '%s')
+      end
+
+      ism_since = isms.select { |ism| ism.updated_at > last_sync }
+      puts ism_since.count
+
+      solutions_list =
+          ism_since.collect { |ism|
+            sol                      = Solution.where(:id => ism.solution_id).first
+            sol['date_link_updated'] = ism.updated_at
+            sol['linked']            = ism.linked
+            sol['item_id']           = ism.item_id
+            sol
+          }
+    end
+
+    render json: { items: solutions_list }, status: 200
   end
 
   def create
@@ -40,9 +82,10 @@ class SolutionsController < BaseApiController
   end
 
   def addLink
-    ism                 = ItemSolutionMap.new(params.permit(:item_id))
-    ism.solution_id     = params[:id]
-    ism.date_associated = DateTime.now.utc
+    ism = ItemSolutionMap.first_or_create(:solution_id => params[:id],
+                                          :item_id     => params[:item_id])
+
+    ism.linked = true
 
     if ism.save
       render json: ism, status: :created
@@ -52,10 +95,16 @@ class SolutionsController < BaseApiController
   end
 
   def removeLink
-    ItemSolutionMap.where(:item_id     => params[:item_id],
-                          :solution_id => params[:id]).destroy_all
+    ism = ItemSolutionMap.first_or_create(:solution_id => params[:id],
+                                          :item_id     => params[:item_id])
 
-    render nothing: true, status: 200
+    ism.linked = false
+
+    if ism.save
+      render json: ism, status: :ok
+    else
+      render nothing: true, status: :bad_request
+    end
   end
 
   def like
@@ -139,10 +188,10 @@ class SolutionsController < BaseApiController
   end
 
   def get_solution_state
-    @solution_state = SolutionState.first_or_create(:solution_id => params[:id],
-                                                    :item_id     => params[:item_id])
-    @solution_state.like = 0 if @solution_state.like.nil?
-    @solution_state.views = 0 if @solution_state.views.nil?
+    @solution_state        = SolutionState.first_or_create(:solution_id => params[:id],
+                                                           :item_id     => params[:item_id])
+    @solution_state.like   = 0 if @solution_state.like.nil?
+    @solution_state.views  = 0 if @solution_state.views.nil?
     @solution_state.clicks = 0 if @solution_state.clicks.nil?
   end
 end

@@ -6,13 +6,13 @@ class ItemsController < BaseApiController
   def lists
     items = Item.where(user_id: @user.uid, archive: [false, nil], parent: ['', nil])
 
-    render json: { items: items }, status: 200
+    render json: { items: items }, status: :ok
   end
 
   def lists_for_user
     items = Item.where(user_id: params[:uid], archive: [false, nil], parent: ['', nil])
 
-    render json: { items: items }, status: 200
+    render json: { items: items }, status: :ok
   end
 
   # GET /items/
@@ -29,7 +29,7 @@ class ItemsController < BaseApiController
       items = items.select { |a| DateTime.parse(a.updated_at.to_s) > last_sync }
     end
 
-    render json: { items: items }, status: 200
+    render json: { items: items }, status: :ok
   end
 
   def create
@@ -38,7 +38,7 @@ class ItemsController < BaseApiController
                                     :duedate, :notes, :solutions, :color, :type))
 
       if params[:parent] && !params[:parent].empty? && !check_authZ_item(params[:parent])
-        render json: { error: 'parent not found' }, status: 404
+        render json: { error: 'parent not found' }, status: :not_found
       else
         item.parent = '' unless params[:parent]
 
@@ -47,22 +47,22 @@ class ItemsController < BaseApiController
         render json: item, status: :created
       end
     else
-      render json: { error: 'title is required' }, status: 400
+      render json: { error: 'title is required' }, status: :bad_request
     end
   end
 
   def show
-    render json: Item.where(id: params[:id]).first, status: 200
+    render json: Item.where(id: params[:id]).first, status: :ok
   end
 
   def children
     children = Item.where(user_id: @user.uid, parent: params['id'], archive: [false, nil]).order(:order)
-    render json: { items: children }, status: 200
+    render json: { items: children }, status: :ok
   end
 
   def children_for_user
     children = Item.where(user_id: params[:uid], parent: params['id'], archive: [false, nil]).order(:order)
-    render json: { items: children }, status: 200
+    render json: { items: children }, status: :ok
   end
 
   def update
@@ -78,10 +78,10 @@ class ItemsController < BaseApiController
     end
 
     if (params[:parent] && !params[:parent].empty?) && !check_authZ_item(params[:parent])
-      render json: { error: 'parent not found' }, status: 404
+      render json: { error: 'parent not found' }, status: :not_found
     else
       item.save
-      render json: item, status: 202
+      render json: item, status: :accepted
     end
   end
 
@@ -98,7 +98,7 @@ class ItemsController < BaseApiController
     Item.update(params['id'], archive: true)
     count += 1
 
-    render json: { archive_item_count: count }, status: 200
+    render json: { archive_item_count: count }, status: :ok
   end
 
   # DELETE /item/:id
@@ -116,7 +116,7 @@ class ItemsController < BaseApiController
     Item.destroy(params[:id])
     count += 1
 
-    render json: { delete_item_count: count }, status: 200
+    render json: { delete_item_count: count }, status: :ok
   end
 
   def most_common_words
@@ -132,26 +132,26 @@ class ItemsController < BaseApiController
       end
     end
     end_time = Time.now
-    render json: { request_time: "#{((end_time - start_time) * 1000).round(2)} ms", words: words.sort_by { |_word, count| count }.reverse.first(50) }, status: 200
+    render json: { request_time: "#{((end_time - start_time) * 1000).round(2)} ms", words: words.sort_by { |_word, count| count }.reverse.first(50) }, status: :ok
   end
 
   def solutions
-    itemsList = ItemSolutionMap.where(item_id: params[:id])
+    itemsList = ItemSolutionMap.where(item_id: params[:id], :linked => true)
     solutionsList = itemsList.collect { |i|
-      sol = Solution.where(id: i.solution_id).first
-      sol["date_associated"] = i.date_associated
+      sol = Solution.where(:id => i.solution_id).first
+      sol['date_link_updated'] = i.updated_at
       sol
     }
     render json: { items: solutionsList }, status: :ok
   end
 
   def addLink
+    ism = ItemSolutionMap.first_or_create(:solution_id => params[:solution_id],
+                                          :item_id     => params[:id])
 
-    ism = ItemSolutionMap.new
+    ism.linked = true
 
-    ism.solution_id = params[:solution_id]
-    ism.item_id = params[:item_id]
-    ism.date_associated = DateTime.now.utc
+    puts 'linked from item'
 
     if ism.save
       render json: ism, status: :created
@@ -161,10 +161,18 @@ class ItemsController < BaseApiController
   end
 
   def removeLink
-    ItemSolutionMap.where(item_id: params[:item_id],
-                          solution_id: params[:solution_id]).destroy_all
+    ism = ItemSolutionMap.first_or_create(:solution_id => params[:solution_id],
+                                          :item_id     => params[:id])
 
-    render nothing: true, status: 200
+    ism.linked = false
+
+    puts 'unlinked from item'
+
+    if ism.save
+      render json: ism, status: :ok
+    else
+      render nothing: true, status: :bad_request
+    end
   end
 
   def search
@@ -176,7 +184,7 @@ class ItemsController < BaseApiController
       items = Item.where(user_id: @user.uid, title: /#{Regexp.escape(params['term'])}/i, archive: [false, nil])
     end
     end_time = Time.now
-    render json: { request_time: "#{((end_time - start_time) * 1000).round(2)} ms", count: items.count, items: items }, status: 200
+    render json: { request_time: "#{((end_time - start_time) * 1000).round(2)} ms", count: items.count, items: items }, status: :ok
   end
 
   private
@@ -184,10 +192,10 @@ class ItemsController < BaseApiController
   def check_authZ
     if params[:id] && !params[:id].empty?
       unless check_authZ_item(params[:id])
-        render json: { error: 'item not found' }, status: 404
+        render json: { error: 'item not found' }, status: :not_found
       end
     else
-      render json: { error: 'item not found' }, status: 404
+      render json: { error: 'item not found' }, status: :not_found
     end
   end
 
