@@ -146,7 +146,8 @@ class ItemsController < BaseApiController
   end
 
   def addLink
-    ism = ItemSolutionMap.first_or_create(:solution_id => params[:solution_id],
+    ism = ItemSolutionMap.first_or_create(:user_id => Item.find(params[:id]).user_id,
+                                          :solution_id => params[:solution_id],
                                           :item_id     => params[:id])
 
     ism.linked = true
@@ -161,7 +162,8 @@ class ItemsController < BaseApiController
   end
 
   def removeLink
-    ism = ItemSolutionMap.first_or_create(:solution_id => params[:solution_id],
+    ism = ItemSolutionMap.first_or_create(:user_id => Item.find(params[:id]).user_id,
+                                          :solution_id => params[:solution_id],
                                           :item_id     => params[:id])
 
     ism.linked = false

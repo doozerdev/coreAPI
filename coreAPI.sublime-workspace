@@ -400,44 +400,18 @@
 	"buffers":
 	[
 		{
-			"contents": "Searching 188 files for \"solutionId\"\n\n0 matches\n\nSearching 188 files for \"itemId\"\n\n/Users/joe/github/Doozer/coreAPI/.idea/workspace.xml:\n  203            <PATH>\n  204              <PATH_ELEMENT>\n  205:               <option name=\"myItemId\" value=\"coreAPI\" />\n  206                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  207              </PATH_ELEMENT>\n  ...\n  209            <PATH>\n  210              <PATH_ELEMENT>\n  211:               <option name=\"myItemId\" value=\"coreAPI\" />\n  212                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  213              </PATH_ELEMENT>\n  214              <PATH_ELEMENT>\n  215:               <option name=\"myItemId\" value=\"coreAPI\" />\n  216                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  217              </PATH_ELEMENT>\n  ...\n  219            <PATH>\n  220              <PATH_ELEMENT>\n  221:               <option name=\"myItemId\" value=\"coreAPI\" />\n  222                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  223              </PATH_ELEMENT>\n  224              <PATH_ELEMENT>\n  225:               <option name=\"myItemId\" value=\"coreAPI\" />\n  226                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  227              </PATH_ELEMENT>\n  228              <PATH_ELEMENT>\n  229:               <option name=\"myItemId\" value=\"config\" />\n  230                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  231              </PATH_ELEMENT>\n  ...\n  233            <PATH>\n  234              <PATH_ELEMENT>\n  235:               <option name=\"myItemId\" value=\"coreAPI\" />\n  236                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  237              </PATH_ELEMENT>\n  238              <PATH_ELEMENT>\n  239:               <option name=\"myItemId\" value=\"coreAPI\" />\n  240                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  241              </PATH_ELEMENT>\n  242              <PATH_ELEMENT>\n  243:               <option name=\"myItemId\" value=\"app\" />\n  244                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  245              </PATH_ELEMENT>\n  246              <PATH_ELEMENT>\n  247:               <option name=\"myItemId\" value=\"views\" />\n  248                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  249              </PATH_ELEMENT>\n  250              <PATH_ELEMENT>\n  251:               <option name=\"myItemId\" value=\"welcome\" />\n  252                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  253              </PATH_ELEMENT>\n  ...\n  255            <PATH>\n  256              <PATH_ELEMENT>\n  257:               <option name=\"myItemId\" value=\"coreAPI\" />\n  258                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  259              </PATH_ELEMENT>\n  260              <PATH_ELEMENT>\n  261:               <option name=\"myItemId\" value=\"coreAPI\" />\n  262                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  263              </PATH_ELEMENT>\n  264              <PATH_ELEMENT>\n  265:               <option name=\"myItemId\" value=\"app\" />\n  266                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  267              </PATH_ELEMENT>\n  268              <PATH_ELEMENT>\n  269:               <option name=\"myItemId\" value=\"views\" />\n  270                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  271              </PATH_ELEMENT>\n  272              <PATH_ELEMENT>\n  273:               <option name=\"myItemId\" value=\"layouts\" />\n  274                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  275              </PATH_ELEMENT>\n  ...\n  277            <PATH>\n  278              <PATH_ELEMENT>\n  279:               <option name=\"myItemId\" value=\"coreAPI\" />\n  280                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  281              </PATH_ELEMENT>\n  282              <PATH_ELEMENT>\n  283:               <option name=\"myItemId\" value=\"coreAPI\" />\n  284                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  285              </PATH_ELEMENT>\n  286              <PATH_ELEMENT>\n  287:               <option name=\"myItemId\" value=\"app\" />\n  288                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  289              </PATH_ELEMENT>\n  290              <PATH_ELEMENT>\n  291:               <option name=\"myItemId\" value=\"views\" />\n  292                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  293              </PATH_ELEMENT>\n  294              <PATH_ELEMENT>\n  295:               <option name=\"myItemId\" value=\"cors\" />\n  296                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  297              </PATH_ELEMENT>\n  ...\n  299            <PATH>\n  300              <PATH_ELEMENT>\n  301:               <option name=\"myItemId\" value=\"coreAPI\" />\n  302                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  303              </PATH_ELEMENT>\n  304              <PATH_ELEMENT>\n  305:               <option name=\"myItemId\" value=\"coreAPI\" />\n  306                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  307              </PATH_ELEMENT>\n  308              <PATH_ELEMENT>\n  309:               <option name=\"myItemId\" value=\"app\" />\n  310                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  311              </PATH_ELEMENT>\n  312              <PATH_ELEMENT>\n  313:               <option name=\"myItemId\" value=\"models\" />\n  314                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  315              </PATH_ELEMENT>\n  ...\n  317            <PATH>\n  318              <PATH_ELEMENT>\n  319:               <option name=\"myItemId\" value=\"coreAPI\" />\n  320                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  321              </PATH_ELEMENT>\n  322              <PATH_ELEMENT>\n  323:               <option name=\"myItemId\" value=\"coreAPI\" />\n  324                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  325              </PATH_ELEMENT>\n  326              <PATH_ELEMENT>\n  327:               <option name=\"myItemId\" value=\"app\" />\n  328                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  329              </PATH_ELEMENT>\n  ...\n  331            <PATH>\n  332              <PATH_ELEMENT>\n  333:               <option name=\"myItemId\" value=\"coreAPI\" />\n  334                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode\" />\n  335              </PATH_ELEMENT>\n  336              <PATH_ELEMENT>\n  337:               <option name=\"myItemId\" value=\"coreAPI\" />\n  338                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  339              </PATH_ELEMENT>\n  340              <PATH_ELEMENT>\n  341:               <option name=\"myItemId\" value=\"app\" />\n  342                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  343              </PATH_ELEMENT>\n  344              <PATH_ELEMENT>\n  345:               <option name=\"myItemId\" value=\"controllers\" />\n  346                <option name=\"myItemType\" value=\"com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode\" />\n  347              </PATH_ELEMENT>\n\n/Users/joe/github/Doozer/coreAPI/app/models/item.rb:\n   25    def solutions\n   26      #TODO: cache this\n   27:     itemsList = ItemSolutionMap.where(:itemId => id.to_s)\n   28      itemsList.collect{|i| Solution.where(:id=>i.solution_id).first}\n   29    end\n\n33 matches across 2 files\n",
+			"file": "app/controllers/solutions_controller.rb",
 			"settings":
 			{
-				"buffer_size": 8646,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "app/models/item.rb",
-			"settings":
-			{
-				"buffer_size": 898,
+				"buffer_size": 5997,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "nginx.conf",
+			"file": "app/controllers/items_controller.rb",
 			"settings":
 			{
-				"buffer_size": 4781,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/joe/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/C633265C-B658-470B-99C1-B4B385358C93/Dreznes, Lisa.asc",
-			"settings":
-			{
-				"buffer_size": 5016,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/controllers/users_controller.rb",
-			"settings":
-			{
-				"buffer_size": 1080,
+				"buffer_size": 5972,
 				"line_ending": "Unix"
 			}
 		}
@@ -542,6 +516,7 @@
 		"/Users/joe/github/Doozer/coreAPI",
 		"/Users/joe/github/Doozer/coreAPI/app",
 		"/Users/joe/github/Doozer/coreAPI/app/assets",
+		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers",
 		"/Users/joe/github/Doozer/coreAPI/app/models",
 		"/Users/joe/github/Doozer/coreAPI/app/views",
@@ -552,6 +527,9 @@
 	],
 	"file_history":
 	[
+		"/Users/joe/github/Doozer/coreAPI/app/models/item.rb",
+		"/Users/joe/github/Doozer/coreAPI/nginx.conf",
+		"/Users/joe/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/C633265C-B658-470B-99C1-B4B385358C93/Dreznes, Lisa.asc",
 		"/Users/joe/Downloads/mongo_backup_20150917_052252/doozer_prod/items.json",
 		"/Users/joe/github/Doozer/coreAPI/config/mongo.yml",
 		"/Users/joe/Downloads/NOOBS_v1_4_1/INSTRUCTIONS-README.txt",
@@ -560,7 +538,6 @@
 		"/Users/joe/github/Doozer/coreAPI/app/models/item_solution_map.rb",
 		"/Users/joe/github/Doozer/coreAPI/Gemfile",
 		"/Users/joe/github/Doozer/coreAPI/app/models/solution.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/models/item.rb",
 		"/Users/joe/Desktop/canibal_markov.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/users_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/items_controller.rb",
@@ -677,13 +654,11 @@
 		"/Users/jbasirico/github/whetstone/app/views/goals/edit.html.erb",
 		"/Users/jbasirico/github/whetstone/app/views/goals/_show_okr_short.erb",
 		"/Users/jbasirico/github/whetstone/app/views/goals/_show_short.html.erb",
-		"/Users/jbasirico/github/whetstone/app/views/goals/_show_reviewer_comments.html.erb",
-		"/Users/jbasirico/github/whetstone/app/views/goals/new.html.erb",
-		"/Users/jbasirico/github/whetstone/app/views/goals/_legacy_form.html.erb"
+		"/Users/jbasirico/github/whetstone/app/views/goals/_show_reviewer_comments.html.erb"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 42.0
 	},
 	"find_in_files":
 	{
@@ -700,6 +675,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"404",
 			"itemId",
 			"solutionId",
 			"solution_id",
@@ -826,8 +802,7 @@
 			"120",
 			"url",
 			"font-size",
-			"body",
-			"line-height"
+			"body"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -949,199 +924,54 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
+					"file": "app/controllers/solutions_controller.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8646,
+						"buffer_size": 5997,
 						"regions":
 						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										232,
-										238
-									],
-									[
-										516,
-										522
-									],
-									[
-										770,
-										776
-									],
-									[
-										1048,
-										1054
-									],
-									[
-										1302,
-										1308
-									],
-									[
-										1550,
-										1556
-									],
-									[
-										1827,
-										1833
-									],
-									[
-										2081,
-										2087
-									],
-									[
-										2329,
-										2335
-									],
-									[
-										2573,
-										2579
-									],
-									[
-										2819,
-										2825
-									],
-									[
-										3097,
-										3103
-									],
-									[
-										3351,
-										3357
-									],
-									[
-										3599,
-										3605
-									],
-									[
-										3843,
-										3849
-									],
-									[
-										4089,
-										4095
-									],
-									[
-										4367,
-										4373
-									],
-									[
-										4621,
-										4627
-									],
-									[
-										4869,
-										4875
-									],
-									[
-										5113,
-										5119
-									],
-									[
-										5359,
-										5365
-									],
-									[
-										5634,
-										5640
-									],
-									[
-										5888,
-										5894
-									],
-									[
-										6136,
-										6142
-									],
-									[
-										6380,
-										6386
-									],
-									[
-										6657,
-										6663
-									],
-									[
-										6911,
-										6917
-									],
-									[
-										7159,
-										7165
-									],
-									[
-										7433,
-										7439
-									],
-									[
-										7687,
-										7693
-									],
-									[
-										7935,
-										7941
-									],
-									[
-										8179,
-										8185
-									],
-									[
-										8512,
-										8518
-									]
-								],
-								"scope": ""
-							}
 						},
 						"selection":
 						[
 							[
-								8498,
-								8498
+								706,
+								706
 							]
 						],
 						"settings":
 						{
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 2,
-							"result_base_dir": "",
-							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2830.0,
+						"translation.y": 533.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/models/item.rb",
+					"file": "app/controllers/items_controller.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 898,
+						"buffer_size": 5972,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								848,
+								863
 							]
 						],
 						"settings":
@@ -1151,98 +981,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 174.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "nginx.conf",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4781,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4328,
-								4328
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/nginx/Syntaxes/nginx.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2369.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/Users/joe/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/C633265C-B658-470B-99C1-B4B385358C93/Dreznes, Lisa.asc",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5016,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5015,
-								2808
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 747.0,
+						"translation.y": 542.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/controllers/users_controller.rb",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1080,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
 					"type": "text"
 				}
 			]

@@ -20,7 +20,7 @@ class Solution
 
   def items
     #TODO: cache this
-    itemsList = ItemSolutionMap.where(:solution_id => id.to_s)
+    itemsList = ItemSolutionMap.where(:solution_id => id.to_s, :linked=>true)
     itemsList.collect{|s| Solution.where(:id=>s.item_id).first}
   end
 
