@@ -8,22 +8,8 @@ class SolutionsController < BaseApiController
 
   def for_user
 
-    # get user's items (items)
-    # get all the isms for those items (ism)
-    # select only the isms since last_sync
-    # Collect all solutions for those isms
-    # add item_id to each solution based on ism
-    # return solutions
-
-    items = Item.where(:user_id => @user.uid)
-
-    isms = Array.new
-
-    items.each do |i|
-      ism = ItemSolutionMap.where(:item_id => i.id.to_s).first
-      isms.push(ism) if ism
-    end
-
+    isms = ItemSolutionMap.where(:user_id => @user.uid)
+      
 
     if params[:last_sync]
       begin
@@ -32,8 +18,8 @@ class SolutionsController < BaseApiController
         last_sync = DateTime.strptime(params[:last_sync], '%s')
       end
 
-      ism_since = isms.select { |ism| ism.updated_at > last_sync }
-      puts ism_since.count
+      ism_since = isms.select { |ism| DateTime.parse(ism.updated_at.to_s) > last_sync }
+      #puts "isms for user: #{ism_since.count}"
 
       solutions_list =
           ism_since.collect { |ism|
@@ -76,13 +62,14 @@ class SolutionsController < BaseApiController
   end
 
   def items
-    solutionsList = ItemSolutionMap.where(:solution_id => params[:id])
+    solutionsList = ItemSolutionMap.where(:solution_id => params[:id], :linked => true)
     itemsList     = solutionsList.collect { |s| Item.where(:id => s.item_id).first }
     render json: { items: itemsList }, :status => :ok
   end
 
   def addLink
-    ism = ItemSolutionMap.first_or_create(:solution_id => params[:id],
+    ism = ItemSolutionMap.first_or_create(:user_id => Item.find(params[:item_id]).user_id,
+                                          :solution_id => params[:id],
                                           :item_id     => params[:item_id])
 
     ism.linked = true
@@ -95,7 +82,8 @@ class SolutionsController < BaseApiController
   end
 
   def removeLink
-    ism = ItemSolutionMap.first_or_create(:solution_id => params[:id],
+    ism = ItemSolutionMap.first_or_create(:user_id => Item.find(params[:item_id]).user_id,
+                                          :solution_id => params[:id],
                                           :item_id     => params[:item_id])
 
     ism.linked = false
