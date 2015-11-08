@@ -400,18 +400,47 @@
 	"buffers":
 	[
 		{
-			"file": "app/controllers/solutions_controller.rb",
+			"contents": "ItemSolutionMap.each do |ism|\n  ism.user_id = Item.find(ism.item_id).user_id\n  ism.save\nend",
+			"file": "/Users/joe/Desktop/updateISM.rb",
+			"file_size": 105,
+			"file_write_time": 130893620020000000,
 			"settings":
 			{
-				"buffer_size": 5997,
-				"line_ending": "Unix"
+				"buffer_size": 91,
+				"line_ending": "Unix",
+				"name": "ItemSolutionMap.each do |ism|"
+			}
+		},
+		{
+			"contents": "dev - rllevjx_lison_1444705522@tfbnw.net\ntest - peter_aajonzq_alisonsen@tfbnw.net\n\n7l2r3AHpSn\n\n",
+			"settings":
+			{
+				"buffer_size": 95,
+				"line_ending": "Unix",
+				"name": "dev - rllevjx_lison_1444705522@tfbnw.net"
 			}
 		},
 		{
 			"file": "app/controllers/items_controller.rb",
 			"settings":
 			{
-				"buffer_size": 5972,
+				"buffer_size": 6144,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/controllers/solutions_controller.rb",
+			"settings":
+			{
+				"buffer_size": 5923,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/solution_action.rb",
+			"settings":
+			{
+				"buffer_size": 169,
 				"line_ending": "Unix"
 			}
 		}
@@ -516,7 +545,6 @@
 		"/Users/joe/github/Doozer/coreAPI",
 		"/Users/joe/github/Doozer/coreAPI/app",
 		"/Users/joe/github/Doozer/coreAPI/app/assets",
-		"/Users/joe/github/Doozer/coreAPI/app/assets/javascripts",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers",
 		"/Users/joe/github/Doozer/coreAPI/app/models",
 		"/Users/joe/github/Doozer/coreAPI/app/views",
@@ -527,7 +555,15 @@
 	],
 	"file_history":
 	[
+		"/Users/joe/github/Doozer/coreAPI/app/models/solution.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/models/item.rb",
+		"/Users/joe/github/Doozer/coreAPI/app/controllers/solutions_controller.rb",
+		"/Volumes/projects/Vestmark/2015-10_VestmarkOne/from_customer/Pen Test logins.txt",
+		"/Users/joe/Dropbox/Login/Pen Test logins.txt",
+		"/Users/joe/Desktop/test.gpg",
+		"/Users/joe/Desktop/test.jsp",
+		"/Users/joe/Desktop/vulns.json",
+		"/Users/joe/github/Doozer/coreAPI/app/models/item_solution_map.rb",
 		"/Users/joe/github/Doozer/coreAPI/nginx.conf",
 		"/Users/joe/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/C633265C-B658-470B-99C1-B4B385358C93/Dreznes, Lisa.asc",
 		"/Users/joe/Downloads/mongo_backup_20150917_052252/doozer_prod/items.json",
@@ -535,14 +571,11 @@
 		"/Users/joe/Downloads/NOOBS_v1_4_1/INSTRUCTIONS-README.txt",
 		"/Users/joe/Downloads/spark.txt",
 		"/Users/joe/github/Doozer/coreAPI/app/models/user.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/models/item_solution_map.rb",
 		"/Users/joe/github/Doozer/coreAPI/Gemfile",
-		"/Users/joe/github/Doozer/coreAPI/app/models/solution.rb",
 		"/Users/joe/Desktop/canibal_markov.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/users_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/controllers/items_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/models/solution_activity.rb",
-		"/Users/joe/github/Doozer/coreAPI/app/controllers/solutions_controller.rb",
 		"/Users/joe/github/Doozer/coreAPI/app/models/solution_action.rb",
 		"/Users/joe/github/Doozer/coreAPI/config/routes.rb",
 		"/Users/joe/Downloads/SI Dinner scratchpad.md-2.markdown",
@@ -649,16 +682,11 @@
 		"/Users/jbasirico/github/whetstone/app/views/goals/_show_rating.html.erb",
 		"/Users/jbasirico/github/whetstone/app/views/employee_reviews/_form.html.erb",
 		"/Users/jbasirico/github/whetstone/app/controllers/project_reviews_controller.rb",
-		"/Users/jbasirico/github/whetstone/app/views/project_reviews/_form.html.erb",
-		"/Users/jbasirico/github/whetstone/app/views/goals/index.html.erb",
-		"/Users/jbasirico/github/whetstone/app/views/goals/edit.html.erb",
-		"/Users/jbasirico/github/whetstone/app/views/goals/_show_okr_short.erb",
-		"/Users/jbasirico/github/whetstone/app/views/goals/_show_short.html.erb",
-		"/Users/jbasirico/github/whetstone/app/views/goals/_show_reviewer_comments.html.erb"
+		"/Users/jbasirico/github/whetstone/app/views/project_reviews/_form.html.erb"
 	],
 	"find":
 	{
-		"height": 42.0
+		"height": 30.0
 	},
 	"find_in_files":
 	{
@@ -675,6 +703,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ItemSolutionMap",
 			"404",
 			"itemId",
 			"solutionId",
@@ -801,8 +830,7 @@
 			"gly",
 			"120",
 			"url",
-			"font-size",
-			"body"
+			"font-size"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -924,54 +952,81 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/controllers/solutions_controller.rb",
+					"file": "/Users/joe/Desktop/updateISM.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5997,
+						"buffer_size": 91,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								706,
-								706
+								23,
+								23
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"auto_name": "ItemSolutionMap.each do |ism|",
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 533.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/controllers/items_controller.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5972,
+						"buffer_size": 95,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								848,
-								863
+								95,
+								95
+							]
+						],
+						"settings":
+						{
+							"auto_name": "dev - rllevjx_lison_1444705522@tfbnw.net",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/controllers/items_controller.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6144,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								671,
+								671
 							]
 						],
 						"settings":
@@ -981,10 +1036,74 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 542.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "app/controllers/solutions_controller.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5923,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2270,
+								2270
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 899.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/models/solution_action.rb",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 169,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1007,11 +1126,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -1033,7 +1159,7 @@
 	"project": "coreAPI.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 56.0
 	},
 	"save_all_on_build": true,
 	"select_file":

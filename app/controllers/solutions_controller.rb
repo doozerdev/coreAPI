@@ -63,7 +63,11 @@ class SolutionsController < BaseApiController
 
   def items
     solutionsList = ItemSolutionMap.where(:solution_id => params[:id], :linked => true)
-    itemsList     = solutionsList.collect { |s| Item.where(:id => s.item_id).first }
+    itemsList     = solutionsList.collect { |s| 
+      i = Item.where(:id => s.item_id).first 
+      i['date_link_updated'] = s.updated_at
+      i
+    }
     render json: { items: itemsList }, :status => :ok
   end
 
