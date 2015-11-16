@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       get '/' => 'items#index'
       post '/' => 'items#create'
       get '/common/words' => 'items#most_common_words'
-      get '/:term/search' => 'items#search'
+      get '/:term/:field/search' => 'items#search'
       scope '/:id' do
         get '/' => 'items#show'
         get '/children' => 'items#children'
@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       get '/' => 'solutions#index'
       get '/for_user/:last_sync' => 'solutions#for_user'
       post '/' => 'solutions#create'
+      get '/:term/:field/search' => 'solutions#search'
       scope '/:id' do
         get '/' => 'solutions#show'
         put '/' => 'solutions#update'

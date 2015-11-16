@@ -13,6 +13,9 @@ class Item
   key :solutions, String
   key :color, String
   key :type, String
+  key :tags, String
+  key :date_updated, Time
+
   timestamps!
 
   Item.ensure_index ([[:title, 1]])

@@ -71,6 +71,20 @@ class SolutionsController < BaseApiController
     render json: { items: itemsList }, :status => :ok
   end
 
+  def search
+    solutions = nil
+    start_time = Time.now
+    if @user.role == 'admin'
+
+      solutions = Solution.where(params['field'] => /#{Regexp.escape(params['term'])}/i)
+
+    else
+      # add ability to search over solutions attached to your own list
+    end
+    end_time = Time.now
+    render json: { request_time: "#{((end_time - start_time) * 1000).round(2)} ms", count: solutions.count, solutions: solutions}, status: :ok
+  end
+
   def addLink
     ism = ItemSolutionMap.first_or_create(:user_id => Item.find(params[:item_id]).user_id,
                                           :solution_id => params[:id],

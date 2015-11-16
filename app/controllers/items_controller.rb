@@ -27,6 +27,7 @@ class ItemsController < BaseApiController
       end
 
       items = items.select { |a| DateTime.parse(a.updated_at.to_s) > last_sync }
+
     end
 
     render json: { items: items }, status: :ok
@@ -43,6 +44,7 @@ class ItemsController < BaseApiController
         item.parent = '' unless params[:parent]
 
         item.user_id = @user.uid
+        item.date_updated = DateTime.now
         item.save
         render json: item, status: :created
       end
@@ -69,7 +71,7 @@ class ItemsController < BaseApiController
     originalItem = Item.find(params[:id])
     item = Item.update(params[:id], params.permit(:title, :done, :archive, :parent,
                                                   :order, :duedate, :notes, :solutions,
-                                                  :color, :type))
+                                                  :color, :type, :tags))
 
     if (!originalItem.done and item.done)
       item.date_completed = DateTime.now
@@ -80,6 +82,12 @@ class ItemsController < BaseApiController
     if (params[:parent] && !params[:parent].empty?) && !check_authZ_item(params[:parent])
       render json: { error: 'parent not found' }, status: :not_found
     else
+
+      if (@user.role != 'admin')
+
+        item.date_updated = DateTime.now
+
+      end
       item.save
       render json: item, status: :accepted
     end
@@ -181,9 +189,10 @@ class ItemsController < BaseApiController
     items = nil
     start_time = Time.now
     if @user.role == 'admin'
-      items = Item.where(archive: [false, nil], title: /#{Regexp.escape(params['term'])}/i)
+      items = Item.where(archive: [false, nil], params['field'] => /#{Regexp.escape(params['term'])}/i)
+
     else
-      items = Item.where(user_id: @user.uid, title: /#{Regexp.escape(params['term'])}/i, archive: [false, nil])
+      items = Item.where(user_id: @user.uid, params['field'] => /#{Regexp.escape(params['term'])}/i, archive: [false, nil])
     end
     end_time = Time.now
     render json: { request_time: "#{((end_time - start_time) * 1000).round(2)} ms", count: items.count, items: items }, status: :ok
