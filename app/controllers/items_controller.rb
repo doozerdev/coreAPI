@@ -44,7 +44,7 @@ class ItemsController < BaseApiController
         item.parent = '' unless params[:parent]
 
         item.user_id = @user.uid
-        item.date_updated = DateTime.now
+        item.date_user_updated = DateTime.now
         item.save
         render json: item, status: :created
       end
@@ -83,9 +83,9 @@ class ItemsController < BaseApiController
       render json: { error: 'parent not found' }, status: :not_found
     else
 
-      if (@user.role != 'admin')
+      if (item.user_id == @user.uid)
 
-        item.date_updated = DateTime.now
+        item.date_user_updated = DateTime.now
 
       end
       item.save

@@ -14,7 +14,7 @@ class Item
   key :color, String
   key :type, String
   key :tags, String
-  key :date_updated, Time
+  key :date_user_updated, Time
 
   timestamps!
 
